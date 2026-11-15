@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import Hero3D from '../components/Hero3D.astro';
 import Galerie from '../components/Galerie.astro';
 import PartneriLoga from '../components/PartneriLoga.astro';
 import { AKCE, PAS, PROGRAM, LINEUP, DEN } from '../data/akce';
@@ -41,7 +41,7 @@ const schema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-  <Hero />
+  <Hero3D />
 
   <!-- běžící pás -->
   <div class="bg-pulnoc text-ruzova overflow-hidden py-4 border-y border-ruzova/15" aria-hidden="true">

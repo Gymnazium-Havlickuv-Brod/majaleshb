@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import Hero3D from '../components/Hero3D.astro';
-import Galerie from '../components/Galerie.astro';
-import PartneriLoga from '../components/PartneriLoga.astro';
-import { AKCE, PAS, PROGRAM, LINEUP, DEN } from '../data/akce';
-import { podleRole } from '../data/fotky';
+import Base from '../../layouts/Base.astro';
+import HeroPlakat from '../../components/archiv/HeroPlakat.astro';
+import Galerie from '../../components/Galerie.astro';
+import PartneriLoga from '../../components/PartneriLoga.astro';
+import { AKCE, PAS, PROGRAM, LINEUP, DEN } from '../../data/akce';
+import { podleRole } from '../../data/fotky';
 
 const oMajalesu = podleRole('o-majalesu');
 const namesti = podleRole('o-majalesu-2');
@@ -35,15 +35,15 @@ const schema = {
 };
 ---
 
-<!-- PROTOTYP: kopie úvodní stránky, jen místo <Hero /> je 3D hero (Hero3D). Neindexuje se, není v sitemapě. -->
+<!-- ARCHIV: úvodní stránka s původní plakátovou hero sekcí (před 3D). Neindexuje se, není v sitemapě. -->
 <Base
   noindex
-  title={`Majáles ${AKCE.rok} · ${AKCE.datum} · ${AKCE.mesto}`}
+  title={`Archiv: původní hero · Majáles ${AKCE.rok}`}
   description={`Studentský Majáles ${AKCE.mesto}: ${AKCE.den} ${AKCE.datum} na Havlíčkově náměstí. Kapely, sport, král a královna, zóny gymplu a stavebky.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-  <Hero3D />
+  <HeroPlakat />
 
   <!-- běžící pás -->
   <div class="bg-pulnoc text-ruzova overflow-hidden py-4 border-y border-ruzova/15" aria-hidden="true">

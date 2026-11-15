@@ -17,8 +17,9 @@ npm run preview
 
 | URL | Soubor | Co tam je |
 |---|---|---|
-| `/` | `src/pages/index.astro` | hero s odpočtem, o Majálesu, program, line-up (6 × ?), galerie, loga partnerů, výzva pro partnery |
+| `/` | `src/pages/index.astro` | 3D hero s odpočtem, o Majálesu, program, line-up (6 × ?), loga partnerů, galerie, výzva pro partnery |
 | `/partneri/` | `src/pages/partneri.astro` | úrovně partnerství, barter, nabídka na míru, postup |
+| `/archiv/puvodni-hero/` | `src/pages/archiv/puvodni-hero.astro` | archiv: úvodní stránka s původní plakátovou hero sekcí (`src/components/archiv/HeroPlakat.astro`), noindex, mimo sitemap |
 
 ## Kde se mění obsah
 
@@ -63,9 +64,9 @@ Barvy jsou v poměru zhruba 60–30–10: obsah nese světlý podklad, modrá je
 - Úrovně partnerů nesedí s tabulkou `majales/partneri/tabulka-partneru-2027.xlsx` (tam je do 5 000 / 10 000 / 25 000+). Sjednotit.
 - Hosting a doména (Cloudflare Pages jako learningtriangle?) zatím nejsou nastavené.
 
-## Prototyp: 3D hero (větev `prototyp-3d`)
+## 3D hero
 
-Stránka `/prototyp-3d/` (noindex, mimo sitemap) má místo hero živé low-poly náměstí: pódium s kapelou, publikum, stánky, radnici a LED stěnu s partnery. Scéna je v `src/scripts/hero3d.js` (three.js), komponenta v `src/components/Hero3D.astro`.
+Od 15. 11. 2026 je na hlavní stránce místo plakátové hero sekce živé low-poly náměstí (vzniklo ve větvi `prototyp-3d`, původní hero je v archivu na `/archiv/puvodni-hero/`): pódium s kapelou, publikum, stánky, radnici a LED stěnu s partnery. Scéna je v `src/scripts/hero3d.js` (three.js), komponenta v `src/components/Hero3D.astro`.
 
 **Načítání:**
 - hned se ukáže **plakát**, tedy vyrenderovaný první snímek scény (`src/assets/hero3d/plakat-{desktop,tablet,mobil}.jpg`, na webu jako AVIF/WebP);
@@ -74,7 +75,7 @@ Stránka `/prototyp-3d/` (noindex, mimo sitemap) má místo hero živé low-poly
 
 **Přegenerování plakátu** (po změně scény):
 1. `npm run build` a `npx astro preview`.
-2. V prohlížeči otevři `/prototyp-3d/`. V konzoli nastav `__hero3d.cas = 1.3; __hero3d.snimek = 0` a skryj `.hero3d-obsah, .hero3d-clona, .hero3d-pauza, header`.
+2. V prohlížeči otevři `/`. V konzoli nastav `__hero3d.cas = 1.3; __hero3d.snimek = 0` a skryj `.hero3d-obsah, .hero3d-clona, .hero3d-pauza, header`.
 3. Vyfoť element `.hero3d` ve třech velikostech:
 
    | Varianta | Okno | Pixel ratio |
