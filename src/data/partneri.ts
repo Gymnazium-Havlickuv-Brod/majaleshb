@@ -94,3 +94,29 @@ export const POSTUP = [
   'Podepíšeme smlouvu a připravíme podklady (logo, banner).',
   'Na Majálesu vás uvidí celé náměstí, po akci dostanete fotky.',
 ];
+
+// ---- Potvrzení partneři (loga na webu) ----
+// Jak přidat partnera:
+//  1. logo ulož do src/assets/partneri/ (ideálně SVG, jinak PNG s průhledným pozadím, šířka aspoň 600 px)
+//  2. přidej řádek sem, `logo` = název souboru
+//  3. na web jen se souhlasem partnera a až po potvrzení (smlouva / platba)
+// Dokud je v úrovni míň partnerů než `MISTA`, doplní se zástupná místa „Vaše logo“.
+
+export type UrovenLoga = 'generalni' | 'hlavni' | 'partner';
+
+export type Partner = {
+  nazev: string;
+  logo?: string; // soubor v src/assets/partneri/
+  url?: string;
+  uroven: UrovenLoga; // podporovatel, partner i barter jdou do 'partner'
+};
+
+export const PARTNERI: Partner[] = [
+  // { nazev: 'Firma s.r.o.', logo: 'firma.svg', url: 'https://www.firma.cz', uroven: 'hlavni' },
+];
+
+export const MISTA: Record<UrovenLoga, { nadpis: string; pocet: number }> = {
+  generalni: { nadpis: 'Generální partner', pocet: 1 },
+  hlavni: { nadpis: 'Hlavní partneři', pocet: 3 },
+  partner: { nadpis: 'Partneři', pocet: 8 },
+};

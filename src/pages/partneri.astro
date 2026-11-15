@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import { AKCE, KONTAKT } from '../data/akce';
 import { UROVNE, DALSI, PROC, POSTUP } from '../data/partneri';
 import { podleRole } from '../data/fotky';
+import PartneriLoga from '../components/PartneriLoga.astro';
 
 const foto = podleRole('program:stage');
 const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}`;
@@ -112,6 +113,13 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
           ))
         }
       </ul>
+    </div>
+  </section>
+
+  <!-- kdo už podporuje -->
+  <section class="sekce pt-0" aria-label="Partneři Majálesu">
+    <div class="obal">
+      <PartneriLoga nadpis="Už nás podporují" nadpisPrazdne="Místa pro partnery" odkazNaNabidku={false} />
     </div>
   </section>
 

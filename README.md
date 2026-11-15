@@ -17,13 +17,21 @@ npm run preview
 
 | URL | Soubor | Co tam je |
 |---|---|---|
-| `/` | `src/pages/index.astro` | hero s odpočtem, o Majálesu, program, line-up (6 × ?), galerie, výzva pro partnery |
+| `/` | `src/pages/index.astro` | hero s odpočtem, o Majálesu, program, line-up (6 × ?), galerie, loga partnerů, výzva pro partnery |
 | `/partneri/` | `src/pages/partneri.astro` | úrovně partnerství, barter, nabídka na míru, postup |
 
 ## Kde se mění obsah
 
 - `src/data/akce.ts`: datum, místo, kontakt, program, line-up. **Jen potvrzené věci.** Časy programu a jména kapel sem přijdou, až budou jisté.
-- `src/data/partneri.ts`: úrovně partnerství a co za ně partner dostane.
+- `src/data/partneri.ts`: úrovně partnerství, co za ně partner dostane, a **seznam potvrzených partnerů** (`PARTNERI`).
+
+### Přidání partnera (logo na web)
+
+1. Logo ulož do `src/assets/partneri/`. Nejlépe SVG, jinak PNG s průhledným pozadím a šířkou aspoň 600 px.
+2. Do `PARTNERI` v `src/data/partneri.ts` přidej řádek, např. `{ nazev: 'Firma s.r.o.', logo: 'firma.svg', url: 'https://www.firma.cz', uroven: 'hlavni' }`. Úroveň je `generalni`, `hlavni`, nebo `partner` (do `partner` patří i podporovatel a barter).
+3. Commit a push na `main`. Vercel web nasadí sám.
+
+Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/partneri/`. Volná místa se doplní rámečky „Vaše logo“ (počty jsou v `MISTA`). Logo dávej na web až po potvrzení a se souhlasem partnera.
 - `src/styles/global.css`: barvy (`@theme`) a fonty, všechno na jednom místě.
 
 ## Fotky
