@@ -17,7 +17,7 @@ Originály v plném rozlišení jsou v pracovním repu `c:\dev\ghb\majales\media
 | [2025/band-kapely-dsc_0580.jpg](2025/band-kapely-dsc_0580.jpg) | 2025 | kapela | 8 | web | Dva zpěváci zpívají do jednoho mikrofonu | `media/2025/foto/Kapely/DSC_0580.jpg` |
 | [2025/band-kapely-dsc_0657.jpg](2025/band-kapely-dsc_0657.jpg) | 2025 | kapela | 8 | web | Zpěvák s kytarou naplno zpívá ve fialových světlech | `media/2025/foto/Kapely/DSC_0657.jpg` |
 | [2025/afterparty-afterparty-kif_3662.jpg](2025/afterparty-afterparty-kif_3662.jpg) | 2025 | afterparty | 7 | web hero ⚠ | Růžově nasvícené pódium s DJi a davem na afterparty | `media/2025/foto/Afterparty/KIF_3662.jpg` |
-| [2025/afterparty-afterparty-kif_3790.jpg](2025/afterparty-afterparty-kif_3790.jpg) | 2025 | afterparty | 7 | web ⚠ | Tři kamarádky dovádějí před pomalovanou zdí na afterparty | `media/2025/foto/Afterparty/KIF_3790.jpg` |
+| [2025/afterparty-afterparty-kif_3790.jpg](2025/afterparty-afterparty-kif_3790.jpg) | 2025 | afterparty | 7 | ⚠ | Tři kamarádky dovádějí před pomalovanou zdí na afterparty | `media/2025/foto/Afterparty/KIF_3790.jpg` |
 | [2025/afterparty-afterparty-kif_3805.jpg](2025/afterparty-afterparty-kif_3805.jpg) | 2025 | afterparty | 7 | web ⚠ | Rozesmáté kamarádky na zaplněném parketu afterparty | `media/2025/foto/Afterparty/KIF_3805.jpg` |
 | [2025/run-běh-dsc_0561.jpg](2025/run-běh-dsc_0561.jpg) | 2025 | běh | 7 |  | Dvě smějící se běžkyně na cestě u řeky | `media/2025/foto/Běh/DSC_0561.jpg` |
 | [2025/run-běh-dsc_0574.jpg](2025/run-běh-dsc_0574.jpg) | 2025 | běh | 7 | web | Dvě usměvavé dívky běží se štafetovými kolíky | `media/2025/foto/Běh/DSC_0574.jpg` |
