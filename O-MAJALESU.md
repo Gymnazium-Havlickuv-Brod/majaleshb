@@ -118,7 +118,7 @@ Program se teprve skládá. Veřejně zatím píšeme bez časů. Harmonogram zv
 ## Jak komunikujeme (dohodnuté na schůzkách)
 
 - ✅ **Žádné téma navíc.** Majáles je sám o sobě svátek studentů. Loňská „Havaj“ byla podle studentů kýčovitá. Stačí silná grafika s jasnou paletou.
-- ✅ **Bez vizuálů z AI** (výslovné přání MDKO). Fotky jsou skutečné, grafika ručně dotažená.
+- Vizuály z AI: MDKO by je nechtělo, ale je to jen jejich přání, o vizuálu rozhodují školy. Na webu jsou skutečné fotky z minulých ročníků.
 - ✅ Program začít šířit **výrazně dřív než loni**, aspoň měsíc předem, ideálně průběžně už teď (teaser s odpočtem „za X dní“).
 - ✅ Plán: teaser plakát → velký plakát s programem → vtipné reels.
 - ✅ **Představovat lidi, kteří na tom pracují:** kdo chystá jídlo, kdo vymyslel paletu. Kombinovat grafiku s fotkami lidí.
