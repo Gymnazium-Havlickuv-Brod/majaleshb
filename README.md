@@ -24,6 +24,7 @@ npm run preview
 
 - `src/data/akce.ts`: datum, místo, kontakt, program, line-up. **Jen potvrzené věci.** Časy programu a jména kapel sem přijdou, až budou jisté.
 - `src/data/partneri.ts`: úrovně partnerství, co za ně partner dostane, a **seznam potvrzených partnerů** (`PARTNERI`).
+- `src/styles/global.css`: barvy (`@theme`) a fonty, všechno na jednom místě.
 
 ### Přidání partnera (logo na web)
 
@@ -32,7 +33,6 @@ npm run preview
 3. Commit a push na `main`. Vercel web nasadí sám.
 
 Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/partneri/`. Volná místa se doplní rámečky „Vaše logo“ (počty jsou v `MISTA`). Logo dávej na web až po potvrzení a se souhlasem partnera.
-- `src/styles/global.css`: barvy (`@theme`) a fonty, všechno na jednom místě.
 
 ## Fotky
 
