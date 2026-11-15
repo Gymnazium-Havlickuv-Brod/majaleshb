@@ -1,0 +1,38 @@
+---
+import { AKCE, KONTAKT } from '../data/akce';
+const site = [
+  KONTAKT.instagram && { href: KONTAKT.instagram, text: 'Instagram' },
+  KONTAKT.facebook && { href: KONTAKT.facebook, text: 'Facebook' },
+].filter(Boolean) as { href: string; text: string }[];
+---
+
+<footer class="bg-pulnoc text-mlecna">
+  <div class="obal py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <p class="display text-ruzova text-[clamp(3rem,10vw,6rem)]">Majáles<br />{AKCE.rok}</p>
+      <p class="mt-4 max-w-sm text-mlecna/80">
+        Studentský Majáles v Havlíčkově Brodě. Pořádají {AKCE.skoly.join(' a ')} {AKCE.spoluprace}.
+      </p>
+    </div>
+    <div>
+      <p class="kicker text-ruzova">Kdy a kde</p>
+      <p class="mt-3 leading-relaxed">
+        {AKCE.den} {AKCE.datum}<br />
+        {AKCE.misto}<br />
+        {AKCE.mesto}
+      </p>
+    </div>
+    <div>
+      <p class="kicker text-ruzova">Kontakt</p>
+      <ul class="mt-3 space-y-2">
+        <li><a class="underline decoration-ruzova/40 underline-offset-4 hover:decoration-ruzova" href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a></li>
+        {site.map((s) => <li><a class="underline decoration-ruzova/40 underline-offset-4 hover:decoration-ruzova" href={s.href} rel="noopener">{s.text}</a></li>)}
+        <li><a class="underline decoration-ruzova/40 underline-offset-4 hover:decoration-ruzova" href="/partneri/">Pro partnery</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="obal pb-8 text-sm text-mlecna/50 flex flex-wrap justify-between gap-2">
+    <span>© {AKCE.rok} Majáles HB</span>
+    <span>Fotky: archiv Majálesu 2017–2026</span>
+  </div>
+</footer>

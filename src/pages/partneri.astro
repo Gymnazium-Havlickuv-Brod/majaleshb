@@ -1,0 +1,137 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { AKCE, KONTAKT } from '../data/akce';
+import { UROVNE, DALSI, PROC, POSTUP } from '../data/partneri';
+import { podleRole } from '../data/fotky';
+
+const foto = podleRole('program:stage');
+const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}`;
+---
+
+<Base
+  title={`Partneři · Majáles ${AKCE.rok} Havlíčkův Brod`}
+  description={`Podpořte studentský Majáles ${AKCE.datum} na Havlíčkově náměstí. Úrovně partnerství od 5 000 Kč, barter i individuální nabídka.`}
+>
+  <!-- úvod -->
+  <section class="bg-modra text-mlecna overflow-hidden">
+    <div class="obal pt-12 pb-16 sm:pt-16 sm:pb-24 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+      <div>
+        <p class="kicker text-ruzova">Pro partnery · Majáles {AKCE.rok}</p>
+        <h1 class="display text-ruzova mt-8 text-[clamp(3.5rem,12vw,8.5rem)]">Buďte<br />u toho</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed">
+          {AKCE.den} {AKCE.datum}, {AKCE.misto}. Majáles staví studenti Gymnázia a SPŠ stavební. S vaší podporou
+          z něj uděláme akci, na kterou bude celý Brod vzpomínat.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#urovne" class="tlacitko tlacitko-plne">Úrovně partnerství</a>
+          <a href={mail(`Partnerství Majáles ${AKCE.rok}`)} class="tlacitko text-ruzova hover:bg-ruzova hover:text-pulnoc">Napište nám</a>
+        </div>
+      </div>
+      <div class="relative">
+        <Image src={foto.img} alt={foto.alt} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 42vw, 92vw" loading="eager" class="w-full aspect-[4/3] object-cover rounded-[2rem] rotate-[1.5deg] ring-4 ring-ruzova shadow-2xl shadow-pulnoc/40" />
+      </div>
+    </div>
+  </section>
+
+  <!-- proč -->
+  <section class="sekce" aria-labelledby="proc-nadpis">
+    <div class="obal">
+      <h2 id="proc-nadpis" class="display text-modra text-[clamp(2.5rem,7vw,4.5rem)]">Proč Majáles</h2>
+      <ul class="mt-10 grid gap-8 md:grid-cols-3">
+        {
+          PROC.map((p) => (
+            <li class="border-t-2 border-modra pt-5">
+              <h3 class="display text-pulnoc text-3xl">{p.nadpis}</h3>
+              <p class="mt-3 text-pulnoc/75 leading-relaxed">{p.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- úrovně -->
+  <section id="urovne" class="sekce pt-0" aria-labelledby="urovne-nadpis">
+    <div class="obal">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 id="urovne-nadpis" class="display text-modra text-[clamp(2.5rem,7vw,4.5rem)]">Úrovně partnerství</h2>
+        <p class="max-w-sm text-pulnoc/70">Částky jsou orientační. Co přesně dostanete, doladíme spolu.</p>
+      </div>
+
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        {
+          UROVNE.map((u) => (
+            <li
+              class:list={[
+                'relative flex flex-col rounded-[1.75rem] p-6 sm:p-7',
+                u.zvyraznit ? 'bg-modra text-mlecna shadow-2xl shadow-modra/30 xl:-my-4 xl:py-10' : 'bg-white ring-1 ring-pulnoc/10',
+              ]}
+            >
+              {u.zvyraznit && (
+                <span class="absolute -top-3 right-5 rounded-full bg-hot px-3 py-1 text-xs font-bold uppercase tracking-wider text-pulnoc">
+                  jen jeden
+                </span>
+              )}
+              <h3 class:list={['kicker', u.zvyraznit ? 'text-ruzova' : 'text-modra']}>{u.nazev}</h3>
+              <p class:list={['display mt-3 text-[2.6rem] leading-none', u.zvyraznit ? 'text-ruzova' : 'text-pulnoc']}>{u.castka}</p>
+              <p class:list={['mt-3 text-sm', u.zvyraznit ? 'text-mlecna/80' : 'text-pulnoc/65']}>{u.podtitul}</p>
+              <ul class:list={['mt-6 space-y-3 border-t pt-5 text-[0.95rem] flex-1', u.zvyraznit ? 'border-ruzova/30' : 'border-pulnoc/10']}>
+                {u.vyhody.map((v) => (
+                  <li class="flex gap-3">
+                    <span class:list={['mt-[0.45rem] size-2 shrink-0 rounded-full', u.zvyraznit ? 'bg-ruzova' : 'bg-modra']} aria-hidden="true" />
+                    <span>{v}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={mail(`Partnerství Majáles ${AKCE.rok}: ${u.nazev}`)}
+                class:list={[
+                  'tlacitko mt-8 justify-center',
+                  u.zvyraznit ? 'tlacitko-plne' : 'text-modra hover:bg-modra hover:text-mlecna',
+                ]}
+              >
+                Mám zájem
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="mt-8 grid gap-5 md:grid-cols-2">
+        {
+          DALSI.map((d) => (
+            <li class="rounded-[1.75rem] border-2 border-dashed border-modra/40 p-6 sm:p-8 flex flex-col">
+              <p class="kicker text-modra">{d.podtitul}</p>
+              <h3 class="display text-pulnoc text-4xl mt-2">{d.nazev}</h3>
+              <p class="mt-3 text-pulnoc/75 leading-relaxed flex-1">{d.text}</p>
+              <a href={mail(`Majáles ${AKCE.rok}: ${d.nazev}`)} class="mt-5 font-bold text-modra underline decoration-2 underline-offset-4 hover:decoration-hot">
+                Ozvat se →
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- postup -->
+  <section class="sekce bg-pulnoc text-mlecna" aria-labelledby="postup-nadpis">
+    <div class="obal grid gap-12 lg:grid-cols-[1fr_1.3fr]">
+      <div>
+        <h2 id="postup-nadpis" class="display text-ruzova text-[clamp(2.5rem,7vw,4.5rem)]">Jak to<br />probíhá</h2>
+        <p class="mt-6 text-mlecna/75 max-w-sm">Napište na <a class="text-ruzova underline underline-offset-4" href={mail(`Partnerství Majáles ${AKCE.rok}`)}>{KONTAKT.email}</a>. Ozveme se do pár dní.</p>
+      </div>
+      <ol class="grid gap-4 sm:grid-cols-2">
+        {
+          POSTUP.map((k, i) => (
+            <li class="rounded-[1.5rem] bg-modra/25 ring-1 ring-ruzova/15 p-6">
+              <span class="display text-ruzova text-5xl leading-none">{i + 1}</span>
+              <p class="mt-3 text-mlecna/90">{k}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>

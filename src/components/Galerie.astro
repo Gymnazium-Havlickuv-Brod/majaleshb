@@ -1,0 +1,139 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { FOTKY } from '../data/fotky';
+
+// role 'hero' / 'program:*' fotky jsou i v galerii – galerie je přehled všeho vybraného, nejnovější nahoře
+const fotky = [...FOTKY].sort((a, b) => b.rok - a.rok);
+const roky = [...new Set(fotky.map((f) => f.rok))];
+const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1600, format: 'webp', quality: 78 })));
+---
+
+<div class="galerie">
+  <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrovat podle ročníku">
+    <button type="button" class="filtr" aria-pressed="true" data-rok="vse">Všechny</button>
+    {roky.map((r) => <button type="button" class="filtr" aria-pressed="false" data-rok={r}>{r}</button>)}
+  </div>
+
+  <ul class="mt-8 columns-2 md:columns-3 xl:columns-4 gap-3 sm:gap-4">
+    {
+      fotky.map((f, i) => (
+        <li class="mb-3 sm:mb-4 break-inside-avoid" data-rok={f.rok}>
+          <button
+            type="button"
+            class="group relative block w-full overflow-hidden rounded-2xl bg-modra/30 cursor-zoom-in"
+            data-velka={velke[i].src}
+            data-alt={f.alt}
+            data-rok={f.rok}
+            aria-label={`Zvětšit: ${f.alt} (${f.rok})`}
+          >
+            <Image
+              src={f.img}
+              alt={f.alt}
+              widths={[360, 560, 800]}
+              sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 47vw"
+              class="w-full h-auto transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+            <span class="absolute left-2 bottom-2 rounded-full bg-pulnoc/75 px-2.5 py-1 text-xs font-bold text-ruzova backdrop-blur">
+              {f.rok}
+            </span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full bg-pulnoc/95 p-0 backdrop:bg-pulnoc/80" aria-label="Fotka">
+    <div class="relative grid h-full w-full place-items-center p-4 sm:p-10">
+      <img class="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl" alt="" />
+      <p class="popis absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] text-center text-sm text-mlecna/85"></p>
+      <button type="button" class="zavrit absolute right-3 top-3 sm:right-6 sm:top-6 lb-tl" aria-label="Zavřít">✕</button>
+      <button type="button" class="pred absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 lb-tl" aria-label="Předchozí">←</button>
+      <button type="button" class="dalsi absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 lb-tl" aria-label="Další">→</button>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  .filtr {
+    min-height: 2.5rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    border: 2px solid color-mix(in srgb, var(--color-ruzova) 45%, transparent);
+    color: var(--color-ruzova);
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .filtr[aria-pressed='true'],
+  .filtr:hover {
+    background: var(--color-ruzova);
+    color: var(--color-pulnoc);
+    border-color: var(--color-ruzova);
+  }
+  .lb-tl {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-modra) 80%, transparent);
+    color: var(--color-mlecna);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .lb-tl:hover {
+    background: var(--color-ruzova);
+    color: var(--color-pulnoc);
+  }
+  li[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  const g = document.querySelector<HTMLElement>('.galerie');
+  if (g) {
+    const filtry = [...g.querySelectorAll<HTMLButtonElement>('.filtr')];
+    const polozky = [...g.querySelectorAll<HTMLLIElement>('li[data-rok]')];
+    filtry.forEach((b) =>
+      b.addEventListener('click', () => {
+        filtry.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        polozky.forEach((li) => (li.hidden = b.dataset.rok !== 'vse' && li.dataset.rok !== b.dataset.rok));
+      }),
+    );
+
+    const dlg = g.querySelector<HTMLDialogElement>('dialog')!;
+    const img = dlg.querySelector('img')!;
+    const popis = dlg.querySelector<HTMLElement>('.popis')!;
+    let aktualni = 0;
+    const viditelne = () => polozky.filter((li) => !li.hidden).map((li) => li.querySelector<HTMLButtonElement>('button')!);
+    const ukaz = (i: number) => {
+      const v = viditelne();
+      aktualni = (i + v.length) % v.length;
+      const b = v[aktualni];
+      img.src = b.dataset.velka!;
+      img.alt = b.dataset.alt!;
+      popis.textContent = `${b.dataset.alt} · ${b.dataset.rok}`;
+    };
+    polozky.forEach((li) =>
+      li.querySelector('button')!.addEventListener('click', (e) => {
+        ukaz(viditelne().indexOf(e.currentTarget as HTMLButtonElement));
+        dlg.showModal();
+      }),
+    );
+    dlg.querySelector('.zavrit')!.addEventListener('click', () => dlg.close());
+    dlg.querySelector('.pred')!.addEventListener('click', () => ukaz(aktualni - 1));
+    dlg.querySelector('.dalsi')!.addEventListener('click', () => ukaz(aktualni + 1));
+    dlg.addEventListener('click', (e) => e.target === dlg.firstElementChild && dlg.close());
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') ukaz(aktualni - 1);
+      if (e.key === 'ArrowRight') ukaz(aktualni + 1);
+    });
+    // swipe na telefonu
+    let x0: number | null = null;
+    dlg.addEventListener('pointerdown', (e) => (x0 = e.clientX));
+    dlg.addEventListener('pointerup', (e) => {
+      if (x0 !== null && Math.abs(e.clientX - x0) > 50) ukaz(aktualni + (e.clientX < x0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+</script>

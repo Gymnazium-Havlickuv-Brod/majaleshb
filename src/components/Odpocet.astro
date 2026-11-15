@@ -1,0 +1,40 @@
+---
+import { AKCE } from '../data/akce';
+const jednotky = [
+  ['d', 'dní'],
+  ['h', 'hodin'],
+  ['m', 'minut'],
+  ['s', 'sekund'],
+];
+---
+
+<div class="odpocet flex gap-2 sm:gap-3" data-cil={AKCE.zacatek} aria-label={`Odpočet do ${AKCE.datum}`} role="timer">
+  {
+    jednotky.map(([k, n]) => (
+      <div class="min-w-[4.2rem] sm:min-w-[5rem] rounded-2xl bg-pulnoc/35 ring-1 ring-ruzova/20 px-3 py-2 text-center">
+        <span class="display block text-ruzova text-[clamp(1.8rem,6vw,2.6rem)] leading-none tabular-nums" data-k={k}>
+          –
+        </span>
+        <span class="mt-1 block text-[0.7rem] uppercase tracking-[0.14em] text-mlecna/75">{n}</span>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  const el = document.querySelector<HTMLElement>('.odpocet');
+  if (el) {
+    const cil = new Date(el.dataset.cil!).getTime();
+    const pole = Object.fromEntries([...el.querySelectorAll<HTMLElement>('[data-k]')].map((s) => [s.dataset.k, s]));
+    const tik = () => {
+      const zbyva = Math.max(0, cil - Date.now());
+      const s = Math.floor(zbyva / 1000);
+      pole.d.textContent = String(Math.floor(s / 86400));
+      pole.h.textContent = String(Math.floor((s % 86400) / 3600)).padStart(2, '0');
+      pole.m.textContent = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+      pole.s.textContent = String(s % 60).padStart(2, '0');
+    };
+    tik();
+    setInterval(tik, 1000);
+  }
+</script>

@@ -1,0 +1,56 @@
+---
+const odkazy = [
+  { href: '/#program', text: 'Program' },
+  { href: '/#line-up', text: 'Line-up' },
+  { href: '/#galerie', text: 'Galerie' },
+  { href: '/#o-majalesu', text: 'O Majálesu' },
+];
+const naPartnerech = Astro.url.pathname.startsWith('/partneri');
+---
+
+<header class="sticky top-0 z-40 text-mlecna bg-modra/90 backdrop-blur-md border-b border-ruzova/15">
+  <nav class="obal flex h-16 items-center justify-between gap-4" aria-label="Hlavní navigace">
+    <a href="/" class="display text-ruzova text-2xl tracking-wide leading-none" aria-label="Majáles 2027, úvod">
+      Majáles<span class="text-hot">’27</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-7 text-sm font-medium">
+      {odkazy.map((o) => <li><a href={o.href} class="hover:text-ruzova transition-colors">{o.text}</a></li>)}
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="/partneri/"
+        class:list={['tlacitko !min-h-10 !py-2 !px-4 text-sm', naPartnerech ? 'tlacitko-plne' : 'text-ruzova hover:bg-ruzova hover:text-pulnoc']}
+        aria-current={naPartnerech ? 'page' : undefined}
+      >
+        Pro partnery
+      </a>
+
+      <details class="md:hidden relative group">
+        <summary class="list-none cursor-pointer grid place-items-center size-10 rounded-full border-2 border-ruzova/40 text-ruzova" aria-label="Menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" class="group-open:hidden"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" class="hidden group-open:block"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        </summary>
+        <ul class="absolute right-0 top-12 w-56 rounded-2xl bg-pulnoc p-2 shadow-2xl ring-1 ring-ruzova/20">
+          {
+            odkazy.map((o) => (
+              <li>
+                <a href={o.href} class="block rounded-xl px-4 py-3 font-medium hover:bg-modra">
+                  {o.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // zavřít mobilní menu po kliknutí na odkaz
+  document.querySelectorAll('header details a').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+  );
+</script>

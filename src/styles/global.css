@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+/*
+  Barvy Majálesu 2027 – jediné místo, kde se ladí.
+  Základ: plakát A1 (Electric Blue × Flamingo, paleta P6 z grafika/podklady/palety.pdf),
+  modrá navzorkovaná z plakátu (#3044F3), růžová o něco čistší a sytější než Flamingo.
+  Kontrast: růžová na modré 4,3 : 1 → jen nadpisy a velký text; běžný text na modré je --color-mlecna.
+*/
+@theme {
+  --color-modra: #3044f3;
+  --color-modra-svetla: #4a5cff;
+  --color-pulnoc: #0b0f4a;
+  --color-ruzova: #ffc2e2;
+  --color-mlecna: #ffe9f4;
+  --color-hot: #ff4fa3;
+  --color-krida: #fff5fa;
+
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  /* 60–30–10: světlý podklad nese obsah, modrá je podpis (hero, line-up), růžová a hot jen akcenty */
+  body {
+    background: var(--color-krida);
+    color: var(--color-pulnoc);
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-hot);
+    color: var(--color-pulnoc);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-hot);
+    outline-offset: 3px;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.86;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+  }
+  /* víceřádkové nadpisy: víc místa na háčky a čárky (Á, Ě, Š) */
+  h2.display,
+  h1.display:not(#hero-nadpis) {
+    line-height: 1.06;
+  }
+  .kicker {
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .obal {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+  }
+  .sekce {
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+  .tlacitko {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    border: 2px solid currentColor;
+    transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+  .tlacitko:hover {
+    transform: translateY(-2px);
+  }
+  .tlacitko-plne {
+    background: var(--color-ruzova);
+    border-color: var(--color-ruzova);
+    color: var(--color-pulnoc);
+  }
+  .tlacitko-plne:hover {
+    background: var(--color-mlecna);
+  }
+}
+
+/* běžící pás s programem */
+@keyframes pas {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.pas {
+  animation: pas 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .pas {
+    animation: none;
+  }
+  .tlacitko:hover {
+    transform: none;
+  }
+}
