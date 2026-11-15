@@ -12,8 +12,10 @@ import { OG_FOTO } from '../data/fotky';
 interface Props {
   title: string;
   description: string;
+  /** experimenty a prototypy: stránka se nemá indexovat */
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = await getImage({ src: OG_FOTO, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 75 });
 const ogUrl = new URL(og.src, Astro.site);
@@ -26,6 +28,7 @@ const ogUrl = new URL(og.src, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#3044f3" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
