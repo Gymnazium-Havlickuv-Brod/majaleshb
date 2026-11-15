@@ -1,0 +1,244 @@
+---
+// PROTOTYP: 3D hero – živý low-poly model Majálesu na náměstí (three.js, procedurální geometrie, žádné modely ani AI obrázky).
+// Nejdřív se ukáže statický plakát (vyrenderovaný první snímek scény), three.js se dotáhne líně přes import() a plátno se prolne.
+// Scéna: src/scripts/hero3d.js. LED stěna na pódiu bere snímky z `data-snimky` (partneři z src/data/partneri.ts).
+import { getImage } from 'astro:assets';
+import { AKCE } from '../data/akce';
+import { PARTNERI, MISTA, type UrovenLoga } from '../data/partneri';
+import Odpocet from './Odpocet.astro';
+import plakatDesktop from '../assets/hero3d/plakat-desktop.jpg';
+import plakatTablet from '../assets/hero3d/plakat-tablet.jpg';
+import plakatMobil from '../assets/hero3d/plakat-mobil.jpg';
+
+// --- snímky pro LED stěnu ---
+const loga = import.meta.glob<{ default: ImageMetadata }>('../assets/partneri/*.{svg,png,jpg,jpeg,webp}', { eager: true });
+const poradi: UrovenLoga[] = ['generalni', 'hlavni', 'partner'];
+const stitek: Record<UrovenLoga, string> = {
+  generalni: 'Generální partner',
+  hlavni: 'Hlavní partner',
+  partner: 'Partner',
+};
+
+type Snimek =
+  | { typ: 'majales'; rok: number; datum: string; misto: string }
+  | { typ: 'partner'; nazev: string; uroven: string; logo?: string; pomer?: number }
+  | { typ: 'volne'; nadpis: string; text: string };
+
+const partneri = [...PARTNERI].sort((a, b) => poradi.indexOf(a.uroven) - poradi.indexOf(b.uroven));
+const snimkyPartneru: Snimek[] = await Promise.all(
+  partneri.map(async (p) => {
+    const meta = p.logo ? loga[`../assets/partneri/${p.logo}`]?.default : undefined;
+    let logo: string | undefined;
+    if (meta) {
+      // SVG projde beze změny, rastr se zmenší na šířku plátna LED stěny
+      const svg = meta.format === 'svg';
+      logo = (await getImage(svg ? { src: meta } : { src: meta, width: Math.min(meta.width, 900), format: 'webp' })).src;
+    }
+    return { typ: 'partner', nazev: p.nazev, uroven: stitek[p.uroven], logo, pomer: meta ? meta.width / meta.height : undefined };
+  }),
+);
+
+const snimky: Snimek[] = [
+  { typ: 'majales', rok: AKCE.rok, datum: AKCE.datum.replace(/\s*\d{4}$/, ''), misto: AKCE.misto },
+  ...(snimkyPartneru.length
+    ? snimkyPartneru
+    : ([
+        { typ: 'volne', nadpis: 'Vaše logo', text: 'místo pro partnera' },
+        { typ: 'volne', nadpis: 'Hledáme partnery', text: 'majaleshb.cz/partneri' },
+      ] as Snimek[])),
+];
+// volná místa připomeneme i mezi potvrzenými partnery, dokud nejsou všechna obsazená
+const obsazeno = poradi.every((u) => PARTNERI.filter((p) => p.uroven === u).length >= MISTA[u].pocet);
+if (snimkyPartneru.length && !obsazeno) snimky.push({ typ: 'volne', nadpis: 'Vaše logo', text: 'místo pro partnera' });
+
+// --- statický plakát scény (vidět hned, než se načte three.js, a zůstane, když WebGL nejde) ---
+// Vyrenderováno ze scény v čase 1,3 s (= první snímek živé animace) se zamčeným snímkem LED stěny 0,
+// takže se živé plátno prolne bez skoku. Přegenerování: viz README (sekce 3D hero).
+
+const varianty = [
+  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1600, 1909], sizes: '100vw' },
+  { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1220, 1610], sizes: '100vw' },
+  { img: plakatMobil, media: '', sirky: [480, 720, 938], sizes: '100vw' },
+];
+const zdroje = await Promise.all(
+  varianty.map(async (v) => {
+    const sada = async (format: 'avif' | 'webp', quality: number) =>
+      (
+        await Promise.all(
+          v.sirky.filter((s) => s <= v.img.width).map(async (s) => `${(await getImage({ src: v.img, width: s, format, quality })).src} ${s}w`),
+        )
+      ).join(', ');
+    return { ...v, avif: await sada('avif', 55), webp: await sada('webp', 72) };
+  }),
+);
+const zaklad = zdroje[zdroje.length - 1];
+const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp', quality: 72 })).src;
+---
+
+<section class="hero3d relative isolate overflow-hidden bg-pulnoc text-mlecna" aria-labelledby="hero-nadpis" data-snimky={JSON.stringify(snimky)}>
+  <!-- statický podklad: je vidět hned a zůstane, když WebGL nejde -->
+  <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
+    <picture>
+      {
+        zdroje.slice(0, -1).map((z) => (
+          <Fragment>
+            <source media={z.media} type="image/avif" srcset={z.avif} sizes={z.sizes} />
+            <source media={z.media} type="image/webp" srcset={z.webp} sizes={z.sizes} />
+          </Fragment>
+        ))
+      }
+      <source type="image/avif" srcset={zaklad.avif} sizes={zaklad.sizes} />
+      <source type="image/webp" srcset={zaklad.webp} sizes={zaklad.sizes} />
+      <img class="hero3d-plakat" src={zakladSrc} alt="" width={zaklad.img.width} height={zaklad.img.height} loading="eager" fetchpriority="high" decoding="async" />
+    </picture>
+  </div>
+
+  <canvas class="hero3d-platno absolute inset-0 -z-20 size-full" aria-hidden="true"></canvas>
+  <div class="hero3d-clona absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="obal hero3d-obsah relative flex flex-col justify-end lg:justify-center @container">
+    <div class="lg:max-w-[36rem]">
+      <p class="kicker text-ruzova">{AKCE.skolyKratce} · {AKCE.rok}</p>
+
+      <h1 id="hero-nadpis" class="display text-ruzova mt-3 lg:mt-6 select-none">
+        <span class="sr-only">Majáles {AKCE.rok}</span>
+        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(5.5rem,26.5cqi,13rem)] lg:text-[clamp(8rem,11.5vw,12rem)] leading-[0.84]">Majáles</span>
+      </h1>
+
+      <div class="mt-3 lg:mt-6 flex flex-wrap items-end gap-x-6 gap-y-2">
+        <p class="display text-mlecna text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
+        <p class="text-base sm:text-lg font-medium leading-snug pb-1">
+          {AKCE.den} · {AKCE.misto}<br />{AKCE.mesto}
+        </p>
+      </div>
+
+      <p class="hidden sm:block mt-4 border-t-2 border-ruzova/50 pt-4 text-base font-medium text-mlecna/90">
+        kapely · DJ · stánky · sport · zóny škol · <span class="text-ruzova">program brzy</span>
+      </p>
+
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="#program" class="tlacitko tlacitko-plne">Co tě čeká</a>
+        <a href="/partneri/" class="tlacitko text-ruzova hover:bg-ruzova hover:text-pulnoc">Staň se partnerem</a>
+      </div>
+
+      <div class="mt-5 lg:mt-8">
+        <p class="kicker text-mlecna/75 mb-3">Do Majálesu zbývá</p>
+        <Odpocet />
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="hero3d-pauza" hidden aria-pressed="false" aria-label="Pozastavit animaci" title="Pozastavit animaci">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <path class="i-pauza" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"></path>
+      <path class="i-hraj" d="M3 1.5v11l9-5.5z" fill="currentColor"></path>
+    </svg>
+  </button>
+</section>
+
+<style>
+  .hero3d-obsah {
+    /* mobil a tablet: scéna nahoře, text dole přes clonu */
+    min-height: calc(94svh - 4rem);
+    padding-top: 36svh;
+    padding-bottom: 1.5rem;
+  }
+  .hero3d-podklad {
+    background:
+      radial-gradient(90% 55% at 50% 46%, rgb(255 79 163 / 0.3), transparent 70%),
+      linear-gradient(180deg, #0b0f4a 0%, #1a2296 30%, #3044f3 50%, #121873 62%, #0b0f4a 100%);
+  }
+  /* plakát = vyrenderovaný první snímek scény; pozice odpovídá středu scény v kameře (cx, cy v hero3d.js) */
+  .hero3d-plakat {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 29%;
+  }
+  .hero3d-platno {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero3d-platno.je-videt {
+    opacity: 1;
+  }
+  .hero3d-clona {
+    background: linear-gradient(0deg, rgb(11 15 74 / 0.96) 0%, rgb(11 15 74 / 0.9) 34%, rgb(11 15 74 / 0.55) 50%, transparent 66%);
+  }
+  .hero3d-pauza {
+    position: absolute;
+    right: clamp(1rem, 4vw, 2.5rem);
+    top: 1rem;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    color: var(--color-ruzova);
+    background: rgb(11 15 74 / 0.55);
+    border: 2px solid rgb(255 194 226 / 0.4);
+    cursor: pointer;
+  }
+  .hero3d-pauza[hidden] {
+    display: none;
+  }
+  .hero3d-pauza:hover {
+    background: var(--color-pulnoc);
+  }
+  .hero3d-pauza .i-hraj,
+  .hero3d-pauza[aria-pressed='true'] .i-pauza {
+    display: none;
+  }
+  .hero3d-pauza[aria-pressed='true'] .i-hraj {
+    display: block;
+  }
+
+  @media (min-width: 1024px) {
+    .hero3d-obsah {
+      /* desktop: text vlevo, scéna vpravo přes celou výšku */
+      min-height: calc(100svh - 4rem);
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .hero3d-podklad {
+      background:
+        radial-gradient(60% 60% at 68% 55%, rgb(255 79 163 / 0.3), transparent 70%),
+        linear-gradient(180deg, #0b0f4a 0%, #1a2296 38%, #3044f3 62%, #121873 78%, #0b0f4a 100%);
+    }
+    .hero3d-plakat {
+      object-position: 69% 60%;
+    }
+    .hero3d-clona {
+      background:
+        linear-gradient(90deg, rgb(11 15 74 / 0.94) 0%, rgb(11 15 74 / 0.8) 26%, rgb(11 15 74 / 0.35) 44%, transparent 60%),
+        linear-gradient(0deg, rgb(11 15 74 / 0.55) 0%, transparent 22%);
+    }
+    .hero3d-pauza {
+      top: auto;
+      bottom: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  // three.js se stahuje až po prvním vykreslení a jen když prohlížeč umí WebGL 2
+  const hero = document.querySelector<HTMLElement>('.hero3d');
+  if (hero) {
+    const umiWebgl = () => {
+      try {
+        return !!document.createElement('canvas').getContext('webgl2');
+      } catch {
+        return false;
+      }
+    };
+    const spust = () => {
+      if (!umiWebgl()) return;
+      import('../scripts/hero3d.js').then((m) => m.init(hero)).catch(() => {});
+    };
+    const azBudeKlid = () => ('requestIdleCallback' in window ? requestIdleCallback(spust, { timeout: 1500 }) : setTimeout(spust, 200));
+    if (document.readyState === 'complete') azBudeKlid();
+    else addEventListener('load', azBudeKlid, { once: true });
+  }
+</script>
