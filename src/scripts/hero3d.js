@@ -206,12 +206,12 @@ function kresliSnimek(x, W, H, s, obrazky) {
       pasuj(x, String(s.rok), ANTON, W * 0.8, H * 0.2);
       x.fillText(String(s.rok), W / 2, H * 0.6);
     } else {
-      const v = pasuj(x, `MAJÁLES ${s.rok}`, ANTON, W * 0.88, H * 0.46);
-      x.fillText(`MAJÁLES ${s.rok}`, W / 2, H * 0.45);
+      const v = pasuj(x, `MAJÁLES ${s.rok}`, ANTON, W * 0.88, H * 0.36);
+      x.fillText(`MAJÁLES ${s.rok}`, W / 2, H * 0.27); // obsah drží nahoře, spodek stěny zakrývá kapela
       x.fillStyle = B.mlecna;
       const pod = `${s.datum.trim()} · ${s.misto}`.toUpperCase();
       pasuj(x, pod, GROTESK, W * 0.86, v * 0.3);
-      x.fillText(pod, W / 2, H * 0.45 + v * 0.78);
+      x.fillText(pod, W / 2, H * 0.27 + v * 0.8);
     }
   } else if (s.typ === 'partner') {
     const img = s.logo && obrazky.get(s.logo);
@@ -219,10 +219,10 @@ function kresliSnimek(x, W, H, s, obrazky) {
     x.fillRect(0, 0, W, H);
     x.fillStyle = B.modra;
     pasuj(x, s.uroven.toUpperCase(), GROTESK, W * 0.8, u * 7);
-    x.fillText(s.uroven.toUpperCase(), W / 2, H * (naVysku ? 0.1 : 0.2));
+    x.fillText(s.uroven.toUpperCase(), W / 2, H * (naVysku ? 0.1 : 0.09));
     const bw = W * 0.8;
-    const bh = H * (naVysku ? 0.5 : 0.52);
-    const cy = H * (naVysku ? 0.56 : 0.6);
+    const bh = H * (naVysku ? 0.5 : 0.4);
+    const cy = H * (naVysku ? 0.56 : 0.36);
     if (img) {
       const pomer = img.naturalWidth && img.naturalHeight ? img.naturalWidth / img.naturalHeight : s.pomer || 2;
       let w = bw;
@@ -252,8 +252,8 @@ function kresliSnimek(x, W, H, s, obrazky) {
     x.fillStyle = B.ruzova;
     const slova = s.nadpis.toUpperCase().split(/\s+/);
     const radky = naVysku ? slova : [slova.join(' ')];
-    const vr = naVysku ? H * 0.17 : H * 0.4;
-    const cy = naVysku ? H * 0.4 : H * 0.47;
+    const vr = naVysku ? H * 0.17 : H * 0.34;
+    const cy = naVysku ? H * 0.4 : H * 0.27;
     let v = vr;
     radky.forEach((r, i) => {
       v = pasuj(x, r, ANTON, W * 0.76, vr * 0.92);
@@ -267,8 +267,8 @@ function kresliSnimek(x, W, H, s, obrazky) {
         x.fillText(r, W / 2, H * 0.7 + i * u * 16);
       });
     } else {
-      pasuj(x, s.text, GROTESK, W * 0.74, H * 0.13);
-      x.fillText(s.text, W / 2, cy + vr * 0.5 + H * 0.12);
+      pasuj(x, s.text, GROTESK, W * 0.74, H * 0.1);
+      x.fillText(s.text, W / 2, cy + vr * 0.5 + H * 0.06);
     }
   }
   x.restore();
