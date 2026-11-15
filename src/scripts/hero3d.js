@@ -1369,7 +1369,7 @@ export async function init(root) {
     const dt = Math.min(0.05, (ted - posledni) / 1000 || 0);
     posledni = ted;
     cas += dt;
-    kresli(cas);
+    kresli(info.cas ?? cas); // info.cas = zámek času pro ladění
     naplanuj();
   }
   function maBezet() {
