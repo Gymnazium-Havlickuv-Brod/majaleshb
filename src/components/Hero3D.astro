@@ -1,11 +1,14 @@
 ---
 // PROTOTYP: 3D hero – živý low-poly model Majálesu na náměstí (three.js, procedurální geometrie, žádné modely ani AI obrázky).
-// Nejdřív se ukáže statický plakátový podklad (CSS + SVG silueta), three.js se dotáhne líně přes import() a plátno se prolne.
+// Nejdřív se ukáže statický plakát (vyrenderovaný první snímek scény), three.js se dotáhne líně přes import() a plátno se prolne.
 // Scéna: src/scripts/hero3d.js. LED stěna na pódiu bere snímky z `data-snimky` (partneři z src/data/partneri.ts).
 import { getImage } from 'astro:assets';
 import { AKCE } from '../data/akce';
 import { PARTNERI, MISTA, type UrovenLoga } from '../data/partneri';
 import Odpocet from './Odpocet.astro';
+import plakatDesktop from '../assets/hero3d/plakat-desktop.jpg';
+import plakatTablet from '../assets/hero3d/plakat-tablet.jpg';
+import plakatMobil from '../assets/hero3d/plakat-mobil.jpg';
 
 // --- snímky pro LED stěnu ---
 const loga = import.meta.glob<{ default: ImageMetadata }>('../assets/partneri/*.{svg,png,jpg,jpeg,webp}', { eager: true });
@@ -47,20 +50,47 @@ const snimky: Snimek[] = [
 // volná místa připomeneme i mezi potvrzenými partnery, dokud nejsou všechna obsazená
 const obsazeno = poradi.every((u) => PARTNERI.filter((p) => p.uroven === u).length >= MISTA[u].pocet);
 if (snimkyPartneru.length && !obsazeno) snimky.push({ typ: 'volne', nadpis: 'Vaše logo', text: 'místo pro partnera' });
+
+// --- statický plakát scény (vidět hned, než se načte three.js, a zůstane, když WebGL nejde) ---
+// Vyrenderováno ze scény v čase 1,3 s (= první snímek živé animace) se zamčeným snímkem LED stěny 0,
+// takže se živé plátno prolne bez skoku. Přegenerování: viz README (sekce 3D hero).
+
+const varianty = [
+  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1600, 1909], sizes: '100vw' },
+  { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1220, 1610], sizes: '100vw' },
+  { img: plakatMobil, media: '', sirky: [480, 720, 938], sizes: '100vw' },
+];
+const zdroje = await Promise.all(
+  varianty.map(async (v) => {
+    const sada = async (format: 'avif' | 'webp', quality: number) =>
+      (
+        await Promise.all(
+          v.sirky.filter((s) => s <= v.img.width).map(async (s) => `${(await getImage({ src: v.img, width: s, format, quality })).src} ${s}w`),
+        )
+      ).join(', ');
+    return { ...v, avif: await sada('avif', 55), webp: await sada('webp', 72) };
+  }),
+);
+const zaklad = zdroje[zdroje.length - 1];
+const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp', quality: 72 })).src;
 ---
 
 <section class="hero3d relative isolate overflow-hidden bg-pulnoc text-mlecna" aria-labelledby="hero-nadpis" data-snimky={JSON.stringify(snimky)}>
   <!-- statický podklad: je vidět hned a zůstane, když WebGL nejde -->
   <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
-    <svg class="hero3d-silueta" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" role="presentation">
-      <path
-        fill="#0b0f4a"
-        d="M0 260V150l38-42 38 42v-22h26v-26h34v26h26v22l46-50 46 50v-30q38-54 76 0v30h30v-64h24v-26h26v-24h22V34l22-34 22 34v22h22v24h26v26h24v64h30v-28l44-44 44 44v-20h28v-28h36v28h28v20q40-58 80 0v-18l42-46 42 46v-24h30v-24h30v24h30v24l40-40 40 40v110z"
-      ></path>
-      <path fill="#ffc2e2" opacity=".85" d="M430 150h260v8H430zM452 158h10v74h-10zM658 158h10v74h-10z"></path>
-      <path fill="#3044f3" d="M470 172h180v60H470z"></path>
-      <path fill="#0b0f4a" d="M380 260c20-34 60-40 90-30 40-16 80-16 120 0 40-14 90-10 130 4 30-8 70 0 90 26z"></path>
-    </svg>
+    <picture>
+      {
+        zdroje.slice(0, -1).map((z) => (
+          <Fragment>
+            <source media={z.media} type="image/avif" srcset={z.avif} sizes={z.sizes} />
+            <source media={z.media} type="image/webp" srcset={z.webp} sizes={z.sizes} />
+          </Fragment>
+        ))
+      }
+      <source type="image/avif" srcset={zaklad.avif} sizes={zaklad.sizes} />
+      <source type="image/webp" srcset={zaklad.webp} sizes={zaklad.sizes} />
+      <img class="hero3d-plakat" src={zakladSrc} alt="" width={zaklad.img.width} height={zaklad.img.height} loading="eager" fetchpriority="high" decoding="async" />
+    </picture>
   </div>
 
   <canvas class="hero3d-platno absolute inset-0 -z-20 size-full" aria-hidden="true"></canvas>
@@ -118,13 +148,14 @@ if (snimkyPartneru.length && !obsazeno) snimky.push({ typ: 'volne', nadpis: 'Va�
       radial-gradient(90% 55% at 50% 46%, rgb(255 79 163 / 0.3), transparent 70%),
       linear-gradient(180deg, #0b0f4a 0%, #1a2296 30%, #3044f3 50%, #121873 62%, #0b0f4a 100%);
   }
-  .hero3d-silueta {
+  /* plakát = vyrenderovaný první snímek scény; pozice odpovídá středu scény v kameře (cx, cy v hero3d.js) */
+  .hero3d-plakat {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 5svh;
+    inset: 0;
     width: 100%;
-    height: 28svh;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 29%;
   }
   .hero3d-platno {
     opacity: 0;
@@ -176,12 +207,8 @@ if (snimkyPartneru.length && !obsazeno) snimky.push({ typ: 'volne', nadpis: 'Va�
         radial-gradient(60% 60% at 68% 55%, rgb(255 79 163 / 0.3), transparent 70%),
         linear-gradient(180deg, #0b0f4a 0%, #1a2296 38%, #3044f3 62%, #121873 78%, #0b0f4a 100%);
     }
-    .hero3d-silueta {
-      left: 34%;
-      top: auto;
-      bottom: 16%;
-      width: 66%;
-      height: 46%;
+    .hero3d-plakat {
+      object-position: 69% 60%;
     }
     .hero3d-clona {
       background:

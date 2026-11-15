@@ -62,3 +62,25 @@ Barvy jsou v poměru zhruba 60–30–10: obsah nese světlý podklad, modrá je
 - Kontaktní e-mail `info@majaleshb.cz` je zatím placeholder. Instagram a Facebook doplnit do `KONTAKT` v `akce.ts`.
 - Úrovně partnerů nesedí s tabulkou `majales/partneri/tabulka-partneru-2027.xlsx` (tam je do 5 000 / 10 000 / 25 000+). Sjednotit.
 - Hosting a doména (Cloudflare Pages jako learningtriangle?) zatím nejsou nastavené.
+
+## Prototyp: 3D hero (větev `prototyp-3d`)
+
+Stránka `/prototyp-3d/` (noindex, mimo sitemap) má místo hero živé low-poly náměstí: pódium s kapelou, publikum, stánky, radnici a LED stěnu s partnery. Scéna je v `src/scripts/hero3d.js` (three.js), komponenta v `src/components/Hero3D.astro`.
+
+**Načítání:**
+- hned se ukáže **plakát**, tedy vyrenderovaný první snímek scény (`src/assets/hero3d/plakat-{desktop,tablet,mobil}.jpg`, na webu jako AVIF/WebP);
+- three.js se stáhne až po načtení stránky a živé plátno se přes plakát prolne. Plakát je stejný snímek (čas 1,3 s), takže přechod není vidět;
+- bez WebGL plakát zůstane.
+
+**Přegenerování plakátu** (po změně scény):
+1. `npm run build` a `npx astro preview`.
+2. V prohlížeči otevři `/prototyp-3d/`. V konzoli nastav `__hero3d.cas = 1.3; __hero3d.snimek = 0` a skryj `.hero3d-obsah, .hero3d-clona, .hero3d-pauza, header`.
+3. Vyfoť element `.hero3d` ve třech velikostech:
+
+   | Varianta | Okno | Pixel ratio |
+   |---|---|---|
+   | desktop | 1440×900 | 1,34 |
+   | tablet | 820×1180 | 2 |
+   | mobil | 390×844 | 2,5 |
+
+4. Ulož snímky jako JPEG (q 92) do `src/assets/hero3d/`.
