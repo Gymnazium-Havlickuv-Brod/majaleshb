@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fotky": "python scripts/fotky.py"
+    "fotky": "python scripts/fotky.py",
+    "render-hero": "node scripts/render-hero.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.0",
@@ -17,5 +18,8 @@
     "astro": "^5.12.0",
     "tailwindcss": "^4.1.0",
     "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
   }
 }

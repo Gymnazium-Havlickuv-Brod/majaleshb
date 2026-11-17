@@ -46,6 +46,21 @@ const B = { modra: '#3044F3', pulnoc: '#0B0F4A', ruzova: '#FFC2E2', hot: '#FF4FA
 const BPM = 120;
 const TAU = Math.PI * 2;
 
+// Režim smyčky pro render videa (scripts/render-hero.mjs, stránka s ?smycka): všechny periodické pohyby
+// se zaokrouhlí na celý počet opakování za délku smyčky SM, takže snímek v čase SM = snímek v čase 0.
+// Živě (SM = 0) se nemění nic.
+let SM = 0;
+/** úhlová frekvence v rad/s zaokrouhlená na smyčku */
+const q = (w) => (SM ? (Math.max(1, Math.round((w * SM) / TAU)) * TAU) / SM : w);
+/** úhlová frekvence v rad/dobu (beat) zaokrouhlená na smyčku */
+const qb = (w) => {
+  if (!SM) return w;
+  const doby = (SM * BPM) / 60;
+  return (Math.max(1, Math.round((w * doby) / TAU)) * TAU) / doby;
+};
+/** zmenšení amplitudy, když se pomalý pohyb musel zrychlit (stejná rychlost kamery) */
+const ka = (w) => Math.min(1, w / q(w));
+
 // ---------- pomůcky ----------
 function nahoda(seed) {
   let a = seed >>> 0;
@@ -435,7 +450,10 @@ export async function init(root) {
   const canvas = root.querySelector('.hero3d-platno');
   const tlacitko = root.querySelector('.hero3d-pauza');
   if (!canvas) return false;
-  const klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ?smycka (= auto) nebo ?smycka=36: režim pro render videa – nic neběží samo, snímky kreslí info.vykresli(t)
+  const parSmycka = new URLSearchParams(location.search).get('smycka');
+  const render = parSmycka !== null;
+  const klid = render || matchMedia('(prefers-reduced-motion: reduce)').matches;
   const maly = Math.min(innerWidth, innerHeight) < 720;
 
   let renderer;
@@ -444,7 +462,7 @@ export async function init(root) {
   } catch {
     return false;
   }
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, maly ? 1.5 : 1.75));
+  renderer.setPixelRatio(render ? devicePixelRatio || 1 : Math.min(devicePixelRatio || 1, maly ? 1.5 : 1.75));
   renderer.outputColorSpace = SRGBColorSpace;
 
   // písma pro kreslení na plátno LED stěny (Anton je dělený podle unicode-range, proto i znaky s háčky)
@@ -822,8 +840,8 @@ export async function init(root) {
     const h = (w * 208) / 100;
     for (let i = 0; i < n; i++) {
       const cx = (i - (n - 1) / 2) * 1.16;
-      const cy = 9.4 + Math.sin(t * 1.1 + i * 1.7) * 0.09;
-      const a = Math.sin(t * 0.8 + i * 2.3) * 0.07;
+      const cy = 9.4 + Math.sin(t * q(1.1) + i * 1.7) * 0.09;
+      const a = Math.sin(t * q(0.8) + i * 2.3) * 0.07;
       const ca = Math.cos(a);
       const sa = Math.sin(a);
       const r = [
@@ -919,7 +937,7 @@ export async function init(root) {
       const W = postava({
         x: 0.3,
         z: -1.35,
-        ry: 0.12 * Math.sin(beat * 0.39),
+        ry: 0.12 * Math.sin(beat * qb(0.39)),
         drep: 0.07 * (1 - bob),
         lean: 0.1,
         sway: 0.07 * Math.sin(beat * Math.PI * 0.5),
@@ -933,7 +951,7 @@ export async function init(root) {
     }
     // kytarista
     {
-      const o = { x: 3.3, z: -1.9, ry: -0.35 + 0.1 * Math.sin(beat * 0.5), drep: 0.06 * (1 - bob), lean: 0.08, sway: 0.05 * Math.sin(beat * Math.PI), telo: obl.hot, nohy: obl.cerna, kyv: kop };
+      const o = { x: 3.3, z: -1.9, ry: -0.35 + 0.1 * Math.sin(beat * qb(0.5)), drep: 0.06 * (1 - bob), lean: 0.08, sway: 0.05 * Math.sin(beat * Math.PI), telo: obl.hot, nohy: obl.cerna, kyv: kop };
       o.l = [-0.6, 1.3, 0.3];
       o.r = [0.14, 1.0 + 0.09 * Math.sin(beat * TAU * 2), 0.3];
       const W = postava(o);
@@ -942,7 +960,7 @@ export async function init(root) {
     }
     // basák
     {
-      const o = { x: -3.3, z: -2.1, ry: 0.38 + 0.08 * Math.sin(beat * 0.31), drep: 0.05 * (1 - bob), lean: 0.06, sway: 0.09 * Math.sin(beat * Math.PI * 0.5), telo: obl.modra, nohy: obl.cerna, kyv: kop };
+      const o = { x: -3.3, z: -2.1, ry: 0.38 + 0.08 * Math.sin(beat * qb(0.31)), drep: 0.05 * (1 - bob), lean: 0.06, sway: 0.09 * Math.sin(beat * Math.PI * 0.5), telo: obl.modra, nohy: obl.cerna, kyv: kop };
       o.l = [-0.66, 1.34, 0.3];
       o.r = [0.14, 0.98 + 0.07 * Math.sin(beat * TAU), 0.3];
       const W = postava(o);
@@ -1242,10 +1260,11 @@ export async function init(root) {
   function hybejKonfetami(t) {
     for (let i = 0; i < NK; i++) {
       const k = konfD[i];
-      const y = 11 - ((k.y + t * k.v) % 11);
-      konf[i * 3] = k.x + Math.sin(t * 0.9 + k.f) * 0.5;
+      const v = SM ? (Math.max(1, Math.round((k.v * SM) / 11)) * 11) / SM : k.v; // pád za smyčku = celý počet výšek
+      const y = 11 - ((k.y + t * v) % 11);
+      konf[i * 3] = k.x + Math.sin(t * q(0.9) + k.f) * 0.5;
       konf[i * 3 + 1] = y + 0.4;
-      konf[i * 3 + 2] = k.z + Math.cos(t * 0.7 + k.f) * 0.4;
+      konf[i * 3 + 2] = k.z + Math.cos(t * q(0.7) + k.f) * 0.4;
     }
     konfD.g.attributes.position.needsUpdate = true;
   }
@@ -1287,9 +1306,9 @@ export async function init(root) {
   function hybejKamerou(t) {
     mys.x += (mys.tx - mys.x) * 0.04;
     mys.y += (mys.ty - mys.y) * 0.04;
-    const th = uhel0 + Math.sin(t * 0.085) * rozkmit + mys.x * 0.07;
-    const ph = vyska0 + Math.sin(t * 0.061 + 1) * 0.035 - mys.y * 0.03;
-    const d = vzdal * (1 + Math.sin(t * 0.05 + 2) * 0.035);
+    const th = uhel0 + Math.sin(t * q(0.085)) * rozkmit * ka(0.085) + mys.x * 0.07;
+    const ph = vyska0 + Math.sin(t * q(0.061) + 1) * 0.035 * ka(0.061) - mys.y * 0.03;
+    const d = vzdal * (1 + Math.sin(t * q(0.05) + 2) * 0.035 * ka(0.05));
     camera.position.set(cil.x + d * Math.sin(th) * Math.cos(ph), cil.y + d * Math.sin(ph), cil.z + d * Math.cos(th) * Math.cos(ph));
     camera.lookAt(cil);
   }
@@ -1304,6 +1323,13 @@ export async function init(root) {
     /* nic */
   }
   window.__hero3d = info;
+  if (render) {
+    // LED stěna se točí po 8 dobách (= 4 s); smyčka musí obsahovat celé kolo snímků a mít aspoň ~30 s
+    const kolo = (8 * 60 * Math.max(1, snimky.length)) / BPM;
+    SM = Number(parSmycka) > 0 ? Number(parSmycka) : kolo * Math.ceil(30 / kolo);
+    info.smycka = SM;
+    info.vykresli = (t) => kresli(t);
+  }
 
   function kresli(t) {
     const beat = (t * BPM) / 60;
@@ -1321,8 +1347,8 @@ export async function init(root) {
     for (let i = 0; i < FIX.length; i++) {
       const o = FIX[i];
       const s = i < 3 ? -1 : 1;
-      const tx = o.x * 1.25 + Math.sin(t * 0.55 + i * 1.1) * 4.2 * s;
-      const tz = 8.5 + Math.sin(t * 0.4 + i * 0.9) * 4.5;
+      const tx = o.x * 1.25 + Math.sin(t * q(0.55) + i * 1.1) * 4.2 * s;
+      const tz = 8.5 + Math.sin(t * q(0.4) + i * 0.9) * 4.5;
       _a.set(tx, 0, tz);
       dopady[i].p.set(tx, 0.07, tz);
       dopady[i].i = 0.34 + 0.22 * puls;
@@ -1335,8 +1361,8 @@ export async function init(root) {
     for (let i = 0; i < NEBE.length; i++) {
       const s = i < 2 ? -1 : 1;
       const vnitrni = i === 1 || i === 2;
-      const a = (vnitrni ? 0.22 : 0.62) + Math.sin(t * 0.5 + (vnitrni ? 1.2 : 0)) * 0.2;
-      _b.set(Math.sin(a) * s, Math.cos(a), 0.12 + 0.1 * Math.sin(t * 0.3 + i)).normalize();
+      const a = (vnitrni ? 0.22 : 0.62) + Math.sin(t * q(0.5) + (vnitrni ? 1.2 : 0)) * 0.2;
+      _b.set(Math.sin(a) * s, Math.cos(a), 0.12 + 0.1 * Math.sin(t * q(0.3) + i)).normalize();
       _q.setFromUnitVectors(DOWN, _b);
       paprsky.setMatrixAt(FIX.length + i, _m.compose(NEBE[i], _q, _s.set(1.5, 30, 1.5)));
     }
@@ -1344,12 +1370,12 @@ export async function init(root) {
     paprsky.material.uniforms.uI.value = 0.3 + 0.1 * puls + 0.2 * blesk;
 
     // wash na pódiu: dvě barvy se pomalu přelévají a dýchají s kopákem
-    const w = 0.5 + 0.5 * Math.sin(t * 0.45);
+    const w = 0.5 + 0.5 * Math.sin(t * q(0.45));
     washA.intensity = (130 + 90 * puls) * (0.6 + 0.4 * w);
     washB.intensity = (130 + 90 * puls) * (1 - 0.4 * w);
     uvnitr.intensity = 34 + 26 * puls;
     strobo.intensity = 260 * blesk;
-    for (const k of opar) k.p.x = k.x0 + Math.sin(t * 0.12 + k.f) * 2.2;
+    for (const k of opar) k.p.x = k.x0 + Math.sin(t * q(0.12) + k.f) * 2.2;
     hybejKolecky(puls);
 
     renderer.render(scene, camera);
