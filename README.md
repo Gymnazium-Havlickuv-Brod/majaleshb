@@ -17,8 +17,9 @@ npm run preview
 
 | URL | Soubor | Co tam je |
 |---|---|---|
-| `/` | `src/pages/index.astro` | 3D hero s odpočtem, o Majálesu, program, line-up (6 × ?), loga partnerů, galerie, výzva pro partnery |
+| `/` | `src/pages/index.astro` | hero video (render 3D scény) s odpočtem, o Majálesu, program, line-up (6 × ?), loga partnerů, galerie, výzva pro partnery |
 | `/partneri/` | `src/pages/partneri.astro` | úrovně partnerství, barter, nabídka na míru, postup |
+| `/archiv/hero-3d/` | `src/pages/archiv/hero-3d.astro` | archiv: úvodní stránka s živou 3D hero (three.js) – zároveň zdroj pro render videa, noindex, mimo sitemap |
 | `/archiv/puvodni-hero/` | `src/pages/archiv/puvodni-hero.astro` | archiv: úvodní stránka s původní plakátovou hero sekcí (`src/components/archiv/HeroPlakat.astro`), noindex, mimo sitemap |
 
 ## Kde se mění obsah
@@ -64,24 +65,18 @@ Barvy jsou v poměru zhruba 60–30–10: obsah nese světlý podklad, modrá je
 - Úrovně partnerů nesedí s tabulkou `majales/partneri/tabulka-partneru-2027.xlsx` (tam je do 5 000 / 10 000 / 25 000+). Sjednotit.
 - Hosting a doména (Cloudflare Pages jako learningtriangle?) zatím nejsou nastavené.
 
-## 3D hero
+## Hero video (3D scéna)
 
-Od 15. 11. 2026 je na hlavní stránce místo plakátové hero sekce živé low-poly náměstí (vzniklo ve větvi `prototyp-3d`, původní hero je v archivu na `/archiv/puvodni-hero/`): pódium s kapelou, publikum, stánky, radnici a LED stěnu s partnery. Scéna je v `src/scripts/hero3d.js` (three.js), komponenta v `src/components/Hero3D.astro`.
+Od 17. 11. 2026 je na hlavní stránce místo živé three.js scény **smyčkové video** vyrenderované z téže scény (živá verze se na slabších počítačích sekala). Komponenta `src/components/HeroVideo.astro`, videa `public/hero/majales-{desktop,tablet,mobil}.mp4` (36 s, H.264), plakáty = první snímek smyčky v `src/assets/hero-video/`.
 
-**Načítání:**
-- hned se ukáže **plakát**, tedy vyrenderovaný první snímek scény (`src/assets/hero3d/plakat-{desktop,tablet,mobil}.jpg`, na webu jako AVIF/WebP);
-- three.js se stáhne až po načtení stránky a živé plátno se přes plakát prolne. Plakát je stejný snímek (čas 1,3 s), takže přechod není vidět;
-- bez WebGL plakát zůstane.
+**Zdroj (model) zůstává:** scéna `src/scripts/hero3d.js` + komponenta `src/components/Hero3D.astro`. Živě běží na archivní stránce `/archiv/hero-3d/` (noindex), původní plakátová hero je dál na `/archiv/puvodni-hero/`.
 
-**Přegenerování plakátu** (po změně scény):
-1. `npm run build` a `npx astro preview`.
-2. V prohlížeči otevři `/`. V konzoli nastav `__hero3d.cas = 1.3; __hero3d.snimek = 0` a skryj `.hero3d-obsah, .hero3d-clona, .hero3d-pauza, header`.
-3. Vyfoť element `.hero3d` ve třech velikostech:
+**Načítání:** hned se ukáže plakát (AVIF/WebP), video se začne stahovat po načtení stránky a prolne se, až opravdu hraje. Varianta podle šířky (≥ 1024 desktop, ≥ 640 tablet, jinak mobil). Při omezeném pohybu nebo zablokovaném autoplay zůstane plakát. Tlačítko pauzy, mimo obrazovku se pauzuje.
 
-   | Varianta | Okno | Pixel ratio |
-   |---|---|---|
-   | desktop | 1440×900 | 1,34 |
-   | tablet | 820×1180 | 2 |
-   | mobil | 390×844 | 2,5 |
+**Přerenderování** (po změně scény nebo partnerů – loga na LED stěně jsou ve videu „zapečená“, změna v `src/data/partneri.ts` se na hlavní stránce projeví až po renderu):
+1. `npm run dev` (nebo build + `npx astro preview`) běží na `localhost:4321`.
+2. `npm run render-hero` (případně jen jedna varianta: `node scripts/render-hero.mjs desktop`). Prvně možná `npx playwright install chromium`.
+3. Skript otevře `/archiv/hero-3d/?smycka`, kde jsou všechny pohyby zaokrouhlené na délku smyčky (poslední snímek navazuje na první; délka = celé kolo snímků LED stěny, ≥ 30 s), projde scénu snímek po snímku přes `window.__hero3d.vykresli(t)`, uloží JPEGy do `render/` (gitignore) a ffmpegem udělá MP4 + plakát. Jen překódovat bez renderu: `--jen-kodovat`. Volby `--fps`, `--smycka`, `--url`, `--ffmpeg`.
+4. Zkontrolovat velikost (teď desktop 7,4 MB, tablet 4,5 MB, mobil 3,1 MB; CRF 32) a commitnout videa + plakáty.
 
-4. Ulož snímky jako JPEG (q 92) do `src/assets/hero3d/`.
+Mouse parallax (kamera za myší) ve videu není, živě je jen v archivu.

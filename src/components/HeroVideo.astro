@@ -1,0 +1,236 @@
+---
+// Hero na hlavní stránce: smyčkové video vyrenderované z 3D scény (src/scripts/hero3d.js).
+// Zdroj videa = živá scéna na /archiv/hero-3d/?smycka, render a kódování: scripts/render-hero.mjs (viz README, sekce Hero video).
+// Hned je vidět plakát (= první snímek smyčky), video se začne stahovat po načtení stránky a prolne se přes něj.
+import { getImage } from 'astro:assets';
+import { AKCE } from '../data/akce';
+import Odpocet from './Odpocet.astro';
+import plakatDesktop from '../assets/hero-video/plakat-desktop.jpg';
+import plakatTablet from '../assets/hero-video/plakat-tablet.jpg';
+import plakatMobil from '../assets/hero-video/plakat-mobil.jpg';
+
+// breakpointy = stejné jako rozvržení textu (lg 1024, sm 640) i varianty videa v public/hero/
+const varianty = [
+  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1600, 1920], sizes: '100vw' },
+  { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1230], sizes: '100vw' },
+  { img: plakatMobil, media: '', sirky: [480, 780], sizes: '100vw' },
+];
+const zdroje = await Promise.all(
+  varianty.map(async (v) => {
+    const sada = async (format: 'avif' | 'webp', quality: number) =>
+      (
+        await Promise.all(
+          v.sirky.filter((s) => s <= v.img.width).map(async (s) => `${(await getImage({ src: v.img, width: s, format, quality })).src} ${s}w`),
+        )
+      ).join(', ');
+    return { ...v, avif: await sada('avif', 55), webp: await sada('webp', 72) };
+  }),
+);
+const zaklad = zdroje[zdroje.length - 1];
+const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp', quality: 72 })).src;
+---
+
+
+<section class="hero3d relative isolate overflow-hidden bg-pulnoc text-mlecna" aria-labelledby="hero-nadpis">
+  <!-- statický podklad: je vidět hned a zůstane, když video nejde nebo je omezený pohyb -->
+  <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
+    <picture>
+      {
+        zdroje.slice(0, -1).map((z) => (
+          <Fragment>
+            <source media={z.media} type="image/avif" srcset={z.avif} sizes={z.sizes} />
+            <source media={z.media} type="image/webp" srcset={z.webp} sizes={z.sizes} />
+          </Fragment>
+        ))
+      }
+      <source type="image/avif" srcset={zaklad.avif} sizes={zaklad.sizes} />
+      <source type="image/webp" srcset={zaklad.webp} sizes={zaklad.sizes} />
+      <img class="hero3d-plakat" src={zakladSrc} alt="" width={zaklad.img.width} height={zaklad.img.height} loading="eager" fetchpriority="high" decoding="async" />
+    </picture>
+  </div>
+
+  <video class="hero3d-platno absolute inset-0 -z-20 size-full" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+  <div class="hero3d-clona absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="obal hero3d-obsah relative flex flex-col justify-end lg:justify-center @container">
+    <div class="lg:max-w-[36rem]">
+      <p class="kicker text-ruzova">{AKCE.skolyKratce} · {AKCE.rok}</p>
+
+      <h1 id="hero-nadpis" class="display text-ruzova mt-3 lg:mt-6 select-none">
+        <span class="sr-only">Majáles {AKCE.rok}</span>
+        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(5.5rem,26.5cqi,13rem)] lg:text-[clamp(8rem,11.5vw,12rem)] leading-[0.84]">Majáles</span>
+      </h1>
+
+      <div class="mt-3 lg:mt-6 flex flex-wrap items-end gap-x-6 gap-y-2">
+        <p class="display text-mlecna text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
+        <p class="text-base sm:text-lg font-medium leading-snug pb-1">
+          {AKCE.den} · {AKCE.misto}<br />{AKCE.mesto}
+        </p>
+      </div>
+
+      <p class="hidden sm:block mt-4 border-t-2 border-ruzova/50 pt-4 text-base font-medium text-mlecna/90">
+        kapely · DJ · stánky · sport · zóny škol · <span class="text-ruzova">program brzy</span>
+      </p>
+
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="#program" class="tlacitko tlacitko-plne">Co tě čeká</a>
+        <a href="/partneri/" class="tlacitko text-ruzova hover:bg-ruzova hover:text-pulnoc">Staň se partnerem</a>
+      </div>
+
+      <div class="mt-5 lg:mt-8">
+        <p class="kicker text-mlecna/75 mb-3">Do Majálesu zbývá</p>
+        <Odpocet />
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="hero3d-pauza" hidden aria-pressed="false" aria-label="Pozastavit animaci" title="Pozastavit animaci">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <path class="i-pauza" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"></path>
+      <path class="i-hraj" d="M3 1.5v11l9-5.5z" fill="currentColor"></path>
+    </svg>
+  </button>
+</section>
+
+<style>
+  .hero3d-obsah {
+    /* mobil a tablet: scéna nahoře, text dole přes clonu */
+    min-height: calc(94svh - 4rem);
+    padding-top: 36svh;
+    padding-bottom: 1.5rem;
+  }
+  .hero3d-podklad {
+    background:
+      radial-gradient(90% 55% at 50% 46%, rgb(255 79 163 / 0.3), transparent 70%),
+      linear-gradient(180deg, #0b0f4a 0%, #1a2296 30%, #3044f3 50%, #121873 62%, #0b0f4a 100%);
+  }
+  /* plakát = první snímek videa; pozice odpovídá středu scény v kameře (cx, cy v hero3d.js) */
+  .hero3d-plakat,
+  .hero3d-platno {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 29%;
+  }
+  .hero3d-platno {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero3d-platno.je-videt {
+    opacity: 1;
+  }
+  .hero3d-clona {
+    background: linear-gradient(0deg, rgb(11 15 74 / 0.96) 0%, rgb(11 15 74 / 0.9) 34%, rgb(11 15 74 / 0.55) 50%, transparent 66%);
+  }
+  .hero3d-pauza {
+    position: absolute;
+    right: clamp(1rem, 4vw, 2.5rem);
+    top: 1rem;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    color: var(--color-ruzova);
+    background: rgb(11 15 74 / 0.55);
+    border: 2px solid rgb(255 194 226 / 0.4);
+    cursor: pointer;
+  }
+  .hero3d-pauza[hidden] {
+    display: none;
+  }
+  .hero3d-pauza:hover {
+    background: var(--color-pulnoc);
+  }
+  .hero3d-pauza .i-hraj,
+  .hero3d-pauza[aria-pressed='true'] .i-pauza {
+    display: none;
+  }
+  .hero3d-pauza[aria-pressed='true'] .i-hraj {
+    display: block;
+  }
+
+  @media (min-width: 1024px) {
+    .hero3d-obsah {
+      /* desktop: text vlevo, scéna vpravo přes celou výšku */
+      min-height: calc(100svh - 4rem);
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .hero3d-podklad {
+      background:
+        radial-gradient(60% 60% at 68% 55%, rgb(255 79 163 / 0.3), transparent 70%),
+        linear-gradient(180deg, #0b0f4a 0%, #1a2296 38%, #3044f3 62%, #121873 78%, #0b0f4a 100%);
+    }
+    /* video je ≈ 2 : 1; na širokých monitorech se ořezává shora a zdola, proto výš než střed scény (0,6) – ať zůstane věž */
+    .hero3d-plakat,
+    .hero3d-platno {
+      object-position: 69% 45%;
+    }
+    .hero3d-clona {
+      background:
+        linear-gradient(90deg, rgb(11 15 74 / 0.94) 0%, rgb(11 15 74 / 0.8) 26%, rgb(11 15 74 / 0.35) 44%, transparent 60%),
+        linear-gradient(0deg, rgb(11 15 74 / 0.55) 0%, transparent 22%);
+    }
+    .hero3d-pauza {
+      top: auto;
+      bottom: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  // video se stahuje až po načtení stránky (plakát má přednost) a vůbec ne při omezeném pohybu
+  const hero = document.querySelector<HTMLElement>('.hero3d');
+  const video = hero?.querySelector<HTMLVideoElement>('video');
+  const tlacitko = hero?.querySelector<HTMLButtonElement>('.hero3d-pauza');
+  if (hero && video && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const mqDesktop = matchMedia('(min-width: 1024px)');
+    const mqTablet = matchMedia('(min-width: 640px)');
+    const varianta = () => (mqDesktop.matches ? 'desktop' : mqTablet.matches ? 'tablet' : 'mobil');
+    let pauza = false;
+    let videt = true;
+    const prehraj = () => {
+      if (!pauza && videt && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    };
+    const nastavZdroj = () => {
+      const src = `/hero/majales-${varianta()}.mp4`;
+      if (video.getAttribute('src') === src) return;
+      video.src = src;
+      video.preload = 'auto';
+      prehraj();
+    };
+    // zobrazit až když opravdu hraje (při zablokovaném autoplay zůstane plakát)
+    video.addEventListener('playing', () => {
+      video.classList.add('je-videt');
+      if (tlacitko) tlacitko.hidden = false;
+    });
+    video.addEventListener('error', () => video.classList.remove('je-videt'));
+    new IntersectionObserver(
+      (z) => {
+        videt = z[0].isIntersecting;
+        if (video.getAttribute('src')) prehraj();
+      },
+      { threshold: 0.02 },
+    ).observe(hero);
+    document.addEventListener('visibilitychange', () => video.getAttribute('src') && prehraj());
+    tlacitko?.addEventListener('click', () => {
+      pauza = !pauza;
+      tlacitko.setAttribute('aria-pressed', String(pauza));
+      const popis = pauza ? 'Spustit animaci' : 'Pozastavit animaci';
+      tlacitko.setAttribute('aria-label', popis);
+      tlacitko.title = popis;
+      prehraj();
+    });
+    const start = () => {
+      nastavZdroj();
+      mqDesktop.addEventListener('change', nastavZdroj);
+      mqTablet.addEventListener('change', nastavZdroj);
+    };
+    if (document.readyState === 'complete') start();
+    else addEventListener('load', start, { once: true });
+  }
+</script>
