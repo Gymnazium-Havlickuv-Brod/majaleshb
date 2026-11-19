@@ -32,7 +32,7 @@ Originály v plném rozlišení jsou v pracovním repu `c:\dev\ghb\majales\media
 | [2025/band-kapely-dsc_0548.jpg](2025/band-kapely-dsc_0548.jpg) | 2025 | kapela | 7 | web | Akustické duo hraje na pódiu, zpěvačka se usmívá | `media/2025/foto/Kapely/DSC_0548.jpg` |
 | [2025/stage-kapely-dsc_0599.jpg](2025/stage-kapely-dsc_0599.jpg) | 2025 | pódium | 7 |  | Dlouhovlasý muzikant s rozpaženýma rukama u pódia | `media/2025/foto/Kapely/DSC_0599.jpg` |
 | [2025/crowd-kapely-dsc_0669.jpg](2025/crowd-kapely-dsc_0669.jpg) | 2025 | dav | 7 | web | Publikum na náměstí tleská a fandí kapele | `media/2025/foto/Kapely/DSC_0669.jpg` |
-| [2025/portrait-kapely-kif_3521.jpg](2025/portrait-kapely-kif_3521.jpg) | 2025 | portrét | 7 | web ⚠ | Usměvaví studenti na Havlíčkově náměstí | `media/2025/foto/Kapely/KIF_3521.jpg` |
+| [2025/portrait-kapely-kif_3521.jpg](2025/portrait-kapely-kif_3521.jpg) | 2025 | portrét | 7 | ⚠ | Usměvaví studenti na Havlíčkově náměstí | `media/2025/foto/Kapely/KIF_3521.jpg` |
 | [2025/king_queen-král-a-královna-dsc_0182.jpg](2025/king_queen-král-a-královna-dsc_0182.jpg) | 2025 | král a královna | 7 | web | Soutěžní úkol: jízda se zavázanýma očima v kolečku | `media/2025/foto/Král a královna/DSC_0182.jpg` |
 | [2025/king_queen-král-a-královna-dsc_0240.jpg](2025/king_queen-král-a-královna-dsc_0240.jpg) | 2025 | král a královna | 7 | web | Porota hodnotí soutěžící, na stole čekají korunky | `media/2025/foto/Král a královna/DSC_0240.jpg` |
 | [2022/crowd-vpp07910.jpg](2022/crowd-vpp07910.jpg) | 2022 | dav | 9 | web hero | Dav zvedá ruce před pódiem s nápisem GHB Majáles a paprsky reflektorů | `media/2022/foto/VPP07910.JPG` |

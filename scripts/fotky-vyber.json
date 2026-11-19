@@ -78,17 +78,6 @@
   "alt": "Soutěžní úkol: jízda se zavázanýma očima v kolečku"
  },
  {
-  "klic": "2025-kapely-kif-3521",
-  "zdroj": "2025/foto/Kapely/KIF_3521.jpg",
-  "rok": 2025,
-  "typ": "portrait",
-  "role": [
-   "program:stanky"
-  ],
-  "skore": 7,
-  "alt": "Usměvaví studenti na Havlíčkově náměstí"
- },
- {
   "klic": "2025-detsky-den-dsc-0122",
   "zdroj": "2025/foto/Dětský den/DSC_0122.jpg",
   "rok": 2025,
@@ -351,7 +340,9 @@
   "zdroj": "2017/foto/Sobota/IMG_6088.JPG",
   "rok": 2017,
   "typ": "portrait",
-  "role": [],
+  "role": [
+   "program:stanky"
+  ],
   "skore": 8,
   "alt": "Smějící se studentka s barevnými balonky na náměstí"
  },
