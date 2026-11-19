@@ -11,9 +11,9 @@ import plakatMobil from '../assets/hero-video/plakat-mobil.jpg';
 
 // breakpointy = stejné jako rozvržení textu (lg 1024, sm 640) i varianty videa v public/hero/
 const varianty = [
-  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1600, 1920], sizes: '100vw' },
-  { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1230], sizes: '100vw' },
-  { img: plakatMobil, media: '', sirky: [480, 780], sizes: '100vw' },
+  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1920, 2560], sizes: '100vw' },
+  { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1230, 1640], sizes: '100vw' },
+  { img: plakatMobil, media: '', sirky: [480, 780, 1080], sizes: '100vw' },
 ];
 const zdroje = await Promise.all(
   varianty.map(async (v) => {
@@ -31,7 +31,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
 ---
 
 
-<section class="hero3d relative isolate overflow-hidden bg-modra text-ruzova" aria-labelledby="hero-nadpis">
+<section class="hero3d relative isolate overflow-hidden na-modre" aria-labelledby="hero-nadpis">
   <!-- statický podklad: je vidět hned a zůstane, když video nejde nebo je omezený pohyb -->
   <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
     <picture>

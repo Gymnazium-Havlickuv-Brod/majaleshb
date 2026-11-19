@@ -42,7 +42,7 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     }
   </ul>
 
-  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full bg-modra text-ruzova p-0 backdrop:bg-modra" aria-label="Fotka">
+  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full na-modre p-0 backdrop:bg-modra" aria-label="Fotka">
     <div class="relative grid h-full w-full place-items-center p-4 sm:p-10">
       <img class="max-h-[82vh] max-w-full rounded-xl object-contain" alt="" />
       <p class="popis absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] text-center text-sm text-ruzova"></p>
@@ -59,14 +59,15 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     padding: 0.4rem 1.1rem;
     border-radius: 999px;
     font-weight: 700;
-    border: 2px solid var(--color-ruzova);
-    color: var(--color-ruzova);
+    border: 2px solid var(--text);
+    color: var(--text);
     transition: background-color 0.15s, color 0.15s;
   }
   .filtr[aria-pressed='true'],
   .filtr:hover {
-    background: var(--color-ruzova);
-    color: var(--color-modra);
+    background: var(--plne);
+    border-color: var(--plne);
+    color: var(--na-plnem);
   }
   .lb-tl {
     display: grid;

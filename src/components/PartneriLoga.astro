@@ -74,11 +74,11 @@ const logoVyska: Record<UrovenLoga, string> = {
               return (
                 <li>
                   {p.url ? (
-                    <a href={p.url} rel="noopener" target="_blank" class:list={['grid place-items-center rounded-[1.25rem] bg-ruzova ring-4 ring-transparent hover:ring-hot transition', vyska[ur.u]]}>
+                    <a href={p.url} rel="noopener" target="_blank" class:list={['grid place-items-center rounded-[1.25rem] karta hover:border-modra transition-colors', vyska[ur.u]]}>
                       {obsah}
                     </a>
                   ) : (
-                    <div class:list={['grid place-items-center rounded-[1.25rem] bg-ruzova', vyska[ur.u]]}>{obsah}</div>
+                    <div class:list={['grid place-items-center rounded-[1.25rem] karta', vyska[ur.u]]}>{obsah}</div>
                   )}
                 </li>
               );

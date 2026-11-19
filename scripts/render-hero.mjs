@@ -16,12 +16,12 @@ import { mkdirSync, rmSync, writeFileSync, copyFileSync, existsSync, statSync } 
 import { join } from 'node:path';
 
 // okno a pixel ratio prohlížeče při renderu; plátno = sekce hero (okno bez hlavičky)
-// sirka = šířka videa (render je o něco ostřejší, zmenšení vyhladí hrany a ušetří data)
+// sirka = šířka videa (render je ostřejší, zmenšení vyhladí hrany), crf = kvalita x264 (nižší = lepší a větší)
 const VARIANTY = {
   // desktop širší (≈ 2 : 1): široké monitory pak neuříznou věž radnice, užší ořežou jen okraje
-  desktop: { width: 1920, height: 1000, dpr: 1, sirka: 1920 },
-  tablet: { width: 820, height: 1180, dpr: 1.5, sirka: 1080 },
-  mobil: { width: 390, height: 844, dpr: 2, sirka: 720 },
+  desktop: { width: 1920, height: 1000, dpr: 2, sirka: 2560, crf: 28 },
+  tablet: { width: 820, height: 1180, dpr: 2.5, sirka: 1640, crf: 28 },
+  mobil: { width: 390, height: 844, dpr: 3, sirka: 1080, crf: 28 },
 };
 
 const args = process.argv.slice(2);
@@ -84,8 +84,8 @@ function zakoduj(jmeno) {
   mkdirSync('src/assets/hero-video', { recursive: true });
   const mp4 = `public/hero/majales-${jmeno}.mp4`;
   // H.264 hraje všude (i Safari); VP9 i AV1 vyšly u téhle scény (dav, konfety) stejně velké nebo větší.
-  // CRF 32 ≈ 1,6 Mbit/s na desktopu – streamuje se plynule, faststart = začne hrát hned při stahování.
-  ffmpeg(...vstup, ...sude, '-c:v', 'libx264', '-preset', 'slow', '-tune', 'animation', '-crf', '32', '-pix_fmt', 'yuv420p', '-g', String(FPS * 2), '-movflags', '+faststart', '-an', mp4);
+  // faststart = začne hrát hned při stahování; crf podle varianty (VARIANTY).
+  ffmpeg(...vstup, ...sude, '-c:v', 'libx264', '-preset', 'slow', '-tune', 'animation', '-crf', String(VARIANTY[jmeno].crf), '-pix_fmt', 'yuv420p', '-g', String(FPS * 2), '-movflags', '+faststart', '-an', mp4);
   // plakát = první snímek smyčky (Astro z něj udělá AVIF/WebP)
   copyFileSync(join('render', jmeno, 'f00000.jpg'), `src/assets/hero-video/plakat-${jmeno}.jpg`);
   const mb = (p) => (statSync(p).size / 1e6).toFixed(1);

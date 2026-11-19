@@ -47,25 +47,24 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 
 ## Vizuál
 
-Jen tři barvy, bez odstínů a průhledností (výjimka: fotky, video a clona přes video). Žádná bílá, černá ani stíny. Tokeny jsou v `src/styles/global.css` (`@theme` vypíná výchozí paletu Tailwindu, takže jiná barva se do webu nedostane ani omylem).
+Čtyři barvy, bez odstínů a průhledností (výjimka: fotky, video a clona přes video). Žádná černá ani stíny. Tokeny jsou v `src/styles/global.css` (`@theme` vypíná výchozí paletu Tailwindu, takže jiná barva se do webu nedostane ani omylem).
 
 | Token | Barva | Použití |
 |---|---|---|
-| `modra` | `#004AFD` Electric Blue | pozadí všeho: stránka, sekce, karty, menu, lightbox, patička |
-| `ruzova` | `#FAC7E1` Flamingo Pink | veškerý text (nadpisy, podnadpisy, odstavce, čísla, odkazy) a ovládací prvky |
-| `hot` | `#FF4FA3` Hot Pink | doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky, symboly ✱ a →, logo, podtržení odkazů, focus |
+| `bila` | `#FFFFFF` | základní pozadí obsahu |
+| `modra` | `#004AFD` Electric Blue | text na bílé; pozadí jen na vybraných místech (hero, menu, běžící pás, line-up, patička, zvýrazněná karta, panel „Podpořte Majáles“, kroky „Jak to probíhá“, lightbox) |
+| `ruzova` | `#FAC7E1` Flamingo Pink | text na modré, plné tlačítko na modré |
+| `hot` | `#FF4FA3` Hot Pink | doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky, symboly ✱ a →, logo, podtržení odkazů, focus. Nikdy na text |
 
-Pravidla pro typy prvků (všude stejně):
+Dva režimy, v každém má typ prvku pevnou barvu:
 
-- **Tlačítko:** obrys = růžový text a rámeček; plné tlačítko, hover, aktivní filtr = růžová výplň s modrým textem (`.tlacitko`, `.tlacitko-plne`).
-- **Štítek** („jen jeden“, rok u fotky): růžová výplň, modrý text (`.stitek`).
-- **Karta:** modré pozadí, rámeček 2 px sytě růžový (`.karta`). Zvýrazněná karta má rámeček 4 px.
-- **Oddělení sekcí:** všechny sekce jsou modré, mezi nimi je sytě růžová linka (`.predel`).
-- **Odkaz v textu:** růžový tučný text, sytě růžové podtržení (`.odkaz`).
+- **Bílý (výchozí):** modrý text, tlačítko s modrým obrysem, plné tlačítko = modrá výplň s růžovým textem.
+- **Modrý (`.na-modre`):** růžový text, tlačítko s růžovým obrysem, plné tlačítko = růžová výplň s modrým textem.
+- V obou: karta má rámeček 2 px sytě růžový (`.karta`), dvě bílé sekce za sebou odděluje sytě růžová linka (`.predel`), odkaz v textu má sytě růžové podtržení (`.odkaz`), štítek („jen jeden“, rok u fotky) je růžový s modrým textem (`.stitek`).
 
-Růžová na modré má kontrast 4,2 : 1, proto je běžný text v řezu 500. Sytě růžová na modré má jen 2 : 1, a tak se na text nepoužívá. Fonty jsou Anton a Space Grotesk, oba hostované lokálně přes `@fontsource` (bez Google Fonts).
+Kontrast: modrá na bílé 6,2 : 1, růžová na modré 4,2 : 1 (proto je běžný text v řezu 500). Fonty jsou Anton a Space Grotesk, oba hostované lokálně přes `@fontsource` (bez Google Fonts).
 
-Hero video zůstává vyrenderované ze 3D scény v původních barvách. Clona přes něj je modrá `#004AFD`, aby video plynule přešlo do pozadí stránky.
+Hero video zůstává vyrenderované ze 3D scény v původních barvách. Clona přes něj je modrá `#004AFD`, aby video plynule přešlo do pozadí hero sekce.
 
 ## Otevřené (TODO)
 
@@ -85,6 +84,6 @@ Od 17. 11. 2026 je na hlavní stránce místo živé three.js scény **smyčkov�
 1. `npm run dev` (nebo build + `npx astro preview`) běží na `localhost:4321`.
 2. `npm run render-hero` (případně jen jedna varianta: `node scripts/render-hero.mjs desktop`). Prvně možná `npx playwright install chromium`.
 3. Skript otevře `/archiv/hero-3d/?smycka`, kde jsou všechny pohyby zaokrouhlené na délku smyčky (poslední snímek navazuje na první; délka = celé kolo snímků LED stěny, ≥ 30 s), projde scénu snímek po snímku přes `window.__hero3d.vykresli(t)`, uloží JPEGy do `render/` (gitignore) a ffmpegem udělá MP4 + plakát. Jen překódovat bez renderu: `--jen-kodovat`. Volby `--fps`, `--smycka`, `--url`, `--ffmpeg`.
-4. Zkontrolovat velikost (teď desktop 7,4 MB, tablet 4,5 MB, mobil 3,1 MB; CRF 32) a commitnout videa + plakáty.
+4. Zkontrolovat velikost (teď desktop 2560 px 17,4 MB, tablet 1640 px 14,8 MB, mobil 1080 px 10,1 MB; CRF 28, render ve vyšším rozlišení a zmenšený) a commitnout videa + plakáty.
 
 Mouse parallax (kamera za myší) ve videu není, živě je jen v archivu.

@@ -1,22 +1,23 @@
 @import 'tailwindcss';
 
 /*
-  Barvy Majálesu 2027 – jediné místo, kde se ladí. Jen tyhle tři barvy, bez odstínů a průhledností
-  (výjimka: fotky, video a clona přes ně). Žádná bílá, černá ani stíny.
+  Barvy Majálesu 2027 – jediné místo, kde se ladí. Jen tyhle čtyři barvy, bez odstínů a průhledností
+  (výjimka: fotky, video a clona přes ně). Žádná černá ani stíny.
 
-  Systém (každý typ prvku má jednu barvu, všude stejnou):
-  - modra  #004AFD  pozadí: stránka, sekce, karty, menu, lightbox, patička
-  - ruzova #FAC7E1  veškerý text (nadpisy, podnadpisy, odstavce, čísla, odkazy)
-                    + ovládací prvky: obrys tlačítka; plné tlačítko, aktivní filtr a štítek = růžová výplň s modrým textem
-  - hot    #FF4FA3  doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky,
-                    dekorativní symboly (✱, →), logo, podtržení odkazů, focus
-  Kontrast růžové na modré je 4,2 : 1, sytě růžová na modré jen 2 : 1 → sytě růžovou nikdy na text.
+  Základ je bílý, modrá je jen na vybraných místech (hero, menu, line-up, patička, zvýrazněné karty a panely).
+  Dva režimy, každý typ prvku má v nich pevnou barvu:
+  - bílý (výchozí)       pozadí bila, text modra,  plné tlačítko = modrá výplň s růžovým textem
+  - modrý (.na-modre)    pozadí modra, text ruzova, plné tlačítko = růžová výplň s modrým textem
+  - hot #FF4FA3 v obou   doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky,
+                         dekorativní symboly (✱, →), logo, podtržení odkazů, focus. Nikdy na text.
+  Kontrast: modrá na bílé 6,2 : 1, růžová na modré 4,2 : 1.
 */
 @theme {
   --color-*: initial;
   --color-modra: #004afd;
   --color-ruzova: #fac7e1;
   --color-hot: #ff4fa3;
+  --color-bila: #ffffff;
 
   --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
   --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -28,11 +29,17 @@
     scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
   }
+  /* barvy režimu: text, plné tlačítko a text na něm */
+  :root {
+    --text: var(--color-modra);
+    --plne: var(--color-modra);
+    --na-plnem: var(--color-ruzova);
+  }
   body {
-    background: var(--color-modra);
-    color: var(--color-ruzova);
+    background: var(--color-bila);
+    color: var(--text);
     font-family: var(--font-sans);
-    /* o stupeň silnější řez: růžová na sytě modré je pak čitelnější */
+    /* o stupeň silnější řez: růžová na sytě modré je pak čitelnější a modrá na bílé drží stejnou váhu */
     font-weight: 500;
     font-feature-settings: 'ss01';
     text-rendering: optimizeLegibility;
@@ -81,16 +88,24 @@
   .sekce {
     padding-block: clamp(4rem, 10vw, 8rem);
   }
-  /* všechny sekce mají stejné modré pozadí, oddělují je sytě růžové linky */
+  /* modrý režim: sekce, panel nebo karta s modrým pozadím */
+  .na-modre {
+    --text: var(--color-ruzova);
+    --plne: var(--color-ruzova);
+    --na-plnem: var(--color-modra);
+    background: var(--color-modra);
+    color: var(--text);
+  }
+  /* dvě bílé sekce za sebou odděluje sytě růžová linka */
   .predel {
     border-top: 2px solid var(--color-hot);
   }
-  /* karta: modré pozadí, sytě růžový rámeček */
+  /* karta: pozadí podle režimu, sytě růžový rámeček */
   .karta {
     border: 2px solid var(--color-hot);
   }
 
-  /* tlačítka: obrys = růžový text a rámeček; plné / hover = růžová výplň s modrým textem */
+  /* tlačítka: obrys = barva textu režimu; plné / hover = výplň a text podle režimu */
   .tlacitko {
     display: inline-flex;
     align-items: center;
@@ -99,19 +114,20 @@
     padding: 0.75rem 1.5rem;
     border-radius: 999px;
     font-weight: 700;
-    border: 2px solid var(--color-ruzova);
-    color: var(--color-ruzova);
+    border: 2px solid var(--text);
+    color: var(--text);
     transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
   }
   .tlacitko:hover,
   .tlacitko-plne {
-    background: var(--color-ruzova);
-    color: var(--color-modra);
+    background: var(--plne);
+    border-color: var(--plne);
+    color: var(--na-plnem);
   }
   .tlacitko:hover {
     transform: translateY(-2px);
   }
-  /* štítek (např. „jen jeden“, rok u fotky): stejná inverze jako plné tlačítko */
+  /* štítek (např. „jen jeden“, rok u fotky): vždy růžová výplň s modrým textem (sedí na fotce i na kartě) */
   .stitek {
     display: inline-block;
     border-radius: 999px;
@@ -120,7 +136,7 @@
     font-weight: 700;
   }
 
-  /* odkaz v textu: růžový text, sytě růžové podtržení */
+  /* odkaz v textu: barva textu režimu, sytě růžové podtržení */
   .odkaz {
     font-weight: 700;
     text-decoration-line: underline;

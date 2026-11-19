@@ -47,7 +47,7 @@ const schema = {
   <Hero3D />
 
   <!-- běžící pás -->
-  <div class="bg-modra text-ruzova overflow-hidden py-4 border-y-2 border-hot" aria-hidden="true">
+  <div class="na-modre overflow-hidden py-4 border-b-2 border-hot" aria-hidden="true">
     <div class="pas flex w-max gap-8 whitespace-nowrap display text-3xl sm:text-4xl">
       {[0, 1].map(() => PAS.concat(PAS).map((t) => <span class="flex items-center gap-8">{t}<span class="text-hot">✱</span></span>))}
     </div>
@@ -86,7 +86,7 @@ const schema = {
           alt={namesti.alt}
           widths={[300, 500]}
           sizes="(min-width: 1024px) 18vw, 40vw"
-          class="absolute -bottom-8 -left-3 sm:-left-8 w-[42%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-modra -rotate-3"
+          class="absolute -bottom-8 -left-3 sm:-left-8 w-[42%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-bila -rotate-3"
         />
       </div>
     </div>
@@ -139,7 +139,7 @@ const schema = {
   </section>
 
   <!-- Line-up -->
-  <section id="line-up" class="sekce predel" aria-labelledby="lineup-nadpis">
+  <section id="line-up" class="sekce na-modre" aria-labelledby="lineup-nadpis">
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -163,7 +163,7 @@ const schema = {
   </section>
 
   <!-- Partneři (loga) -->
-  <section id="partneri" class="sekce predel" aria-label="Partneři Majálesu">
+  <section id="partneri" class="sekce" aria-label="Partneři Majálesu">
     <div class="obal">
       <PartneriLoga />
     </div>
@@ -183,7 +183,8 @@ const schema = {
 
   <!-- Partneři CTA -->
   <section class="sekce predel" aria-labelledby="cta-nadpis">
-    <div class="obal grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+    <div class="obal">
+      <div class="na-modre rounded-[2rem] p-8 sm:p-12 lg:p-16 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
       <div>
         <p class="kicker">Pro firmy a partnery</p>
         <h2 id="cta-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Podpořte<br />Majáles {AKCE.rok}</h2>
@@ -193,6 +194,7 @@ const schema = {
           Od 5 000 Kč, barterem, nebo jako generální partner s vlastním stánkem na náměstí. Vyberte si úroveň, která vám sedí.
         </p>
         <a href="/partneri/" class="tlacitko tlacitko-plne mt-6">Úrovně partnerství →</a>
+      </div>
       </div>
     </div>
   </section>
