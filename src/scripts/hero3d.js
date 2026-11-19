@@ -795,13 +795,19 @@ export async function init(root) {
   // ----- nápis MAJÁLES z „balónků" nad střechou -----
   const NAPIS = 'MAJÁLES';
   const napis = (() => {
-    const bw = 100;
+    // buňka na písmeno: musí pojmout i nejširší M (≈ 112 px + obrys), jinak přeteče do vedlejšího A
+    const bw = 130;
     const c = platno(bw * NAPIS.length, 208);
     const x = c.getContext('2d');
     x.textAlign = 'center';
     x.textBaseline = 'alphabetic';
     x.font = '400 150px Anton, Impact, sans-serif';
     x.lineJoin = 'round';
+    // skutečná šířka každého písmene i s obrysem – podle ní se písmena rozmístí se stejnými mezerami
+    const sirky = [...NAPIS].map((ch) => {
+      const m = x.measureText(ch);
+      return m.actualBoundingBoxLeft + m.actualBoundingBoxRight + 10;
+    });
     [...NAPIS].forEach((ch, i) => {
       const cx = bw * i + bw / 2;
       const g = x.createLinearGradient(0, 40, 0, 200);
@@ -832,14 +838,18 @@ export async function init(root) {
     const m = new Mesh(g, new MeshBasicMaterial({ map: t, transparent: true, alphaTest: 0.35, side: DoubleSide, toneMapped: false }));
     m.frustumCulled = false;
     scene.add(m);
-    return { pos, g };
+    return { pos, g, bw, sirky };
   })();
   function hybejNapisem(t) {
     const n = NAPIS.length;
-    const w = 1.1;
-    const h = (w * 208) / 100;
+    const S = 1.1 / 100; // svět na pixel textury (velikost písmen jako dřív)
+    const w = napis.bw * S;
+    const h = 208 * S;
+    const MEZERA = 0.24;
+    let kurzor = -(napis.sirky.reduce((a, b) => a + b, 0) * S + MEZERA * (n - 1)) / 2;
     for (let i = 0; i < n; i++) {
-      const cx = (i - (n - 1) / 2) * 1.16;
+      const cx = kurzor + (napis.sirky[i] * S) / 2;
+      kurzor += napis.sirky[i] * S + MEZERA;
       const cy = 9.4 + Math.sin(t * q(1.1) + i * 1.7) * 0.09;
       const a = Math.sin(t * q(0.8) + i * 2.3) * 0.07;
       const ca = Math.cos(a);
