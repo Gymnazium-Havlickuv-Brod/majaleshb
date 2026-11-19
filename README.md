@@ -47,17 +47,25 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 
 ## Vizuál
 
-Vychází z plakátu A1 (paleta P6 Electric Blue × Flamingo z `majales/grafika/`):
+Jen tři barvy, bez odstínů a průhledností (výjimka: fotky, video a clona přes video). Žádná bílá, černá ani stíny. Tokeny jsou v `src/styles/global.css` (`@theme` vypíná výchozí paletu Tailwindu, takže jiná barva se do webu nedostane ani omylem).
 
 | Token | Barva | Použití |
 |---|---|---|
-| `modra` | `#3044F3` | hero a line-up, nadpisy na světlém pozadí |
-| `ruzova` | `#FFC2E2` | velký text na modré a tmavé, tlačítka |
-| `pulnoc` | `#0B0F4A` | text, galerie, patička |
-| `krida` | `#FFF5FA` | podklad obsahových sekcí |
-| `hot` | `#FF4FA3` | jen drobné akcenty (odznak, hvězdička) |
+| `modra` | `#004AFD` Electric Blue | pozadí všeho: stránka, sekce, karty, menu, lightbox, patička |
+| `ruzova` | `#FAC7E1` Flamingo Pink | veškerý text (nadpisy, podnadpisy, odstavce, čísla, odkazy) a ovládací prvky |
+| `hot` | `#FF4FA3` Hot Pink | doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky, symboly ✱ a →, logo, podtržení odkazů, focus |
 
-Barvy jsou v poměru zhruba 60–30–10: obsah nese světlý podklad, modrá je podpisová barva a růžové akcenty jsou jen střídmě. Růžová na modré má kontrast 4,3 : 1, proto se používá jen na velký text. Běžný text na modré je `mlecna`. Fonty jsou Anton a Space Grotesk, oba hostované lokálně přes `@fontsource` (bez Google Fonts).
+Pravidla pro typy prvků (všude stejně):
+
+- **Tlačítko:** obrys = růžový text a rámeček; plné tlačítko, hover, aktivní filtr = růžová výplň s modrým textem (`.tlacitko`, `.tlacitko-plne`).
+- **Štítek** („jen jeden“, rok u fotky): růžová výplň, modrý text (`.stitek`).
+- **Karta:** modré pozadí, rámeček 2 px sytě růžový (`.karta`). Zvýrazněná karta má rámeček 4 px.
+- **Oddělení sekcí:** všechny sekce jsou modré, mezi nimi je sytě růžová linka (`.predel`).
+- **Odkaz v textu:** růžový tučný text, sytě růžové podtržení (`.odkaz`).
+
+Růžová na modré má kontrast 4,2 : 1, proto je běžný text v řezu 500. Sytě růžová na modré má jen 2 : 1, a tak se na text nepoužívá. Fonty jsou Anton a Space Grotesk, oba hostované lokálně přes `@fontsource` (bez Google Fonts).
+
+Hero video zůstává vyrenderované ze 3D scény v původních barvách. Clona přes něj je modrá `#004AFD`, aby video plynule přešlo do pozadí stránky.
 
 ## Otevřené (TODO)
 

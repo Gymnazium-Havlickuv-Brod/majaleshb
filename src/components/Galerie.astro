@@ -20,7 +20,7 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
         <li class="mb-3 sm:mb-4 break-inside-avoid" data-rok={f.rok}>
           <button
             type="button"
-            class="group relative block w-full overflow-hidden rounded-2xl bg-modra/30 cursor-zoom-in"
+            class="group relative block w-full overflow-hidden rounded-2xl cursor-zoom-in"
             data-velka={velke[i].src}
             data-alt={f.alt}
             data-rok={f.rok}
@@ -33,7 +33,7 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
               sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 47vw"
               class="w-full h-auto transition-transform duration-500 group-hover:scale-[1.04]"
             />
-            <span class="absolute left-2 bottom-2 rounded-full bg-pulnoc/75 px-2.5 py-1 text-xs font-bold text-ruzova backdrop-blur">
+            <span class="stitek absolute left-2 bottom-2 px-2.5 py-1 text-xs">
               {f.rok}
             </span>
           </button>
@@ -42,10 +42,10 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     }
   </ul>
 
-  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full bg-pulnoc/95 p-0 backdrop:bg-pulnoc/80" aria-label="Fotka">
+  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full bg-modra text-ruzova p-0 backdrop:bg-modra" aria-label="Fotka">
     <div class="relative grid h-full w-full place-items-center p-4 sm:p-10">
-      <img class="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl" alt="" />
-      <p class="popis absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] text-center text-sm text-mlecna/85"></p>
+      <img class="max-h-[82vh] max-w-full rounded-xl object-contain" alt="" />
+      <p class="popis absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] text-center text-sm text-ruzova"></p>
       <button type="button" class="zavrit absolute right-3 top-3 sm:right-6 sm:top-6 lb-tl" aria-label="Zavřít">✕</button>
       <button type="button" class="pred absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 lb-tl" aria-label="Předchozí">←</button>
       <button type="button" class="dalsi absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 lb-tl" aria-label="Další">→</button>
@@ -59,15 +59,14 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     padding: 0.4rem 1.1rem;
     border-radius: 999px;
     font-weight: 700;
-    border: 2px solid color-mix(in srgb, var(--color-ruzova) 45%, transparent);
+    border: 2px solid var(--color-ruzova);
     color: var(--color-ruzova);
     transition: background-color 0.15s, color 0.15s;
   }
   .filtr[aria-pressed='true'],
   .filtr:hover {
     background: var(--color-ruzova);
-    color: var(--color-pulnoc);
-    border-color: var(--color-ruzova);
+    color: var(--color-modra);
   }
   .lb-tl {
     display: grid;
@@ -75,14 +74,15 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     width: 3rem;
     height: 3rem;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--color-modra) 80%, transparent);
-    color: var(--color-mlecna);
+    background: var(--color-modra);
+    color: var(--color-ruzova);
+    border: 2px solid var(--color-ruzova);
     font-size: 1.25rem;
     font-weight: 700;
   }
   .lb-tl:hover {
     background: var(--color-ruzova);
-    color: var(--color-pulnoc);
+    color: var(--color-modra);
   }
   li[hidden] {
     display: none;

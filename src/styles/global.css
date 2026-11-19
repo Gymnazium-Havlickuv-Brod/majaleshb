@@ -1,19 +1,22 @@
 @import 'tailwindcss';
 
 /*
-  Barvy Majálesu 2027 – jediné místo, kde se ladí.
-  Základ: plakát A1 (Electric Blue × Flamingo, paleta P6 z grafika/podklady/palety.pdf),
-  modrá navzorkovaná z plakátu (#3044F3), růžová o něco čistší a sytější než Flamingo.
-  Kontrast: růžová na modré 4,3 : 1 → jen nadpisy a velký text; běžný text na modré je --color-mlecna.
+  Barvy Majálesu 2027 – jediné místo, kde se ladí. Jen tyhle tři barvy, bez odstínů a průhledností
+  (výjimka: fotky, video a clona přes ně). Žádná bílá, černá ani stíny.
+
+  Systém (každý typ prvku má jednu barvu, všude stejnou):
+  - modra  #004AFD  pozadí: stránka, sekce, karty, menu, lightbox, patička
+  - ruzova #FAC7E1  veškerý text (nadpisy, podnadpisy, odstavce, čísla, odkazy)
+                    + ovládací prvky: obrys tlačítka; plné tlačítko, aktivní filtr a štítek = růžová výplň s modrým textem
+  - hot    #FF4FA3  doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky,
+                    dekorativní symboly (✱, →), logo, podtržení odkazů, focus
+  Kontrast růžové na modré je 4,2 : 1, sytě růžová na modré jen 2 : 1 → sytě růžovou nikdy na text.
 */
 @theme {
-  --color-modra: #3044f3;
-  --color-modra-svetla: #4a5cff;
-  --color-pulnoc: #0b0f4a;
-  --color-ruzova: #ffc2e2;
-  --color-mlecna: #ffe9f4;
+  --color-*: initial;
+  --color-modra: #004afd;
+  --color-ruzova: #fac7e1;
   --color-hot: #ff4fa3;
-  --color-krida: #fff5fa;
 
   --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
   --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -25,19 +28,20 @@
     scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
   }
-  /* 60–30–10: světlý podklad nese obsah, modrá je podpis (hero, line-up), růžová a hot jen akcenty */
   body {
-    background: var(--color-krida);
-    color: var(--color-pulnoc);
+    background: var(--color-modra);
+    color: var(--color-ruzova);
     font-family: var(--font-sans);
+    /* o stupeň silnější řez: růžová na sytě modré je pak čitelnější */
+    font-weight: 500;
     font-feature-settings: 'ss01';
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
   ::selection {
-    background: var(--color-hot);
-    color: var(--color-pulnoc);
+    background: var(--color-ruzova);
+    color: var(--color-modra);
   }
   :focus-visible {
     outline: 3px solid var(--color-hot);
@@ -77,6 +81,16 @@
   .sekce {
     padding-block: clamp(4rem, 10vw, 8rem);
   }
+  /* všechny sekce mají stejné modré pozadí, oddělují je sytě růžové linky */
+  .predel {
+    border-top: 2px solid var(--color-hot);
+  }
+  /* karta: modré pozadí, sytě růžový rámeček */
+  .karta {
+    border: 2px solid var(--color-hot);
+  }
+
+  /* tlačítka: obrys = růžový text a rámeček; plné / hover = růžová výplň s modrým textem */
   .tlacitko {
     display: inline-flex;
     align-items: center;
@@ -85,19 +99,38 @@
     padding: 0.75rem 1.5rem;
     border-radius: 999px;
     font-weight: 700;
-    border: 2px solid currentColor;
+    border: 2px solid var(--color-ruzova);
+    color: var(--color-ruzova);
     transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+  .tlacitko:hover,
+  .tlacitko-plne {
+    background: var(--color-ruzova);
+    color: var(--color-modra);
   }
   .tlacitko:hover {
     transform: translateY(-2px);
   }
-  .tlacitko-plne {
+  /* štítek (např. „jen jeden“, rok u fotky): stejná inverze jako plné tlačítko */
+  .stitek {
+    display: inline-block;
+    border-radius: 999px;
     background: var(--color-ruzova);
-    border-color: var(--color-ruzova);
-    color: var(--color-pulnoc);
+    color: var(--color-modra);
+    font-weight: 700;
   }
-  .tlacitko-plne:hover {
-    background: var(--color-mlecna);
+
+  /* odkaz v textu: růžový text, sytě růžové podtržení */
+  .odkaz {
+    font-weight: 700;
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-hot);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: text-underline-offset 0.15s ease;
+  }
+  .odkaz:hover {
+    text-underline-offset: 7px;
   }
 }
 
@@ -120,5 +153,8 @@
   }
   .tlacitko:hover {
     transform: none;
+  }
+  .odkaz {
+    transition: none;
   }
 }

@@ -11,11 +11,11 @@ const jednotky = [
 <div class="odpocet flex gap-2 sm:gap-3" data-cil={AKCE.zacatek} aria-label={`Odpočet do ${AKCE.datum}`} role="timer">
   {
     jednotky.map(([k, n]) => (
-      <div class="min-w-[4.2rem] sm:min-w-[5rem] rounded-2xl bg-pulnoc/35 ring-1 ring-ruzova/20 px-3 py-2 text-center">
-        <span class="display block text-ruzova text-[clamp(1.8rem,6vw,2.6rem)] leading-none tabular-nums" data-k={k}>
+      <div class="min-w-[4.2rem] sm:min-w-[5rem] rounded-2xl bg-modra karta px-3 py-2 text-center">
+        <span class="display block text-[clamp(1.8rem,6vw,2.6rem)] leading-none tabular-nums" data-k={k}>
           –
         </span>
-        <span class="mt-1 block text-[0.7rem] uppercase tracking-[0.14em] text-mlecna/75">{n}</span>
+        <span class="mt-1 block text-[0.7rem] uppercase tracking-[0.14em]">{n}</span>
       </div>
     ))
   }

@@ -46,7 +46,7 @@ const schema = {
   <HeroPlakat />
 
   <!-- běžící pás -->
-  <div class="bg-pulnoc text-ruzova overflow-hidden py-4 border-y border-ruzova/15" aria-hidden="true">
+  <div class="bg-modra text-ruzova overflow-hidden py-4 border-y-2 border-hot" aria-hidden="true">
     <div class="pas flex w-max gap-8 whitespace-nowrap display text-3xl sm:text-4xl">
       {[0, 1].map(() => PAS.concat(PAS).map((t) => <span class="flex items-center gap-8">{t}<span class="text-hot">✱</span></span>))}
     </div>
@@ -56,9 +56,9 @@ const schema = {
   <section id="o-majalesu" class="sekce" aria-labelledby="o-nadpis">
     <div class="obal grid gap-12 lg:grid-cols-2 lg:items-center">
       <div>
-        <p class="kicker text-modra">O Majálesu</p>
-        <h2 id="o-nadpis" class="display text-modra mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Oslava jara<br />a mládí</h2>
-        <div class="mt-6 space-y-4 text-lg leading-relaxed text-pulnoc/85 max-w-xl">
+        <p class="kicker">O Majálesu</p>
+        <h2 id="o-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Oslava jara<br />a mládí</h2>
+        <div class="mt-6 space-y-4 text-lg leading-relaxed max-w-xl">
           <p>
             Majáles sahá až ke středověkým univerzitám. V Havlíčkově Brodě ho přes dvacet let pořádalo gymnázium,
             od roku 2026 ho připravuje společně se stavební průmyslovkou.
@@ -70,9 +70,9 @@ const schema = {
         <dl class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 max-w-xl">
           {
             fakta.map(([c, t]) => (
-              <div class="border-t-2 border-modra pt-3">
-                <dt class="display text-modra text-[clamp(2.2rem,7vw,3.5rem)] leading-none">{c}</dt>
-                <dd class="mt-1 text-sm font-medium text-pulnoc/70">{t}</dd>
+              <div class="border-t-2 border-hot pt-3">
+                <dt class="display text-[clamp(2.2rem,7vw,3.5rem)] leading-none">{c}</dt>
+                <dd class="mt-1 text-sm font-medium">{t}</dd>
               </div>
             ))
           }
@@ -85,7 +85,7 @@ const schema = {
           alt={namesti.alt}
           widths={[300, 500]}
           sizes="(min-width: 1024px) 18vw, 40vw"
-          class="absolute -bottom-8 -left-3 sm:-left-8 w-[42%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-krida -rotate-3"
+          class="absolute -bottom-8 -left-3 sm:-left-8 w-[42%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-modra -rotate-3"
         />
       </div>
     </div>
@@ -96,10 +96,10 @@ const schema = {
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="kicker text-modra">Program</p>
-          <h2 id="program-nadpis" class="display text-modra mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Co tě čeká</h2>
+          <p class="kicker">Program</p>
+          <h2 id="program-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Co tě čeká</h2>
         </div>
-        <p class="max-w-sm text-pulnoc/70">Program dolaďujeme se studenty. Přesný harmonogram zveřejníme na jaře.</p>
+        <p class="max-w-sm">Program dolaďujeme se studenty. Přesný harmonogram zveřejníme na jaře.</p>
       </div>
 
       <ul class="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -109,51 +109,51 @@ const schema = {
               <div class="overflow-hidden rounded-[1.5rem]">
                 <Image src={p.f.img} alt={p.f.alt} widths={[400, 640, 900]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw" class="w-full aspect-[4/3] object-cover" />
               </div>
-              <p class="mt-5 text-sm font-bold text-modra tabular-nums">{String(i + 1).padStart(2, '0')}</p>
-              <h3 class="display text-pulnoc text-3xl sm:text-4xl mt-1">{p.nazev}</h3>
-              <p class="mt-3 text-pulnoc/75 leading-relaxed">{p.text}</p>
+              <p class="mt-5 text-sm font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</p>
+              <h3 class="display text-3xl sm:text-4xl mt-1">{p.nazev}</h3>
+              <p class="mt-3 leading-relaxed">{p.text}</p>
             </li>
           ))
         }
       </ul>
 
       <!-- průběh dne -->
-      <div class="mt-20 rounded-[2rem] bg-white/70 ring-1 ring-pulnoc/10 p-6 sm:p-10">
-        <h3 class="kicker text-modra">Jak bude vypadat den</h3>
+      <div class="mt-20 rounded-[2rem] karta p-6 sm:p-10">
+        <h3 class="kicker">Jak bude vypadat den</h3>
         <ol class="mt-6 grid gap-6 md:grid-cols-3">
           {
             DEN.map((d) => (
-              <li class="border-l-4 border-ruzova pl-5">
-                <p class="display text-modra text-3xl">{d.kdy}</p>
-                <p class="mt-2 text-pulnoc/80">{d.co}</p>
+              <li class="border-l-4 border-hot pl-5">
+                <p class="display text-3xl">{d.kdy}</p>
+                <p class="mt-2">{d.co}</p>
               </li>
             ))
           }
         </ol>
-        <p class="mt-8 pt-6 border-t border-pulnoc/10 text-pulnoc/75">
-          <strong class="text-pulnoc">Den předem, v pátek 21. 5.,</strong> chystáme hru pro osmáky ze základních škol.
+        <p class="mt-8 pt-6 border-t-2 border-hot">
+          <strong>Den předem, v pátek 21. 5.,</strong> chystáme hru pro osmáky ze základních škol.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Line-up -->
-  <section id="line-up" class="sekce bg-modra text-mlecna" aria-labelledby="lineup-nadpis">
+  <section id="line-up" class="sekce predel" aria-labelledby="lineup-nadpis">
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="kicker text-ruzova">Line-up {AKCE.rok}</p>
-          <h2 id="lineup-nadpis" class="display text-ruzova mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Šest kapel.<br />Jména brzy.</h2>
+          <p class="kicker">Line-up {AKCE.rok}</p>
+          <h2 id="lineup-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Šest kapel.<br />Jména brzy.</h2>
         </div>
-        <p class="max-w-sm text-mlecna/80">Domlouváme kapely na hlavní stage. Jména odhalíme postupně, sleduj nás.</p>
+        <p class="max-w-sm">Domlouváme kapely na hlavní stage. Jména odhalíme postupně, sleduj nás.</p>
       </div>
       <ul class="mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
         {
           LINEUP.map((k) => (
-            <li class="relative aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-ruzova/45 grid place-items-center">
-              <span class="absolute left-4 top-3 text-sm font-bold text-mlecna/70 tabular-nums">{k.cislo}</span>
-              <span class="display text-ruzova text-[clamp(4.5rem,14vw,8rem)] leading-none">{k.jmeno}</span>
-              <span class="absolute bottom-3 left-4 right-4 kicker !text-[0.65rem] text-mlecna/60">Odhalíme brzy</span>
+            <li class="relative aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-hot grid place-items-center">
+              <span class="absolute left-4 top-3 text-sm font-bold tabular-nums">{k.cislo}</span>
+              <span class="display text-[clamp(4.5rem,14vw,8rem)] leading-none">{k.jmeno}</span>
+              <span class="absolute bottom-3 left-4 right-4 kicker !text-[0.65rem]">Odhalíme brzy</span>
             </li>
           ))
         }
@@ -162,18 +162,18 @@ const schema = {
   </section>
 
   <!-- Partneři (loga) -->
-  <section id="partneri" class="sekce" aria-label="Partneři Majálesu">
+  <section id="partneri" class="sekce predel" aria-label="Partneři Majálesu">
     <div class="obal">
       <PartneriLoga />
     </div>
   </section>
 
   <!-- Galerie -->
-  <section id="galerie" class="sekce bg-pulnoc text-mlecna" aria-labelledby="galerie-nadpis">
+  <section id="galerie" class="sekce predel" aria-labelledby="galerie-nadpis">
     <div class="obal">
-      <p class="kicker text-ruzova">Galerie</p>
-      <h2 id="galerie-nadpis" class="display text-ruzova mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Takhle to vypadalo</h2>
-      <p class="mt-4 max-w-xl text-mlecna/75">Výběr z minulých ročníků. Letos to bude ještě větší.</p>
+      <p class="kicker">Galerie</p>
+      <h2 id="galerie-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Takhle to vypadalo</h2>
+      <p class="mt-4 max-w-xl">Výběr z minulých ročníků. Letos to bude ještě větší.</p>
       <div class="mt-10">
         <Galerie />
       </div>
@@ -181,17 +181,17 @@ const schema = {
   </section>
 
   <!-- Partneři CTA -->
-  <section class="sekce bg-ruzova text-pulnoc" aria-labelledby="cta-nadpis">
+  <section class="sekce predel" aria-labelledby="cta-nadpis">
     <div class="obal grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
       <div>
-        <p class="kicker text-modra">Pro firmy a partnery</p>
+        <p class="kicker">Pro firmy a partnery</p>
         <h2 id="cta-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Podpořte<br />Majáles {AKCE.rok}</h2>
       </div>
       <div>
         <p class="text-lg leading-relaxed">
           Od 5 000 Kč, barterem, nebo jako generální partner s vlastním stánkem na náměstí. Vyberte si úroveň, která vám sedí.
         </p>
-        <a href="/partneri/" class="tlacitko mt-6 bg-pulnoc text-ruzova border-pulnoc hover:bg-modra hover:border-modra">Úrovně partnerství →</a>
+        <a href="/partneri/" class="tlacitko tlacitko-plne mt-6">Úrovně partnerství →</a>
       </div>
     </div>
   </section>

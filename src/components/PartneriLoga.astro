@@ -46,13 +46,13 @@ const logoVyska: Record<UrovenLoga, string> = {
 <div class="partneri-loga">
   <div class="flex flex-wrap items-end justify-between gap-4">
     <div>
-      <p class="kicker text-modra">{kicker}</p>
-      <h2 class="display text-modra mt-3 text-[clamp(2.5rem,7vw,4.5rem)]">{nadpis}</h2>
+      <p class="kicker">{kicker}</p>
+      <h2 class="display mt-3 text-[clamp(2.5rem,7vw,4.5rem)]">{nadpis}</h2>
     </div>
     {
       odkazNaNabidku && (
-        <a href="/partneri/" class="font-bold text-modra underline decoration-2 underline-offset-4 hover:decoration-hot">
-          Chcete tu být taky? →
+        <a href="/partneri/" class="odkaz">
+          Chcete tu být taky? <span class="text-hot" aria-hidden="true">→</span>
         </a>
       )
     }
@@ -62,23 +62,23 @@ const logoVyska: Record<UrovenLoga, string> = {
     {
       urovne.map((ur) => (
         <div>
-          <h3 class="kicker !text-[0.7rem] text-pulnoc/60 mb-4">{ur.nadpis}</h3>
+          <h3 class="kicker !text-[0.7rem] mb-4">{ur.nadpis}</h3>
           <ul class:list={['grid gap-3 sm:gap-4', mrizka[ur.u]]}>
             {ur.potvrzeni.map((p) => {
               const img = logo(p.logo);
               const obsah = img ? (
                 <Image src={img} alt={p.nazev} class:list={['w-auto max-w-[80%] object-contain', logoVyska[ur.u]]} />
               ) : (
-                <span class="display text-pulnoc text-2xl text-center px-4">{p.nazev}</span>
+                <span class="display text-modra text-2xl text-center px-4">{p.nazev}</span>
               );
               return (
                 <li>
                   {p.url ? (
-                    <a href={p.url} rel="noopener" target="_blank" class:list={['grid place-items-center rounded-[1.25rem] bg-white ring-1 ring-pulnoc/10 hover:ring-modra transition', vyska[ur.u]]}>
+                    <a href={p.url} rel="noopener" target="_blank" class:list={['grid place-items-center rounded-[1.25rem] bg-ruzova ring-4 ring-transparent hover:ring-hot transition', vyska[ur.u]]}>
                       {obsah}
                     </a>
                   ) : (
-                    <div class:list={['grid place-items-center rounded-[1.25rem] bg-white ring-1 ring-pulnoc/10', vyska[ur.u]]}>{obsah}</div>
+                    <div class:list={['grid place-items-center rounded-[1.25rem] bg-ruzova', vyska[ur.u]]}>{obsah}</div>
                   )}
                 </li>
               );
@@ -89,7 +89,7 @@ const logoVyska: Record<UrovenLoga, string> = {
                 <a
                   href="/partneri/"
                   class:list={[
-                    'group grid place-items-center rounded-[1.25rem] border-2 border-dashed border-modra/25 text-modra/45 hover:border-modra hover:text-modra transition-colors',
+                    'group grid place-items-center rounded-[1.25rem] border-2 border-dashed border-hot hover:border-solid',
                     vyska[ur.u],
                   ]}
                   aria-label={`Volné místo: ${ur.nadpis.toLowerCase()}. Zobrazit nabídku partnerství.`}
