@@ -84,6 +84,6 @@ Od 17. 11. 2026 je na hlavní stránce místo živé three.js scény **smyčkov�
 1. `npm run dev` (nebo build + `npx astro preview`) běží na `localhost:4321`.
 2. `npm run render-hero` (případně jen jedna varianta: `node scripts/render-hero.mjs desktop`). Prvně možná `npx playwright install chromium`.
 3. Skript otevře `/archiv/hero-3d/?smycka`, kde jsou všechny pohyby zaokrouhlené na délku smyčky (poslední snímek navazuje na první; délka = celé kolo snímků LED stěny, ≥ 30 s), projde scénu snímek po snímku přes `window.__hero3d.vykresli(t)`, uloží JPEGy do `render/` (gitignore) a ffmpegem udělá MP4 + plakát. Jen překódovat bez renderu: `--jen-kodovat`. Volby `--fps`, `--smycka`, `--url`, `--ffmpeg`.
-4. Zkontrolovat velikost (teď desktop 2560 px 17,4 MB, tablet 1640 px 14,8 MB, mobil 1080 px 10,1 MB; CRF 28, render ve vyšším rozlišení a zmenšený) a commitnout videa + plakáty.
+4. Zkontrolovat velikost (teď desktop 2560 px 34 MB, tablet 1640 px 30 MB, mobil 1080 px 21 MB; CRF 22, render ve vyšším rozlišení a zmenšený) a commitnout videa + plakáty.
 
 Mouse parallax (kamera za myší) ve videu není, živě je jen v archivu.

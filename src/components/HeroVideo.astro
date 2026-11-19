@@ -23,11 +23,11 @@ const zdroje = await Promise.all(
           v.sirky.filter((s) => s <= v.img.width).map(async (s) => `${(await getImage({ src: v.img, width: s, format, quality })).src} ${s}w`),
         )
       ).join(', ');
-    return { ...v, avif: await sada('avif', 55), webp: await sada('webp', 72) };
+    return { ...v, avif: await sada('avif', 70), webp: await sada('webp', 85) };
   }),
 );
 const zaklad = zdroje[zdroje.length - 1];
-const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp', quality: 72 })).src;
+const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp', quality: 85 })).src;
 ---
 
 
