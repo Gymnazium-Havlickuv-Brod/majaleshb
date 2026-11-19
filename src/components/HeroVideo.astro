@@ -31,7 +31,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
 ---
 
 
-<section class="hero3d relative isolate overflow-hidden bg-pulnoc text-mlecna" aria-labelledby="hero-nadpis">
+<section class="hero3d relative isolate overflow-hidden bg-modra text-ruzova" aria-labelledby="hero-nadpis">
   <!-- statický podklad: je vidět hned a zůstane, když video nejde nebo je omezený pohyb -->
   <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
     <picture>
@@ -54,38 +54,38 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
 
   <div class="obal hero3d-obsah relative flex flex-col justify-end lg:justify-center @container">
     <div class="lg:max-w-[36rem]">
-      <p class="kicker text-ruzova">{AKCE.skolyKratce} · {AKCE.rok}</p>
+      <p class="kicker">{AKCE.skolyKratce} · {AKCE.rok}</p>
 
-      <h1 id="hero-nadpis" class="display text-ruzova mt-3 lg:mt-6 select-none">
+      <h1 id="hero-nadpis" class="display mt-3 lg:mt-6 select-none">
         <span class="sr-only">Majáles {AKCE.rok}</span>
         <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(5.5rem,26.5cqi,13rem)] lg:text-[clamp(8rem,11.5vw,12rem)] leading-[0.84]">Majáles</span>
       </h1>
 
       <div class="mt-3 lg:mt-6 flex flex-wrap items-end gap-x-6 gap-y-2">
-        <p class="display text-mlecna text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
+        <p class="display text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
         <p class="text-base sm:text-lg font-medium leading-snug pb-1">
           {AKCE.den} · {AKCE.misto}<br />{AKCE.mesto}
         </p>
       </div>
 
-      <p class="hidden sm:block mt-4 border-t-2 border-ruzova/50 pt-4 text-base font-medium text-mlecna/90">
-        kapely · DJ · stánky · sport · zóny škol · <span class="text-ruzova">program brzy</span>
+      <p class="hidden sm:block mt-4 border-t-2 border-hot pt-4 text-base font-medium">
+        kapely · DJ · stánky · sport · zóny škol · <span class="font-bold">program brzy</span>
       </p>
 
       <div class="mt-5 flex flex-wrap gap-3">
         <a href="#program" class="tlacitko tlacitko-plne">Co tě čeká</a>
-        <a href="/partneri/" class="tlacitko text-ruzova hover:bg-ruzova hover:text-pulnoc">Staň se partnerem</a>
+        <a href="/partneri/" class="tlacitko">Staň se partnerem</a>
       </div>
 
       <div class="mt-5 lg:mt-8">
-        <p class="kicker text-mlecna/75 mb-3">Do Majálesu zbývá</p>
+        <p class="kicker mb-3">Do Majálesu zbývá</p>
         <Odpocet />
       </div>
     </div>
   </div>
 
   <button type="button" class="hero3d-pauza" hidden aria-pressed="false" aria-label="Pozastavit animaci" title="Pozastavit animaci">
-    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
       <path class="i-pauza" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"></path>
       <path class="i-hraj" d="M3 1.5v11l9-5.5z" fill="currentColor"></path>
     </svg>
@@ -100,9 +100,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
     padding-bottom: 1.5rem;
   }
   .hero3d-podklad {
-    background:
-      radial-gradient(90% 55% at 50% 46%, rgb(255 79 163 / 0.3), transparent 70%),
-      linear-gradient(180deg, #0b0f4a 0%, #1a2296 30%, #3044f3 50%, #121873 62%, #0b0f4a 100%);
+    background: var(--color-modra);
   }
   /* plakát = první snímek videa; pozice odpovídá středu scény v kameře (cx, cy v hero3d.js) */
   .hero3d-plakat,
@@ -122,7 +120,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
     opacity: 1;
   }
   .hero3d-clona {
-    background: linear-gradient(0deg, rgb(11 15 74 / 0.96) 0%, rgb(11 15 74 / 0.9) 34%, rgb(11 15 74 / 0.55) 50%, transparent 66%);
+    background: linear-gradient(0deg, rgb(0 74 253 / 0.96) 0%, rgb(0 74 253 / 0.9) 34%, rgb(0 74 253 / 0.55) 50%, transparent 66%);
   }
   .hero3d-pauza {
     position: absolute;
@@ -134,15 +132,16 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
     height: 2.5rem;
     border-radius: 999px;
     color: var(--color-ruzova);
-    background: rgb(11 15 74 / 0.55);
-    border: 2px solid rgb(255 194 226 / 0.4);
+    background: var(--color-modra);
+    border: 2px solid var(--color-ruzova);
     cursor: pointer;
   }
   .hero3d-pauza[hidden] {
     display: none;
   }
   .hero3d-pauza:hover {
-    background: var(--color-pulnoc);
+    background: var(--color-ruzova);
+    color: var(--color-modra);
   }
   .hero3d-pauza .i-hraj,
   .hero3d-pauza[aria-pressed='true'] .i-pauza {
@@ -159,11 +158,6 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
       padding-top: 2.5rem;
       padding-bottom: 2.5rem;
     }
-    .hero3d-podklad {
-      background:
-        radial-gradient(60% 60% at 68% 55%, rgb(255 79 163 / 0.3), transparent 70%),
-        linear-gradient(180deg, #0b0f4a 0%, #1a2296 38%, #3044f3 62%, #121873 78%, #0b0f4a 100%);
-    }
     /* video je ≈ 2 : 1; na širokých monitorech se ořezává shora a zdola, proto výš než střed scény (0,6) – ať zůstane věž */
     .hero3d-plakat,
     .hero3d-platno {
@@ -171,8 +165,8 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
     }
     .hero3d-clona {
       background:
-        linear-gradient(90deg, rgb(11 15 74 / 0.94) 0%, rgb(11 15 74 / 0.8) 26%, rgb(11 15 74 / 0.35) 44%, transparent 60%),
-        linear-gradient(0deg, rgb(11 15 74 / 0.55) 0%, transparent 22%);
+        linear-gradient(90deg, rgb(0 74 253 / 0.94) 0%, rgb(0 74 253 / 0.8) 26%, rgb(0 74 253 / 0.35) 44%, transparent 60%),
+        linear-gradient(0deg, rgb(0 74 253 / 0.55) 0%, transparent 22%);
     }
     .hero3d-pauza {
       top: auto;

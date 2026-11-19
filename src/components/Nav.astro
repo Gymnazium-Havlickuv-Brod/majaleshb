@@ -9,35 +9,35 @@ const odkazy = [
 const naPartnerech = Astro.url.pathname.startsWith('/partneri');
 ---
 
-<header class="sticky top-0 z-40 text-mlecna bg-modra/90 backdrop-blur-md border-b border-ruzova/15">
+<header class="sticky top-0 z-40 bg-modra text-ruzova border-b-2 border-hot">
   <nav class="obal flex h-16 items-center justify-between gap-4" aria-label="Hlavní navigace">
-    <a href="/" class="display text-ruzova text-2xl tracking-wide leading-none" aria-label="Majáles 2027, úvod">
-      Majáles<span class="text-hot">’27</span>
+    <a href="/" class="display text-hot text-2xl tracking-wide leading-none" aria-label="Majáles 2027, úvod">
+      Majáles’27
     </a>
 
-    <ul class="hidden md:flex items-center gap-7 text-sm font-medium">
-      {odkazy.map((o) => <li><a href={o.href} class="hover:text-ruzova transition-colors">{o.text}</a></li>)}
+    <ul class="hidden md:flex items-center gap-7 text-sm font-bold">
+      {odkazy.map((o) => <li><a href={o.href} class="decoration-hot decoration-2 underline-offset-8 hover:underline">{o.text}</a></li>)}
     </ul>
 
     <div class="flex items-center gap-2">
       <a
         href="/partneri/"
-        class:list={['tlacitko !min-h-10 !py-2 !px-4 text-sm', naPartnerech ? 'tlacitko-plne' : 'text-ruzova hover:bg-ruzova hover:text-pulnoc']}
+        class:list={['tlacitko !min-h-10 !py-2 !px-4 text-sm', naPartnerech && 'tlacitko-plne']}
         aria-current={naPartnerech ? 'page' : undefined}
       >
         Pro partnery
       </a>
 
       <details class="md:hidden relative group">
-        <summary class="list-none cursor-pointer grid place-items-center size-10 rounded-full border-2 border-ruzova/40 text-ruzova" aria-label="Menu">
-          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" class="group-open:hidden"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" class="hidden group-open:block"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        <summary class="list-none cursor-pointer grid place-items-center size-10 rounded-full border-2 border-ruzova text-ruzova hover:bg-ruzova hover:text-modra group-open:bg-ruzova group-open:text-modra" aria-label="Menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" class="group-open:hidden"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" class="hidden group-open:block"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
         </summary>
-        <ul class="absolute right-0 top-12 w-56 rounded-2xl bg-pulnoc p-2 shadow-2xl ring-1 ring-ruzova/20">
+        <ul class="absolute right-0 top-12 w-56 rounded-2xl bg-modra karta p-2">
           {
             odkazy.map((o) => (
               <li>
-                <a href={o.href} class="block rounded-xl px-4 py-3 font-medium hover:bg-modra">
+                <a href={o.href} class="block rounded-xl px-4 py-3 font-bold hover:bg-ruzova hover:text-modra">
                   {o.text}
                 </a>
               </li>
