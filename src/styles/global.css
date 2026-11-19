@@ -9,7 +9,7 @@
   - bílý (výchozí)       pozadí bila, text modra,  plné tlačítko = modrá výplň s růžovým textem
   - modrý (.na-modre)    pozadí modra, text ruzova, plné tlačítko = růžová výplň s modrým textem
   - hot #FF4FA3 v obou   doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky,
-                         dekorativní symboly (✱, →), logo, podtržení odkazů, focus. Nikdy na text.
+                         dekorativní symboly (✱, →), ’27 v logu, podtržení odkazů, focus. Nikdy na text.
   Kontrast: modrá na bílé 6,2 : 1, růžová na modré 4,2 : 1.
 */
 @theme {
