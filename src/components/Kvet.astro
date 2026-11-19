@@ -1,0 +1,13 @@
+---
+// stylizovaný květ (oddělovač v běžícím pásu): sytě růžové okvětní lístky, světle růžový střed
+interface Props {
+  class?: string;
+}
+const { class: trida = '' } = Astro.props;
+const listky = [0, 72, 144, 216, 288];
+---
+
+<svg class={trida} viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">
+  {listky.map((u) => <ellipse cx="0" cy="-25" rx="16" ry="25" transform={`rotate(${u})`} class="fill-hot" />)}
+  <circle r="14" class="fill-ruzova" />
+</svg>

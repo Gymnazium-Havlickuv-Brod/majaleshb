@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import HeroPlakat from '../../components/archiv/HeroPlakat.astro';
 import Galerie from '../../components/Galerie.astro';
 import PartneriLoga from '../../components/PartneriLoga.astro';
+import Kvet from '../../components/Kvet.astro';
 import { AKCE, PAS, PROGRAM, LINEUP, DEN } from '../../data/akce';
 import { podleRole } from '../../data/fotky';
 
@@ -46,9 +47,9 @@ const schema = {
   <HeroPlakat />
 
   <!-- běžící pás -->
-  <div class="na-modre overflow-hidden py-4 border-b-2 border-hot" aria-hidden="true">
+  <div class="na-modre overflow-hidden py-4" aria-hidden="true">
     <div class="pas flex w-max gap-8 whitespace-nowrap display text-3xl sm:text-4xl">
-      {[0, 1].map(() => PAS.concat(PAS).map((t) => <span class="flex items-center gap-8">{t}<span class="text-hot">✱</span></span>))}
+      {[0, 1].map(() => PAS.concat(PAS).map((t) => <span class="flex items-center gap-8">{t}<Kvet class="size-[0.8em] shrink-0" /></span>))}
     </div>
   </div>
 

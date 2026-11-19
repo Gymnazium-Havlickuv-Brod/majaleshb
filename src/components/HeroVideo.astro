@@ -153,8 +153,8 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
 
   @media (min-width: 1024px) {
     .hero3d-obsah {
-      /* desktop: text vlevo, scéna vpravo; o výšku běžícího pásu (+ kousek) nižší, ať je pás vidět hned po otevření */
-      min-height: calc(100svh - 10rem);
+      /* desktop: text vlevo, scéna vpravo; menu (4rem + 2px linka) + hero + běžící pás (4,5rem) = přesně jedna obrazovka */
+      min-height: calc(100svh - 8.5rem - 2px);
       padding-top: 2.5rem;
       padding-bottom: 2.5rem;
     }

@@ -54,7 +54,7 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 | `bila` | `#FFFFFF` | základní pozadí obsahu |
 | `modra` | `#004AFD` Electric Blue | text na bílé; pozadí jen na vybraných místech (hero, menu, běžící pás, line-up, patička, zvýrazněná karta, panel „Podpořte Majáles“, kroky „Jak to probíhá“, lightbox) |
 | `ruzova` | `#FAC7E1` Flamingo Pink | text na modré, plné tlačítko na modré |
-| `hot` | `#FF4FA3` Hot Pink | doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky, symboly ✱ a →, „’27“ v logu (nápis Majáles je světle růžový), podtržení odkazů, focus. Nikdy na text |
+| `hot` | `#FF4FA3` Hot Pink | doplňky: linky, rámečky karet, přerušované rámečky, oddělovače sekcí, odrážky, šipky →, okvětní lístky květu v běžícím pásu (střed květu je světle růžový), „’27“ v logu (nápis Majáles je světle růžový), podtržení odkazů, focus. Nikdy na text |
 
 Dva režimy, v každém má typ prvku pevnou barvu:
 
