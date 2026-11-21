@@ -27,17 +27,14 @@ const urovne = (Object.keys(MISTA) as UrovenLoga[]).map((u) => {
 
 // velikost karet podle úrovně
 const mrizka: Record<UrovenLoga, string> = {
-  generalni: 'grid-cols-1',
   hlavni: 'grid-cols-2 sm:grid-cols-3',
   partner: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4',
 };
 const vyska: Record<UrovenLoga, string> = {
-  generalni: 'h-36 sm:h-44',
   hlavni: 'h-28 sm:h-32',
   partner: 'h-24',
 };
 const logoVyska: Record<UrovenLoga, string> = {
-  generalni: 'max-h-20 sm:max-h-24',
   hlavni: 'max-h-14 sm:max-h-16',
   partner: 'max-h-12',
 };
@@ -95,8 +92,7 @@ const logoVyska: Record<UrovenLoga, string> = {
                   aria-label={`Volné místo: ${ur.nadpis.toLowerCase()}. Zobrazit nabídku partnerství.`}
                 >
                   <span class="text-center">
-                    <span class:list={['display block leading-none', ur.u === 'generalni' ? 'text-4xl sm:text-5xl' : 'text-2xl']}>Vaše logo</span>
-                    {ur.u === 'generalni' && <span class="mt-2 block text-sm font-medium">místo pro generálního partnera</span>}
+                    <span class:list={['display block leading-none', ur.u === 'hlavni' ? 'text-3xl sm:text-4xl' : 'text-2xl']}>Vaše logo</span>
                   </span>
                 </a>
               </li>

@@ -12,7 +12,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
 
 <Base
   title={`Partneři · Majáles ${AKCE.rok} Havlíčkův Brod`}
-  description={`Podpořte studentský Majáles ${AKCE.datum} na Havlíčkově náměstí. Úrovně partnerství od 5 000 Kč, barter i individuální nabídka.`}
+  description={`Podpořte studentský Majáles ${AKCE.datum} na Havlíčkově náměstí. Úrovně partnerství od 5 000 Kč, věcný dar i individuální nabídka.`}
 >
   <!-- úvod -->
   <section class="na-modre overflow-hidden">
@@ -69,9 +69,9 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
                 u.zvyraznit ? 'na-modre karta xl:-my-4 xl:py-10' : 'karta',
               ]}
             >
-              {u.zvyraznit && (
+              {u.stitek && (
                 <span class="stitek absolute -top-3 right-5 px-3 py-1 text-xs uppercase tracking-wider">
-                  jen jeden
+                  {u.stitek}
                 </span>
               )}
               <h3 class="kicker">{u.nazev}</h3>
@@ -96,7 +96,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
         }
       </ul>
 
-      <ul class="mt-8 grid gap-5 md:grid-cols-2">
+      <ul class="mt-8 grid gap-5">
         {
           DALSI.map((d) => (
             <li class="rounded-[1.75rem] border-2 border-dashed border-hot p-6 sm:p-8 flex flex-col">

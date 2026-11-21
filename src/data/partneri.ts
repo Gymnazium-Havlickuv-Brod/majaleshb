@@ -1,6 +1,5 @@
-// Úrovně partnerství Majálesu 2027.
-// Pozor: tabulka partnerů v pracovním repu (partneri/tabulka-partneru-2027.xlsx) má zatím
-// úrovně do 5 000 / 10 000 / 25 000 a víc – sjednotit, až se úrovně schválí.
+// Úrovně partnerství Majálesu 2027 (5 000 / 10 000 / 25 000 Kč a věcný dar).
+// Pozor: soutěž o ceny se nesmí jmenovat „tombola“ (zákon o hazardních hrách), vždy „hra o ceny“.
 
 export type Uroven = {
   id: string;
@@ -9,6 +8,7 @@ export type Uroven = {
   podtitul: string;
   vyhody: string[];
   zvyraznit?: boolean;
+  stitek?: string; // štítek nad kartou, např. „jen jeden“
 };
 
 export const UROVNE: Uroven[] = [
@@ -17,7 +17,7 @@ export const UROVNE: Uroven[] = [
     nazev: 'Podporovatel',
     castka: '5 000 Kč',
     podtitul: 'Pro menší firmy a živnostníky z Brodu.',
-    vyhody: ['logo na webu majaleshb.cz', 'poděkování na sociálních sítích Majálesu'],
+    vyhody: ['logo na webu', 'poděkování na sociálních sítích', 'poděkování na pódiu'],
   },
   {
     id: 'partner',
@@ -25,46 +25,39 @@ export const UROVNE: Uroven[] = [
     castka: '10 000 Kč',
     podtitul: 'Nejčastější forma podpory.',
     vyhody: [
-      'všechno z úrovně Podporovatel',
-      'logo na backdropu u pódia a na fotostěně',
-      'poděkování z pódia během dne',
+      'logo na webu',
+      'poděkování na sociálních sítích',
+      'poděkování na pódiu',
+      'logo na plakátu',
+      'banner na pódiu (ze strany)',
     ],
   },
   {
     id: 'hlavni',
     nazev: 'Hlavní partner',
-    castka: 'od 20 000 Kč',
-    podtitul: 'Výrazná viditelnost na náměstí.',
+    castka: '25 000 Kč',
+    podtitul: 'Největší viditelnost na náměstí i na pódiu.',
+    zvyraznit: true,
     vyhody: [
-      'všechno z úrovně Partner',
-      'vlastní banner na náměstí',
-      'logo na plakátech a v programu',
-      'krátké video studentů o vaší firmě',
+      'logo na webu',
+      'poděkování na sociálních sítích',
+      'poděkování na pódiu',
+      'logo na plakátu',
+      'hlavní banner na pódiu',
+      'příspěvek věnovaný partnerovi',
+      'program na pódiu',
     ],
   },
   {
-    id: 'generalni',
-    nazev: 'Generální partner',
-    castka: 'od 25 000 Kč',
-    podtitul: 'Majáles a vaše značka spolu.',
-    zvyraznit: true,
-    vyhody: [
-      'všechno z úrovně Hlavní partner',
-      'vlastní stánek nebo stan přímo na náměstí',
-      'označení „generální partner“ na všech materiálech',
-      'prezentace na pódiu a v aftermovie',
-      'spolupráci připravíme do detailu společně',
-    ],
+    id: 'dar',
+    nazev: 'Dar',
+    castka: 'Věcný dar',
+    podtitul: 'Podpora jídlem nebo cenami do hry o ceny.',
+    vyhody: ['jídlo: zmíníme vás na pódiu', 'jídlo: zmíníme vás u stánku', 'ceny do hry o ceny'],
   },
 ];
 
 export const DALSI = [
-  {
-    id: 'barter',
-    nazev: 'Barter',
-    podtitul: 'Podpora věcí nebo službou',
-    text: 'Jídlo a pití pro tým, ceny do soutěží, technika, doprava, tisk. Protihodnotu nastavíme podle hodnoty plnění.',
-  },
   {
     id: 'na-miru',
     nazev: 'Na míru',
@@ -102,13 +95,13 @@ export const POSTUP = [
 //  3. na web jen se souhlasem partnera a až po potvrzení (smlouva / platba)
 // Dokud je v úrovni míň partnerů než `MISTA`, doplní se zástupná místa „Vaše logo“.
 
-export type UrovenLoga = 'generalni' | 'hlavni' | 'partner';
+export type UrovenLoga = 'hlavni' | 'partner';
 
 export type Partner = {
   nazev: string;
   logo?: string; // soubor v src/assets/partneri/
   url?: string;
-  uroven: UrovenLoga; // podporovatel, partner i barter jdou do 'partner'
+  uroven: UrovenLoga; // hlavní partner = 'hlavni'; partner, podporovatel i dar jdou do 'partner'
 };
 
 export const PARTNERI: Partner[] = [
@@ -116,7 +109,6 @@ export const PARTNERI: Partner[] = [
 ];
 
 export const MISTA: Record<UrovenLoga, { nadpis: string; pocet: number }> = {
-  generalni: { nadpis: 'Generální partner', pocet: 1 },
   hlavni: { nadpis: 'Hlavní partneři', pocet: 3 },
   partner: { nadpis: 'Partneři', pocet: 8 },
 };

@@ -18,7 +18,7 @@ npm run preview
 | URL | Soubor | Co tam je |
 |---|---|---|
 | `/` | `src/pages/index.astro` | hero video (render 3D scény) s odpočtem, o Majálesu, program, line-up (6 × ?), loga partnerů, galerie, výzva pro partnery |
-| `/partneri/` | `src/pages/partneri.astro` | úrovně partnerství, barter, nabídka na míru, postup |
+| `/partneri/` | `src/pages/partneri.astro` | úrovně partnerství (5 000 / 10 000 / 25 000 Kč, dar), nabídka na míru, postup |
 | `/archiv/hero-3d/` | `src/pages/archiv/hero-3d.astro` | archiv: úvodní stránka s živou 3D hero (three.js) – zároveň zdroj pro render videa, noindex, mimo sitemap |
 | `/archiv/puvodni-hero/` | `src/pages/archiv/puvodni-hero.astro` | archiv: úvodní stránka s původní plakátovou hero sekcí (`src/components/archiv/HeroPlakat.astro`), noindex, mimo sitemap |
 
@@ -31,7 +31,7 @@ npm run preview
 ### Přidání partnera (logo na web)
 
 1. Logo ulož do `src/assets/partneri/`. Nejlépe SVG, jinak PNG s průhledným pozadím a šířkou aspoň 600 px.
-2. Do `PARTNERI` v `src/data/partneri.ts` přidej řádek, např. `{ nazev: 'Firma s.r.o.', logo: 'firma.svg', url: 'https://www.firma.cz', uroven: 'hlavni' }`. Úroveň je `generalni`, `hlavni`, nebo `partner` (do `partner` patří i podporovatel a barter).
+2. Do `PARTNERI` v `src/data/partneri.ts` přidej řádek, např. `{ nazev: 'Firma s.r.o.', logo: 'firma.svg', url: 'https://www.firma.cz', uroven: 'hlavni' }`. Úroveň je `hlavni` (hlavní partner, 25 000 Kč), nebo `partner` (do `partner` patří i partner za 10 000, podporovatel a dar).
 3. Commit a push na `main`. Vercel web nasadí sám.
 
 Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/partneri/`. Volná místa se doplní rámečky „Vaše logo“ (počty jsou v `MISTA`). Logo dávej na web až po potvrzení a se souhlasem partnera.
@@ -69,7 +69,6 @@ Hero video zůstává vyrenderované ze 3D scény v původních barvách. Clona 
 ## Otevřené (TODO)
 
 - Kontaktní e-mail `info@majaleshb.cz` je zatím placeholder. Instagram a Facebook doplnit do `KONTAKT` v `akce.ts`.
-- Úrovně partnerů nesedí s tabulkou `majales/partneri/tabulka-partneru-2027.xlsx` (tam je do 5 000 / 10 000 / 25 000+). Sjednotit.
 - Hosting a doména (Cloudflare Pages jako learningtriangle?) zatím nejsou nastavené.
 
 ## Hero video (3D scéna)

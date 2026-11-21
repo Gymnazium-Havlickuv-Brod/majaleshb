@@ -129,8 +129,13 @@ Program se teprve skládá. Veřejně zatím píšeme bez časů. Harmonogram zv
 
 Celá nabídka je na webu `/partneri/` (data v `src/data/partneri.ts`).
 
-- 🟡 Úrovně: **5 000 Kč · 10 000 Kč · od 20 000 Kč · generální partner od 25 000 Kč** (jen jeden, vlastní stánek nebo stan na náměstí), **barter** (jídlo, pití, ceny do soutěží, technika, tisk), **na míru**.
-- ❓ Úrovně se ještě sjednocují s tabulkou partnerů (`majales/partneri/tabulka-partneru-2027.xlsx`), která má do 5 000 / 10 000 / 25 000+.
+- ✅ Úrovně (sjednocené s tabulkou partnerů):
+  - **5 000 Kč – Podporovatel:** logo na webu, poděkování na sociálních sítích, poděkování na pódiu.
+  - **10 000 Kč – Partner:** to samé + logo na plakátu, banner na pódiu (ze strany).
+  - **25 000 Kč – Hlavní partner:** to samé + hlavní banner na pódiu, příspěvek věnovaný partnerovi, program na pódiu.
+  - **Dar:** jídlo (zmínění na pódiu a u stánku) nebo ceny do hry o ceny.
+  - **Na míru:** individuální nabídka.
+- ⚠️ Soutěž o ceny se **nesmí jmenovat „tombola“** (právní důvody), vždy jen **„hra o ceny“**.
 - Co můžeme nabídnout:
   - logo na webu;
   - poděkování na sítích a z pódia;

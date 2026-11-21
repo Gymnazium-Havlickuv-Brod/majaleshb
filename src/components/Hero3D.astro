@@ -12,9 +12,8 @@ import plakatMobil from '../assets/hero3d/plakat-mobil.jpg';
 
 // --- snímky pro LED stěnu ---
 const loga = import.meta.glob<{ default: ImageMetadata }>('../assets/partneri/*.{svg,png,jpg,jpeg,webp}', { eager: true });
-const poradi: UrovenLoga[] = ['generalni', 'hlavni', 'partner'];
+const poradi: UrovenLoga[] = ['hlavni', 'partner'];
 const stitek: Record<UrovenLoga, string> = {
-  generalni: 'Generální partner',
   hlavni: 'Hlavní partner',
   partner: 'Partner',
 };
