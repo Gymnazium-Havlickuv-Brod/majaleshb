@@ -19,8 +19,8 @@ import { join } from 'node:path';
 // sirka = šířka videa (render je ostřejší, zmenšení vyhladí hrany), crf = kvalita x264 (nižší = lepší a větší)
 const VARIANTY = {
   // desktop širší (≈ 2 : 1): široké monitory pak neuříznou věž radnice, užší ořežou jen okraje
-  desktop: { width: 1920, height: 1000, dpr: 2, sirka: 2560, crf: 22 },
-  tablet: { width: 820, height: 1180, dpr: 2.5, sirka: 1640, crf: 22 },
+  desktop: { width: 1920, height: 1000, dpr: 2, sirka: 2560, crf: 26 },
+  tablet: { width: 820, height: 1180, dpr: 2.5, sirka: 1640, crf: 26 },
   mobil: { width: 390, height: 844, dpr: 3, sirka: 1080, crf: 22 },
 };
 
@@ -83,15 +83,18 @@ function zakoduj(jmeno) {
   mkdirSync('public/hero', { recursive: true });
   mkdirSync('src/assets/hero-video', { recursive: true });
   const mp4 = `public/hero/majales-${jmeno}.mp4`;
-  // H.264 hraje všude (i Safari); VP9 i AV1 vyšly u téhle scény (dav, konfety) stejně velké nebo větší.
+  // AV1 (SVT, CRF 44) je hlavní: zhruba poloviční při SSIM ≈ 0,985. H.264 je záloha pro prohlížeče bez AV1 (starší iPhony).
+  // Cloudflare Pages bere soubory max. 25 MiB, proto desktop/tablet H.264 na CRF 26.
   // faststart = začne hrát hned při stahování; crf podle varianty (VARIANTY).
   // CRF 32/28 dělalo na obloze pruhy a v davu kostičky; CRF 22 + aq-mode 3 (lepší přechody v tmavých plochách),
   // preset slower a klíčový snímek po 5 s drží kvalitu (SSIM ≈ 0,99) za cenu zhruba dvojnásobné velikosti.
   ffmpeg(...vstup, ...sude, '-c:v', 'libx264', '-preset', 'slower', '-tune', 'animation', '-crf', String(VARIANTY[jmeno].crf), '-x264-params', 'aq-mode=3:ref=6', '-pix_fmt', 'yuv420p', '-g', String(FPS * 5), '-movflags', '+faststart', '-an', mp4);
+  const av1 = `public/hero/majales-${jmeno}-av1.mp4`;
+  ffmpeg(...vstup, ...sude, '-c:v', 'libsvtav1', '-preset', '5', '-crf', '44', '-svtav1-params', 'tune=0', '-pix_fmt', 'yuv420p', '-g', String(FPS * 5), '-movflags', '+faststart', '-an', av1);
   // plakát = první snímek smyčky (Astro z něj udělá AVIF/WebP)
   copyFileSync(join('render', jmeno, 'f00000.jpg'), `src/assets/hero-video/plakat-${jmeno}.jpg`);
   const mb = (p) => (statSync(p).size / 1e6).toFixed(1);
-  console.log(`  ${mp4} ${mb(mp4)} MB`);
+  console.log(`  ${mp4} ${mb(mp4)} MB, ${av1} ${mb(av1)} MB`);
 }
 
 if (!JEN_KODOVAT) {
