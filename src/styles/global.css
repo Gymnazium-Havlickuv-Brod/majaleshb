@@ -25,6 +25,8 @@
 
 @layer base {
   html {
+    /* přetažení nad hlavičku / pod patičku je modré jako ony, ne bílé */
+    background: var(--color-modra);
     scroll-behavior: smooth;
     scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
