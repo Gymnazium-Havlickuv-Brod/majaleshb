@@ -5,13 +5,11 @@ import { PARTNERI, MISTA, type UrovenLoga } from '../data/partneri';
 interface Props {
   nadpis?: string;
   nadpisPrazdne?: string;
-  kicker?: string;
   odkazNaNabidku?: boolean;
 }
 const {
   nadpis: nadpisPotvrzeni = 'Děkujeme partnerům',
   nadpisPrazdne = 'Tady může být vaše logo',
-  kicker = 'Partneři Majálesu 2027',
   odkazNaNabidku = true,
 } = Astro.props;
 // dokud nikdo není potvrzený, neděkujeme prázdným místům
@@ -43,8 +41,7 @@ const logoVyska: Record<UrovenLoga, string> = {
 <div class="partneri-loga">
   <div class="flex flex-wrap items-end justify-between gap-4">
     <div>
-      <p class="kicker">{kicker}</p>
-      <h2 class="display mt-3 text-[clamp(2.5rem,7vw,4.5rem)]">{nadpis}</h2>
+      <h2 class="display text-[clamp(2.5rem,7vw,4.5rem)]">{nadpis}</h2>
     </div>
     {
       odkazNaNabidku && (

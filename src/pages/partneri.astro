@@ -18,8 +18,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
   <section class="na-modre overflow-hidden">
     <div class="obal pt-12 pb-16 sm:pt-16 sm:pb-24 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
       <div>
-        <p class="kicker">Pro partnery · Majáles {AKCE.rok}</p>
-        <h1 class="display mt-8 text-[clamp(3.5rem,12vw,8.5rem)]">Buďte<br />u toho</h1>
+        <h1 class="display text-[clamp(3.5rem,12vw,8.5rem)]">Buďte<br />u toho</h1>
         <p class="mt-6 max-w-xl text-lg leading-relaxed">
           {AKCE.den} {AKCE.datum}, {AKCE.misto}. Majáles staví studenti Gymnázia a SPŠ stavební. S vaší podporou
           z něj uděláme akci, na kterou bude celý Brod vzpomínat.
@@ -100,8 +99,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
         {
           DALSI.map((d) => (
             <li class="rounded-[1.75rem] border-2 border-dashed border-hot p-6 sm:p-8 flex flex-col">
-              <p class="kicker">{d.podtitul}</p>
-              <h3 class="display text-4xl mt-2">{d.nazev}</h3>
+              <h3 class="display text-4xl">{d.podtitul}</h3>
               <p class="mt-3 leading-relaxed flex-1">{d.text}</p>
               <a href={mail(`Majáles ${AKCE.rok}: ${d.nazev}`)} class="odkaz mt-5 self-start">
                 Ozvat se <span class="text-hot" aria-hidden="true">→</span>

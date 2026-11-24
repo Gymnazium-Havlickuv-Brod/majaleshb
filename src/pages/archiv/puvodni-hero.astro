@@ -11,12 +11,6 @@ import { podleRole } from '../../data/fotky';
 const oMajalesu = podleRole('o-majalesu');
 const namesti = podleRole('o-majalesu-2');
 const program = PROGRAM.map((p) => ({ ...p, f: podleRole(`program:${p.foto}`) }));
-const fakta = [
-  ['20+', 'let tradice'],
-  ['2', 'školy'],
-  ['6', 'kapel'],
-  ['1', 'náměstí'],
-];
 
 const schema = {
   '@context': 'https://schema.org',
@@ -57,8 +51,7 @@ const schema = {
   <section id="o-majalesu" class="sekce" aria-labelledby="o-nadpis">
     <div class="obal grid gap-12 lg:grid-cols-2 lg:items-center">
       <div>
-        <p class="kicker">O Majálesu</p>
-        <h2 id="o-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Oslava jara<br />a mládí</h2>
+        <h2 id="o-nadpis" class="display text-[clamp(2.8rem,8vw,5.5rem)]">Oslava jara<br />a mládí</h2>
         <div class="mt-6 space-y-4 text-lg leading-relaxed max-w-xl">
           <p>
             Majáles sahá až ke středověkým univerzitám. V Havlíčkově Brodě ho přes dvacet let pořádalo gymnázium,
@@ -68,16 +61,6 @@ const schema = {
             Na jeden den patří Havlíčkovo náměstí studentům. Celý program vymýšlí a staví studenti obou škol {AKCE.spoluprace}.
           </p>
         </div>
-        <dl class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 max-w-xl">
-          {
-            fakta.map(([c, t]) => (
-              <div class="border-t-2 border-hot pt-3">
-                <dt class="display text-[clamp(2.2rem,7vw,3.5rem)] leading-none">{c}</dt>
-                <dd class="mt-1 text-sm font-medium">{t}</dd>
-              </div>
-            ))
-          }
-        </dl>
       </div>
       <div class="relative">
         <Image src={oMajalesu.img} alt={oMajalesu.alt} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 46vw, 92vw" class="w-full aspect-[4/3] object-cover rounded-[2rem]" />
@@ -97,8 +80,7 @@ const schema = {
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="kicker">Program</p>
-          <h2 id="program-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Co tě čeká</h2>
+          <h2 id="program-nadpis" class="display text-[clamp(2.8rem,8vw,5.5rem)]">Co tě čeká</h2>
         </div>
         <p class="max-w-sm">Program dolaďujeme se studenty. Přesný harmonogram zveřejníme na jaře.</p>
       </div>
@@ -143,10 +125,9 @@ const schema = {
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="kicker">Line-up {AKCE.rok}</p>
-          <h2 id="lineup-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Šest kapel.<br />Jména brzy.</h2>
+          <h2 id="lineup-nadpis" class="display text-[clamp(2.8rem,8vw,5.5rem)]">Šest kapel, jména<br />prozradíme brzy</h2>
         </div>
-        <p class="max-w-sm">Domlouváme kapely na hlavní stage. Jména odhalíme postupně, sleduj nás.</p>
+        <p class="max-w-sm">Domlouváme kapely na hlavní stage a odhalovat je budeme postupně, tak nás sleduj.</p>
       </div>
       <ul class="mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
         {
@@ -154,7 +135,7 @@ const schema = {
             <li class="relative aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-hot grid place-items-center">
               <span class="absolute left-4 top-3 text-sm font-bold tabular-nums">{k.cislo}</span>
               <span class="display text-[clamp(4.5rem,14vw,8rem)] leading-none">{k.jmeno}</span>
-              <span class="absolute bottom-3 left-4 right-4 kicker !text-[0.65rem]">Odhalíme brzy</span>
+              <span class="absolute bottom-3 left-4 right-4 kicker !text-[0.65rem]">Jméno odhalíme brzy</span>
             </li>
           ))
         }
@@ -172,8 +153,7 @@ const schema = {
   <!-- Galerie -->
   <section id="galerie" class="sekce predel" aria-labelledby="galerie-nadpis">
     <div class="obal">
-      <p class="kicker">Galerie</p>
-      <h2 id="galerie-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Takhle to vypadalo</h2>
+      <h2 id="galerie-nadpis" class="display text-[clamp(2.8rem,8vw,5.5rem)]">Takhle to vypadalo</h2>
       <p class="mt-4 max-w-xl">Výběr z minulých ročníků. Letos to bude ještě větší.</p>
       <div class="mt-10">
         <Galerie />
@@ -186,8 +166,7 @@ const schema = {
     <div class="obal">
       <div class="na-modre rounded-[2rem] p-8 sm:p-12 lg:p-16 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
       <div>
-        <p class="kicker">Pro firmy a partnery</p>
-        <h2 id="cta-nadpis" class="display mt-3 text-[clamp(2.8rem,8vw,5.5rem)]">Podpořte<br />Majáles {AKCE.rok}</h2>
+        <h2 id="cta-nadpis" class="display text-[clamp(2.8rem,8vw,5.5rem)]">Podpořte<br />Majáles {AKCE.rok}</h2>
       </div>
       <div>
         <p class="text-lg leading-relaxed">
