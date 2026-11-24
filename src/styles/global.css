@@ -63,17 +63,15 @@
 }
 
 @layer components {
+  /* Řádkování: čárky a háčky v Antonu (Á, Í, Š, Ď…) sahají ~0,24 em nad verzálky, takže víceřádkový nadpis
+     potřebuje aspoň ~1,15, jinak se akcent zařízne do řádku nad ním. Jednořádkové prvky (číslice, datum,
+     hero nápis) mají vlastní leading-none / leading-[…]. */
   .display {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 0.86;
+    line-height: 1.18;
     text-transform: uppercase;
     letter-spacing: -0.005em;
-  }
-  /* víceřádkové nadpisy: víc místa na háčky a čárky (Á, Ě, Š) */
-  h2.display,
-  h1.display:not(#hero-nadpis) {
-    line-height: 1.06;
   }
   .kicker {
     font-weight: 700;
