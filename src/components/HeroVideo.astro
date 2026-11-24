@@ -31,7 +31,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
 ---
 
 
-<section class="hero3d relative isolate overflow-hidden na-modre" aria-labelledby="hero-nadpis">
+<section class="hero3d relative isolate overflow-hidden na-modre -mt-16" aria-labelledby="hero-nadpis">
   <!-- statický podklad: je vidět hned a zůstane, když video nejde nebo je omezený pohyb -->
   <div class="hero3d-podklad absolute inset-0 -z-30" aria-hidden="true">
     <picture>
@@ -93,7 +93,8 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
 <style>
   .hero3d-obsah {
     /* mobil a tablet: scéna nahoře, text dole přes clonu */
-    min-height: calc(94svh - 4rem);
+    /* hero začíná pod průhledným menu (-mt-16), proto o 4rem vyšší */
+    min-height: 94svh;
     padding-top: 36svh;
     padding-bottom: 1.5rem;
   }
@@ -118,12 +119,14 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
     opacity: 1;
   }
   .hero3d-clona {
-    background: linear-gradient(0deg, rgb(0 74 253 / 0.96) 0%, rgb(0 74 253 / 0.9) 34%, rgb(0 74 253 / 0.55) 50%, transparent 66%);
+    background:
+      linear-gradient(180deg, rgb(0 74 253 / 0.8) 0, rgb(0 74 253 / 0.35) 4rem, transparent 9rem),
+      linear-gradient(0deg, rgb(0 74 253 / 0.96) 0%, rgb(0 74 253 / 0.9) 34%, rgb(0 74 253 / 0.55) 50%, transparent 66%);
   }
   .hero3d-pauza {
     position: absolute;
     right: clamp(1rem, 4vw, 2.5rem);
-    top: 1rem;
+    top: 5rem;
     display: grid;
     place-items: center;
     width: 2.5rem;
@@ -151,9 +154,9 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
 
   @media (min-width: 1024px) {
     .hero3d-obsah {
-      /* desktop: text vlevo, scéna vpravo; menu (4rem + 2px linka) + hero + běžící pás (4,5rem) = přesně jedna obrazovka */
-      min-height: calc(100svh - 8.5rem - 2px);
-      padding-top: 2.5rem;
+      /* desktop: text vlevo, scéna vpravo; hero (od horního okraje, pod průhledným menu) + běžící pás (4,5rem) = přesně jedna obrazovka */
+      min-height: calc(100svh - 4.5rem);
+      padding-top: 6.5rem;
       padding-bottom: 2.5rem;
     }
     /* video je ≈ 2 : 1; na širokých monitorech se ořezává shora a zdola, proto výš než střed scény (0,6) – ať zůstane věž */
@@ -163,6 +166,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
     }
     .hero3d-clona {
       background:
+        linear-gradient(180deg, rgb(0 74 253 / 0.8) 0, rgb(0 74 253 / 0.35) 4rem, transparent 9rem),
         linear-gradient(90deg, rgb(0 74 253 / 0.94) 0%, rgb(0 74 253 / 0.8) 26%, rgb(0 74 253 / 0.35) 44%, transparent 60%),
         linear-gradient(0deg, rgb(0 74 253 / 0.55) 0%, transparent 22%);
     }

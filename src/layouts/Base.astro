@@ -14,8 +14,10 @@ interface Props {
   description: string;
   /** experimenty a prototypy: stránka se nemá indexovat */
   noindex?: boolean;
+  /** menu nahoře průhledné nad hero (hlavní stránka s videem) */
+  pruhlednaHlavicka?: boolean;
 }
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, pruhlednaHlavicka = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const og = await getImage({ src: OG_FOTO, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 75 });
 const ogUrl = new URL(og.src, Astro.site);
@@ -45,7 +47,7 @@ const ogUrl = new URL(og.src, Astro.site);
   </head>
   <body>
     <a href="#obsah" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 tlacitko tlacitko-plne">Přeskočit na obsah</a>
-    <Nav />
+    <Nav pruhledna={pruhlednaHlavicka} />
     <main id="obsah">
       <slot />
     </main>

@@ -7,9 +7,14 @@ const odkazy = [
   { href: '/#o-majalesu', text: 'O Majálesu' },
 ];
 const naPartnerech = Astro.url.pathname.startsWith('/partneri');
+interface Props {
+  /** nahoře stránky průhledné nad hero videem, po odscrollování plná modrá lišta */
+  pruhledna?: boolean;
+}
+const { pruhledna = false } = Astro.props;
 ---
 
-<header class="sticky top-0 z-40 na-modre border-b-2 border-hot">
+<header class="sticky top-0 z-40 na-modre" data-pruhledna={pruhledna ? '' : undefined}>
   <nav class="obal flex h-16 items-center justify-between gap-4" aria-label="Hlavní navigace">
     <a href="/" class="display text-ruzova text-2xl tracking-wide leading-none" aria-label="Majáles 2027, úvod">
       Majáles<span class="text-hot">’27</span>
@@ -49,7 +54,25 @@ const naPartnerech = Astro.url.pathname.startsWith('/partneri');
   </nav>
 </header>
 
+<style>
+  header[data-pruhledna] {
+    transition: background-color 0.3s ease;
+  }
+  /* nahoře nad videem průhledné, navazuje na modrý přechod v hero */
+  header[data-pruhledna]:not(.je-plna) {
+    background-color: transparent;
+  }
+</style>
+
 <script>
+  // průhledné menu: plné, jakmile stránka není úplně nahoře
+  const hlavicka = document.querySelector<HTMLElement>('header[data-pruhledna]');
+  if (hlavicka) {
+    const nastav = () => hlavicka.classList.toggle('je-plna', scrollY > 8);
+    nastav();
+    addEventListener('scroll', nastav, { passive: true });
+  }
+
   // zavřít mobilní menu po kliknutí na odkaz
   document.querySelectorAll('header details a').forEach((a) =>
     a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
