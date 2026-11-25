@@ -285,9 +285,7 @@
   "zdroj": "2025/foto/Majales 2025/54-DSC_5604.jpg",
   "rok": 2025,
   "typ": "food",
-  "role": [
-   "program:stanky"
-  ],
+  "role": [],
   "skore": 8,
   "alt": "Příprava palačinek u studentského stánku"
  },
@@ -296,9 +294,11 @@
   "zdroj": "2025/foto/Majales 2025/60-DSC_5622.jpg",
   "rok": 2025,
   "typ": "portrait",
-  "role": [],
+  "role": [
+   "program:stanky"
+  ],
   "skore": 8,
-  "alt": "Dvě rozesmáté kamarádky s jídlem ze stánku"
+  "alt": "Dvě rozesmáté kamarádky s talířem bramboráků ze stánku"
  },
  {
   "klic": "2025-dsc-5819",
