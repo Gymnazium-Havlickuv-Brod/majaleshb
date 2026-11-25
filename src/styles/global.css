@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* „pc:“ = rozvržení pro PC jen na širokých obrazovkách naležato. Vysoký tablet na výšku
+   (iPad Pro 1024 × 1366) dostane rozvržení tabletu, jinak by text v úvodu ležel přes pódium ve videu. */
+@custom-variant pc (@media (min-width: 1024px) and (orientation: landscape));
+
 /*
   Barvy Majálesu 2027 – jediné místo, kde se ladí. Jen tyhle čtyři barvy, bez odstínů a průhledností
   (výjimka: fotky, video a clona přes ně). Žádná černá ani stíny.

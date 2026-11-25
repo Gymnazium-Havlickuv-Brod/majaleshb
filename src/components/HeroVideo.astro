@@ -9,9 +9,9 @@ import plakatDesktop from '../assets/hero-video/plakat-desktop.jpg';
 import plakatTablet from '../assets/hero-video/plakat-tablet.jpg';
 import plakatMobil from '../assets/hero-video/plakat-mobil.jpg';
 
-// breakpointy = stejné jako rozvržení textu (lg 1024, sm 640) i varianty videa v public/hero/
+// breakpointy = stejné jako rozvržení textu (PC = 1024 px a víc naležato, varianta pc: v global.css; tablet = sm 640) i varianty videa v public/hero/
 const varianty = [
-  { img: plakatDesktop, media: '(min-width: 1024px)', sirky: [1280, 1920, 2560], sizes: '100vw' },
+  { img: plakatDesktop, media: '(min-width: 1024px) and (orientation: landscape)', sirky: [1280, 1920, 2560], sizes: '100vw' },
   { img: plakatTablet, media: '(min-width: 640px)', sirky: [820, 1230, 1640], sizes: '100vw' },
   { img: plakatMobil, media: '', sirky: [480, 780, 1080], sizes: '100vw' },
 ];
@@ -52,12 +52,12 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
   <video class="hero3d-platno absolute inset-0 -z-20 size-full" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
   <div class="hero3d-clona absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
 
-  <div class="obal hero3d-obsah relative flex flex-col justify-end lg:justify-center @container">
-    <div class="hero3d-text lg:max-w-[36rem]">
+  <div class="obal hero3d-obsah relative flex flex-col justify-end pc:justify-center @container">
+    <div class="hero3d-text pc:max-w-[36rem]">
       <div>
       <h1 id="hero-nadpis" class="display select-none">
         <span class="sr-only">Majáles {AKCE.rok}</span>
-        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(4.5rem,26.5cqi,13rem)] lg:text-[clamp(7rem,min(11.5vw,21svh),15rem)] leading-[0.84]">Majáles</span>
+        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(4.5rem,26.5cqi,13rem)] pc:text-[clamp(7rem,min(11.5vw,21svh),15rem)] leading-[0.84]">Majáles</span>
       </h1>
 
       <div class="hero3d-datum mt-3 flex flex-wrap items-end gap-x-6 gap-y-2">
@@ -160,7 +160,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
     display: block;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) and (orientation: landscape) {
     .hero3d-obsah {
       /* desktop: text vlevo, scéna vpravo; hero (od horního okraje, pod průhledným menu) + běžící pás (4,5rem) = přesně jedna obrazovka */
       min-height: calc(100svh - 4.5rem);
@@ -205,7 +205,7 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
   const video = hero?.querySelector<HTMLVideoElement>('video');
   const tlacitko = hero?.querySelector<HTMLButtonElement>('.hero3d-pauza');
   if (hero && video && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const mqDesktop = matchMedia('(min-width: 1024px)');
+    const mqDesktop = matchMedia('(min-width: 1024px) and (orientation: landscape)');
     const mqTablet = matchMedia('(min-width: 640px)');
     const varianta = () => (mqDesktop.matches ? 'desktop' : mqTablet.matches ? 'tablet' : 'mobil');
     // AV1 je zhruba poloviční; starší iPhony ho neumí, ty dostanou H.264
