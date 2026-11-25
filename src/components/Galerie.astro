@@ -14,7 +14,8 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     {roky.map((r) => <button type="button" class="filtr" aria-pressed="false" data-rok={r}>{r}</button>)}
   </div>
 
-  <ul class="mt-8 columns-2 md:columns-3 xl:columns-4 gap-3 sm:gap-4">
+  <!-- bez JavaScriptu CSS sloupce; skript je pak přeskládá a dorovná, ať všechny sloupce končí na stejné čáře -->
+  <ul class="galerie-mriz mt-8 columns-2 md:columns-3 xl:columns-4 gap-3 sm:gap-4">
     {
       fotky.map((f, i) => (
         <li class="mb-3 sm:mb-4 break-inside-avoid" data-rok={f.rok}>
@@ -88,6 +89,22 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
   li[hidden] {
     display: none;
   }
+  /* rozložení skriptem: fotky mají spočítanou polohu a výšku, ořez dorovná object-fit */
+  .galerie-mriz.je-rozlozena {
+    columns: auto;
+    position: relative;
+  }
+  .galerie-mriz.je-rozlozena li {
+    position: absolute;
+    margin: 0;
+  }
+  .galerie-mriz.je-rozlozena button,
+  .galerie-mriz.je-rozlozena img {
+    height: 100%;
+  }
+  .galerie-mriz.je-rozlozena img {
+    object-fit: cover;
+  }
 </style>
 
 <script>
@@ -95,10 +112,63 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
   if (g) {
     const filtry = [...g.querySelectorAll<HTMLButtonElement>('.filtr')];
     const polozky = [...g.querySelectorAll<HTMLLIElement>('li[data-rok]')];
+    const mriz = g.querySelector<HTMLElement>('.galerie-mriz')!;
+
+    // Rozložení do sloupců se stejně vysokým koncem: fotka jde vždy do nejnižšího sloupce (nejnovější tak
+    // zůstanou nahoře přes celou šířku) a výšky fotek ve sloupci se pak nepatrně natáhnou nebo zmáčknou
+    // (ořez přes object-fit), aby všechny sloupce končily na stejné čáře.
+    // Počet sloupců a mezery = třídy na <ul>: columns-2 md:columns-3 xl:columns-4, gap-3 sm:gap-4.
+    const sloupcu = () => (matchMedia('(min-width: 1280px)').matches ? 4 : matchMedia('(min-width: 768px)').matches ? 3 : 2);
+    const mezera = () => (matchMedia('(min-width: 640px)').matches ? 16 : 12);
+    const rozlozit = () => {
+      const v = polozky.filter((li) => !li.hidden);
+      if (!v.length) return;
+      // u filtru s pár fotkami aspoň dvě fotky na sloupec
+      const n = Math.min(sloupcu(), v.length, Math.max(2, Math.floor(v.length / 2)));
+      const m = mezera();
+      const s = (mriz.clientWidth - m * (n - 1)) / n;
+      const sloupce = Array.from({ length: n }, () => ({ vyska: 0, fotky: [] as { li: HTMLLIElement; h: number }[] }));
+      for (const li of v) {
+        const im = li.querySelector('img');
+        const pomer = Number(im?.getAttribute('height')) / Number(im?.getAttribute('width')) || 0.75;
+        const c = sloupce.reduce((a, b) => (b.vyska < a.vyska ? b : a));
+        c.fotky.push({ li, h: s * pomer });
+        c.vyska += s * pomer + m;
+      }
+      // cíl = průměrná výška sloupce; natažení/zmáčknutí je omezené, ať se fotky moc neořežou
+      const cil = sloupce.reduce((a, c) => a + c.vyska - m, 0) / n;
+      let nejvys = 0;
+      sloupce.forEach((c, i) => {
+        const fotky = c.fotky.reduce((a, f) => a + f.h, 0);
+        const k = Math.min(1.35, Math.max(0.75, (cil - m * (c.fotky.length - 1)) / fotky));
+        let y = 0;
+        for (const f of c.fotky) {
+          const nahore = Math.round(y);
+          y += f.h * k;
+          Object.assign(f.li.style, { left: `${i * (s + m)}px`, top: `${nahore}px`, width: `${s}px`, height: `${Math.round(y) - nahore}px` });
+          y += m;
+        }
+        nejvys = Math.max(nejvys, Math.round(y - m));
+      });
+      mriz.style.height = `${nejvys}px`;
+    };
+    mriz.classList.add('je-rozlozena');
+    rozlozit();
+    // znovu rozložit jen při změně šířky (výšku mění rozlozit sám)
+    let sirka = mriz.clientWidth;
+    let cekam = 0;
+    new ResizeObserver(() => {
+      if (mriz.clientWidth === sirka) return;
+      sirka = mriz.clientWidth;
+      cancelAnimationFrame(cekam);
+      cekam = requestAnimationFrame(rozlozit);
+    }).observe(mriz);
+
     filtry.forEach((b) =>
       b.addEventListener('click', () => {
         filtry.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
         polozky.forEach((li) => (li.hidden = b.dataset.rok !== 'vse' && li.dataset.rok !== b.dataset.rok));
+        rozlozit();
       }),
     );
 
