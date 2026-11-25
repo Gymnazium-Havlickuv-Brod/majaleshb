@@ -61,8 +61,16 @@ function zkontrolovat(dotyk) {
   const vlastniText = (el) => [...el.childNodes].some((n) => n.nodeType === 3 && n.nodeValue.trim());
 
   // 1) přetečení do strany: stránka jde posunout vodorovně
+  // prvek oříznutý předkem s overflow hidden/clip (třeba kvítka v běžícím pásu) stránku neposouvá
+  const orezany = (el) => {
+    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      if (['hidden', 'clip'].includes(cs.overflowX) && a.getBoundingClientRect().right <= vw + 1) return true;
+    }
+    return false;
+  };
   if (document.documentElement.scrollWidth > vw + 1) {
-    const ven = [...document.body.querySelectorAll('*')].filter((el) => el.getBoundingClientRect().right > vw + 1 && !skryty(el));
+    const ven = [...document.body.querySelectorAll('*')].filter((el) => el.getBoundingClientRect().right > vw + 1 && !skryty(el) && !orezany(el));
     const priciny = ven.filter((el) => !ven.some((d) => d !== el && el.contains(d))).slice(0, 8);
     for (const el of priciny) {
       const r = el.getBoundingClientRect();
@@ -72,16 +80,24 @@ function zkontrolovat(dotyk) {
 
   // 2) texty přes sebe: obdélníky řádků textu z různých prvků se protínají.
   // Obdélník řádku je výška písma včetně rezervy nad a pod písmeny, proto se zmenší (nahoře 18 %, dole 12 %).
+  // U obřích nadpisů s malým řádkováním (Anton, leading 0.84–1) je rezerva větší než řádek – tam se bere výška řádku.
   const radky = [];
   const chodec = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let n; (n = chodec.nextNode()); ) {
     const el = n.parentElement;
     if (!n.nodeValue.trim() || !el || el.closest('script, style, noscript, template') || skryty(el)) continue;
+    const radkovani = parseFloat(getComputedStyle(el).lineHeight);
     const rozsah = document.createRange();
     rozsah.selectNodeContents(n);
     for (const r of rozsah.getClientRects()) {
       if (r.width < 3 || r.height < 3) continue;
-      radky.push({ n, el, x1: r.left + scrollX, x2: r.right + scrollX, y1: r.top + scrollY + r.height * 0.18, y2: r.bottom + scrollY - r.height * 0.12 });
+      let y1 = r.top + r.height * 0.18, y2 = r.bottom - r.height * 0.12;
+      if (radkovani && radkovani < r.height) {
+        const stred = (r.top + r.bottom) / 2;
+        y1 = Math.max(y1, stred - radkovani * 0.45);
+        y2 = Math.min(y2, stred + radkovani * 0.45);
+      }
+      radky.push({ n, el, x1: r.left + scrollX, x2: r.right + scrollX, y1: y1 + scrollY, y2: y2 + scrollY });
     }
   }
   radky.sort((a, b) => a.y1 - b.y1);
