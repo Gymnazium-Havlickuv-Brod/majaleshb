@@ -53,10 +53,11 @@ Od 25. 11. 2026 jsou na webu hlavně fotky z let 2025 a 2026 (Majáles 2025, Col
 
 ## Agenti (Claude Code)
 
-V `.claude/agents/` jsou čtyři pomocníci, Claude Code je načte sám, když se pracuje v tomhle repu:
+V `.claude/agents/` je pět pomocníků, Claude Code je načte sám, když se pracuje v tomhle repu:
 
 - **Morgoth** (`morgoth.md`) – kontrolor před nasazením: build, barvy, nadpisy, texty a pravidla z O-MAJALESU.md, fotky na webu (alkohol, děti, jmenovky, reklamy), snímky na PC i mobilu a po nasazení živý web. Jen hlásí, nic neopravuje. Stačí napsat „zkontroluj to Morgothem“.
 - **Balrog** (`balrog.md`) – fotoeditor: změří fotky skriptem `scripts/hodnoceni-fotek.py`, prohlédne si je a ke každé řekne 🟢 hezká / 🟡 ujde / 🔴 na hovno s konkrétním důvodem a doporučí výběr na web. Taky jen radí. Stačí napsat „ať Balrog projde fotky ve složce …“.
+- **Tom Bombadil** (`tom-bombadil.md`) – kontrola na mobilech, tabletech a monitorech: skript `node scripts/zobrazeni.mjs [adresa]` projde web na 11 velikostech obrazovky (od telefonu 320 px po monitor 1920 px), sám najde přetečení do strany, texty přes sebe, useknuté texty, malá tlačítka a rozbité obrázky a uloží snímky do `render/bombadil/`. Tom Bombadil si je pak prohlédne, vyzkouší menu, okno „Napište nám“ a galerii a ke každé chybě napíše opravu. Stačí napsat „ať to Tom Bombadil projde na mobilu“.
 - **Gandalf Šedý** (`gandalf-sedy.md`) – bezpečnost, první průchod: projde repo i celou historii gitu (hesla, klíče, osobní údaje, GPS ve fotkách), živý web (hlavičky, soubory, které venku být nemají, XSS), závislosti, doménu a poštu (SPF, DMARC) a nastavení GitHubu a všechno podezřelé sepíše s důkazy. Stačí napsat „ať se na security podívá Gandalf Šedý“.
 - **Gandalf Bílý** (`gandalf-bily.md`) – bezpečnost, druhý průchod po Gandalfu Šedém: každý jeho nález sám ověří, vyřadí plané poplachy, dohledá, co chybělo, určí skutečnou závažnost a napíše přesné opravy (kdo je udělá) a shrnutí pro netechnické lidi.
 
