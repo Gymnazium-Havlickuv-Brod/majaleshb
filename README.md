@@ -71,7 +71,7 @@ Dva režimy, v každém má typ prvku pevnou barvu:
 
 - **Bílý (výchozí):** modrý text, tlačítko s modrým obrysem, plné tlačítko = modrá výplň s růžovým textem.
 - **Modrý (`.na-modre`):** růžový text, tlačítko s růžovým obrysem, plné tlačítko = růžová výplň s modrým textem.
-- V obou: karta má rámeček 2 px sytě růžový (`.karta`), dvě bílé sekce za sebou odděluje sytě růžová linka (`.predel`), odkaz v textu má sytě růžové podtržení (`.odkaz`), štítek („jen jeden“, rok u fotky) je růžový s modrým textem (`.stitek`).
+- V obou: karta má rámeček 2 px sytě růžový (`.karta`), na úvodní stránce odděluje dvě bílé sekce za sebou sytě růžová linka (`.predel`), odkaz v textu má sytě růžové podtržení (`.odkaz`), štítek („jen jeden“, rok u fotky) je růžový s modrým textem (`.stitek`).
 
 Kontrast: modrá na bílé 6,2 : 1, růžová na modré 4,2 : 1 (proto je běžný text v řezu 500). Fonty jsou Anton a Space Grotesk, oba hostované lokálně přes `@fontsource` (bez Google Fonts).
 
