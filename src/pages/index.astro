@@ -5,7 +5,8 @@ import HeroVideo from '../components/HeroVideo.astro';
 import Galerie from '../components/Galerie.astro';
 import PartneriLoga from '../components/PartneriLoga.astro';
 import Kvet from '../components/Kvet.astro';
-import { AKCE, PAS, PROGRAM, LINEUP, DEN } from '../data/akce';
+import PrubehDne from '../components/PrubehDne.astro';
+import { AKCE, PAS, PROGRAM, LINEUP } from '../data/akce';
 import { podleRole } from '../data/fotky';
 
 const oMajalesu = podleRole('o-majalesu');
@@ -99,23 +100,8 @@ const schema = {
         }
       </ul>
 
-      <!-- průběh dne: modrý panel bez čar, části dne odděluje jen mezera -->
-      <div class="mt-20 rounded-[2rem] na-modre p-6 sm:p-10">
-        <h3 class="kicker">Jak bude vypadat den</h3>
-        <ol class="mt-6 grid gap-8 md:grid-cols-3">
-          {
-            DEN.map((d) => (
-              <li>
-                <p class="display text-4xl">{d.kdy}</p>
-                <p class="mt-2">{d.co}</p>
-              </li>
-            ))
-          }
-        </ol>
-        <p class="mt-10">
-          <strong>Den předem, v pátek 21. 5.,</strong> chystáme hru pro osmáky ze základních škol.
-        </p>
-      </div>
+      <!-- průběh dne -->
+      <PrubehDne />
     </div>
   </section>
 

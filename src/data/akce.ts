@@ -66,9 +66,9 @@ export const PROGRAM = [
   },
 ];
 
-// Průběh dne – jen orientačně, bez časů
+// Průběh dne – jen orientačně, bez časů. `ikona` = ikona na časové ose (components/PrubehDne.astro): rano, slunce, mesic
 export const DEN = [
-  { kdy: 'Dopoledne', co: 'běh a sport' },
-  { kdy: 'Odpoledne', co: 'studentské kapely, zóny škol, král a královna' },
-  { kdy: 'Večer', co: 'hlavní kapely na náměstí' },
+  { kdy: 'Dopoledne', co: 'běh a sport', ikona: 'rano' },
+  { kdy: 'Odpoledne', co: 'studentské kapely, zóny škol, král a královna', ikona: 'slunce' },
+  { kdy: 'Večer', co: 'hlavní kapely na náměstí', ikona: 'mesic' },
 ];

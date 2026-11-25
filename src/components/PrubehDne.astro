@@ -1,0 +1,92 @@
+---
+// Jak bude vypadat den: časová osa dopoledne → odpoledne → večer ve světle růžovém boxu.
+// Ikony částí dne v modrých kolečkách spojuje modrá čára: na PC vodorovně přes středy sloupců, na mobilu svisle vlevo.
+// Pozvánka na pátek 21. 5. (hra pro osmáky ze základních škol) je tu zatím schválně vynechaná, vrátí se později.
+import { DEN } from '../data/akce';
+---
+
+<div class="mt-20 rounded-[2rem] bg-ruzova text-modra p-6 sm:p-10">
+  <h3 class="kicker md:text-center">Jak bude vypadat den</h3>
+  <ol class="osa mt-7 grid gap-8 md:grid-cols-3 md:gap-6">
+    {
+      DEN.map((d) => (
+        <li>
+          <span class="osa-ikona" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              {d.ikona === 'rano' && <path d="M3 18h18M7 18a5 5 0 0 1 10 0M12 6.5v3M5.5 11.5l2 2M18.5 11.5l-2 2M9 21.5h6" />}
+              {d.ikona === 'slunce' && (
+                <Fragment>
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" />
+                </Fragment>
+              )}
+              {d.ikona === 'mesic' && (
+                <Fragment>
+                  <path d="M19.5 14.5A8 8 0 1 1 9.5 4.5a6.2 6.2 0 0 0 10 10z" />
+                  <path d="M17 3.5v3M15.5 5h3" />
+                </Fragment>
+              )}
+            </svg>
+          </span>
+          <p class="display text-4xl">{d.kdy}</p>
+          <p class="mt-2">{d.co}</p>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  /* mobil: svislá osa vlevo, ikony pod sebou */
+  .osa li {
+    position: relative;
+    padding-left: 4.25rem;
+    min-height: 3rem;
+  }
+  .osa-ikona {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: var(--color-modra);
+    color: var(--color-ruzova);
+  }
+  .osa-ikona svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  /* spojnice od středu ikony ke středu další ikony */
+  .osa li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    background: var(--color-modra);
+    left: calc(1.5rem - 1px);
+    top: 1.5rem;
+    bottom: -2rem;
+    width: 2px;
+  }
+  /* od md: vodorovná osa, ikony i text na středu sloupců, čára přesně mezi středy ikon (mezera sloupců 1,5rem) */
+  @media (min-width: 768px) {
+    .osa li {
+      padding-left: 0;
+      padding-top: 4.5rem;
+      text-align: center;
+    }
+    .osa-ikona {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .osa li:not(:last-child)::before {
+      left: 50%;
+      top: calc(1.5rem - 1px);
+      bottom: auto;
+      width: calc(100% + 1.5rem);
+      height: 2px;
+    }
+  }
+</style>
