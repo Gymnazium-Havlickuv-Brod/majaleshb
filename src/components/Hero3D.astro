@@ -105,15 +105,11 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 720, format: 'webp',
       <div class="mt-3 lg:mt-6 flex flex-wrap items-end gap-x-6 gap-y-2">
         <p class="display text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
         <p class="text-base sm:text-lg font-medium leading-snug pb-1">
-          {AKCE.den} · {AKCE.misto}<br />{AKCE.mesto}
+          {AKCE.misto}<br />{AKCE.mesto}
         </p>
       </div>
 
-      <p class="hidden sm:block mt-4 border-t-2 border-hot pt-4 text-base font-medium">
-        kapely · DJ · stánky · sport · zóny škol · <span class="font-bold">program brzy</span>
-      </p>
-
-      <div class="mt-5 flex flex-wrap gap-3">
+      <div class="mt-6 lg:mt-8 flex flex-wrap gap-3">
         <a href="#program" class="tlacitko tlacitko-plne">Co tě čeká</a>
         <a href="/partneri/" class="tlacitko">Staň se partnerem</a>
       </div>
