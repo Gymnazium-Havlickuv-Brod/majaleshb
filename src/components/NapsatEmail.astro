@@ -1,0 +1,83 @@
+---
+// Okno „Napište nám“: všechny odkazy mailto: na webu místo přímého otevření poštovní aplikace
+// (na počítači často žádná není nastavená a klik pak nic neudělá) nabídnou, kde e-mail napsat.
+// Gmail a Outlook se otevřou v prohlížeči s předvyplněnou adresou, předmětem i textem z odkazu.
+// Bez JavaScriptu zůstanou obyčejné odkazy mailto:.
+---
+
+<dialog class="napsat-email m-auto w-[min(30rem,calc(100%-2rem))] max-h-[calc(100dvh-2rem)] overflow-auto rounded-[1.75rem] na-modre karta p-0 backdrop:bg-transparent" aria-labelledby="napsat-nadpis">
+  <div class="p-6 sm:p-8">
+    <div class="flex items-start justify-between gap-4">
+      <h2 id="napsat-nadpis" class="display text-4xl">Napište nám</h2>
+      <button type="button" class="napsat-zavrit grid place-items-center size-10 shrink-0 rounded-full border-2 border-ruzova hover:bg-ruzova hover:text-modra" aria-label="Zavřít">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+    <p class="mt-3">Vyberte, kde chcete e-mail napsat. Adresa, předmět i text už budou předvyplněné.</p>
+    <p class="napsat-adresa mt-4 text-lg font-bold break-all select-all"></p>
+    <div class="napsat-volby mt-6 grid gap-3">
+      <a class="tlacitko justify-center" data-sluzba="gmail" target="_blank" rel="noopener">Napsat v Gmailu</a>
+      <a class="tlacitko justify-center" data-sluzba="outlook" target="_blank" rel="noopener">Napsat v Outlooku</a>
+      <a class="tlacitko justify-center" data-sluzba="aplikace">Poštovní aplikace</a>
+      <button type="button" class="tlacitko justify-center" data-sluzba="kopirovat">Zkopírovat adresu</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('dialog.napsat-email');
+  if (dlg) {
+    const volba = (s: string) => dlg.querySelector<HTMLElement>(`[data-sluzba="${s}"]`)!;
+    const gmail = volba('gmail') as HTMLAnchorElement;
+    const outlook = volba('outlook') as HTMLAnchorElement;
+    const aplikace = volba('aplikace') as HTMLAnchorElement;
+    const kopirovat = volba('kopirovat') as HTMLButtonElement;
+    const adresa = dlg.querySelector<HTMLElement>('.napsat-adresa')!;
+    const zavrit = () => dlg.close();
+
+    // na telefonu je poštovní aplikace vždycky po ruce, na počítači spíš Gmail v prohlížeči
+    const dotyk = matchMedia('(pointer: coarse)').matches;
+    const hlavni = dotyk ? aplikace : gmail;
+    hlavni.classList.add('tlacitko-plne');
+    hlavni.parentElement!.prepend(hlavni);
+
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const odkaz = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href^="mailto:"]');
+      if (!odkaz || dlg.contains(odkaz)) return;
+      e.preventDefault();
+      const href = odkaz.getAttribute('href')!;
+      const [cil, dotaz = ''] = href.slice('mailto:'.length).split('?');
+      const komu = decodeURIComponent(cil);
+      const p = new URLSearchParams(dotaz);
+      const enc = encodeURIComponent;
+      const predmet = enc(p.get('subject') ?? '');
+      const text = enc(p.get('body') ?? '');
+      gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(komu)}&su=${predmet}&body=${text}`;
+      outlook.href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(komu)}&subject=${predmet}&body=${text}`;
+      aplikace.href = href;
+      adresa.textContent = komu;
+      kopirovat.textContent = 'Zkopírovat adresu';
+      dlg.showModal();
+    });
+
+    // po výběru služby okno zavřít (odkaz se mezitím otevře)
+    for (const a of [gmail, outlook, aplikace]) a.addEventListener('click', () => setTimeout(zavrit));
+    dlg.querySelector('.napsat-zavrit')!.addEventListener('click', zavrit);
+    // klik mimo okno ho zavře (Esc zavírá <dialog> sám)
+    dlg.addEventListener('click', (e) => e.target === dlg && zavrit());
+
+    kopirovat.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(adresa.textContent ?? '');
+        kopirovat.textContent = 'Zkopírováno ✓';
+      } catch {
+        const r = document.createRange();
+        r.selectNodeContents(adresa);
+        getSelection()?.removeAllRanges();
+        getSelection()?.addRange(r);
+        kopirovat.textContent = 'Adresa označená, zkopírujte Ctrl+C';
+      }
+    });
+  }
+</script>

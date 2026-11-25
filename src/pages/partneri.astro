@@ -7,7 +7,15 @@ import { podleRole } from '../data/fotky';
 import PartneriLoga from '../components/PartneriLoga.astro';
 
 const foto = podleRole('partneri'); // úvod pro partnery: fotka bez reklam minulých partnerů
-const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}`;
+// odkaz mailto: s předmětem a připraveným textem (okno NapsatEmail z něj udělá i Gmail / Outlook)
+const NL = String.fromCharCode(13, 10); // konec řádku v těle e-mailu (CRLF)
+const PODPIS = ['', '', 'Firma:', 'Kontaktní osoba:', 'Telefon:', '', 'S pozdravem'].join(NL);
+const mail = (predmet: string, uvod = `rádi bychom se domluvili na partnerství Majálesu ${AKCE.rok}.`) =>
+  `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}&body=${encodeURIComponent(['Dobrý den,', '', uvod].join(NL) + PODPIS)}`;
+const zajem = (u: (typeof UROVNE)[number]) =>
+  u.id === 'dar'
+    ? `rádi bychom Majáles ${AKCE.rok} podpořili věcným darem (jídlo nebo ceny do hry o ceny).`
+    : `máme zájem o partnerství Majálesu ${AKCE.rok}, úroveň ${u.nazev} (${u.castka}).`;
 ---
 
 <Base
@@ -85,7 +93,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
                 ))}
               </ul>
               <a
-                href={mail(`Partnerství Majáles ${AKCE.rok}: ${u.nazev}`)}
+                href={mail(`Partnerství Majáles ${AKCE.rok}: ${u.nazev}`, zajem(u))}
                 class:list={['tlacitko mt-8 justify-center', u.zvyraznit && 'tlacitko-plne']}
               >
                 Mám zájem
@@ -101,7 +109,7 @@ const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURICo
             <li class="rounded-[1.75rem] border-2 border-dashed border-hot p-6 sm:p-8 flex flex-col">
               <h3 class="display text-4xl">{d.podtitul}</h3>
               <p class="mt-3 leading-relaxed flex-1">{d.text}</p>
-              <a href={mail(`Majáles ${AKCE.rok}: ${d.nazev}`)} class="odkaz mt-5 self-start">
+              <a href={mail(`Majáles ${AKCE.rok}: ${d.nazev}`, `rádi bychom se domluvili na spolupráci s Majálesem ${AKCE.rok} na míru. Představujeme si: `)} class="odkaz mt-5 self-start">
                 Ozvat se <span class="text-hot" aria-hidden="true">→</span>
               </a>
             </li>

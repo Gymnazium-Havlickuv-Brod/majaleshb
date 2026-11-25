@@ -27,6 +27,7 @@ npm run preview
 - `src/data/akce.ts`: datum, místo, kontakt, program, line-up. **Jen potvrzené věci.** Časy programu a jména kapel sem přijdou, až budou jisté.
 - `src/data/partneri.ts`: úrovně partnerství, co za ně partner dostane, a **seznam potvrzených partnerů** (`PARTNERI`).
 - `src/styles/global.css`: barvy (`@theme`) a fonty, všechno na jednom místě.
+- E-mailové odkazy (`mailto:`) neotevírají rovnou poštovní aplikaci, ale okno s volbou Gmail / Outlook / poštovní aplikace / zkopírovat adresu (`src/components/NapsatEmail.astro`). Předmět a text konceptu se berou z odkazu (`subject`, `body`), pro partnery je skládá funkce `mail()` v `src/pages/partneri.astro`.
 
 ### Přidání partnera (logo na web)
 
