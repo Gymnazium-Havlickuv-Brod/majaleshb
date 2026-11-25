@@ -157,22 +157,19 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
       padding-top: 6.5rem;
       padding-bottom: 2.5rem;
     }
-    /* obsah roztažený po výšce: nadpis s datem nahoře, odpočet dole, tlačítka mezi nimi.
-       Na nízkých obrazovkách se mezery smrsknou na minimum, na vysokých je výška omezená (58rem), ať se to nerozsype. */
+    /* nadpis s datem, tlačítka a odpočet pohromadě svisle uprostřed hero, mezi nimi přiměřené mezery
+       (spíš menší: roztažené přes celou výšku to bylo moc daleko od sebe); na nízkých obrazovkách se zmenší */
     .hero3d-text {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      flex: 1 1 auto;
-      max-height: 58rem;
-      padding-block: clamp(0rem, 5svh - 1.5rem, 3rem);
+      gap: clamp(1.75rem, 6svh - 0.5rem, 3.5rem);
     }
     .hero3d-datum {
       margin-top: clamp(0.75rem, 2.5svh, 1.75rem);
     }
     .hero3d-tlacitka,
     .hero3d-odpocet {
-      margin-top: 1.25rem;
+      margin-top: 0;
     }
     /* video je ≈ 2 : 1; na širokých monitorech se ořezává shora a zdola, proto výš než střed scény (0,6) – ať zůstane věž */
     .hero3d-plakat,
