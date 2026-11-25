@@ -62,6 +62,13 @@ V `.claude/agents/` jsou čtyři pomocníci, Claude Code je načte sám, když s
 
 O bezpečnostních agentech se píše vždy celým jménem, Gandalf Šedý a Gandalf Bílý, nikdy jen „Gandalf“. Pořadí je pevné: nejdřív Gandalf Šedý, jeho zprávu dostane Gandalf Bílý. Ani jeden nic neopravuje, opravy dělá hlavní agent nebo lidi s přístupem do služeb.
 
+## Bezpečnost
+
+- Repo je veřejné (`Gymnazium-Havlickuv-Brod/majaleshb`), takže všechno v něm i v celé historii gitu vidí kdokoli: žádné fotky bez souhlasu, interní poznámky, hesla ani jména lidí, kteří mají přístupy.
+- Obrázky do repa jen bez metadat. Exporty z Canvy zapisují do PNG celé jméno autora a ID účtu; `scripts/ikony.py` zdroj loga čistí sám, ostatní kontroluje Morgoth.
+- Bezpečnostní hlavičky: `public/_headers` (Cloudflare Pages, majaleshb.cz) a `vercel.json` (Vercel). Content-Security-Policy je zatím jen v režimu hlášení (`-Report-Only`); když 1–2 týdny nic nehlásí, přejmenovat na `Content-Security-Policy`.
+- `src/pages/404.astro`: neexistující adresy vrací skutečnou 404 (dřív Cloudflare vracel hlavní stránku).
+
 ## Vizuál
 
 Čtyři barvy, bez odstínů a průhledností (výjimka: fotky, video a clona přes video). Žádná černá ani stíny. Tokeny jsou v `src/styles/global.css` (`@theme` vypíná výchozí paletu Tailwindu, takže jiná barva se do webu nedostane ani omylem).

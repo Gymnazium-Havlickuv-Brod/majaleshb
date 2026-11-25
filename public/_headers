@@ -1,0 +1,10 @@
+# Bezpečnostní hlavičky pro Cloudflare Pages (majaleshb.cz). Pro Vercel totéž ve vercel.json.
+# nosniff a Referrer-Policy posílá Cloudflare sám.
+# CSP je zatím jen v režimu hlášení (Report-Only), nic neblokuje. Když konzole prohlížeče 1–2 týdny
+# nehlásí „[Report Only] Refused to…“, přejmenovat na Content-Security-Policy a připsat ; upgrade-insecure-requests.
+# HSTS schválně bez includeSubDomains, dokud www.majaleshb.cz nepřesměrovává na https.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'

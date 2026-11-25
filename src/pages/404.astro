@@ -1,0 +1,25 @@
+---
+// Neexistující adresa: Cloudflare Pages i Vercel vrátí tuhle stránku se stavem 404.
+// Bez ní Cloudflare Pages na každou neznámou adresu vracel hlavní stránku se stavem 200.
+import Base from '../layouts/Base.astro';
+import { AKCE } from '../data/akce';
+---
+
+<Base
+  title={`Stránka nenalezena · Majáles ${AKCE.rok} Havlíčkův Brod`}
+  description="Tahle stránka na webu Majálesu neexistuje."
+  noindex
+>
+  <section class="na-modre">
+    <div class="obal py-24 sm:py-32">
+      <h1 class="display text-[clamp(3.5rem,12vw,8.5rem)]">Tady nic není</h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed">
+        Adresa je asi špatně, nebo stránka už neexistuje. Všechno o Majálesu {AKCE.rok} najdete na hlavní stránce.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/" class="tlacitko tlacitko-plne">Na hlavní stránku</a>
+        <a href="/partneri/" class="tlacitko">Pro partnery</a>
+      </div>
+    </div>
+  </section>
+</Base>
