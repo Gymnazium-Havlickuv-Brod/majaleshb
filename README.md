@@ -44,6 +44,16 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 4. `python scripts/fotky.py` vyexportuje výběr do `src/assets/foto/`: max 2000 px, bez EXIF/GPS. Zároveň vygeneruje `src/data/fotky.ts` (ten se needituje ručně).
 5. **`fotky-balik/`** obsahuje 78 zajímavých fotek (skóre 7+), i ty, které na webu zatím nejsou, pro toho, kdo bude web upravovat. Náhledy jsou v `fotky-balik/index.html` (dvojklik), tabulka v `fotky-balik/README.md`. Přegeneruje se příkazem `python scripts/fotky-balik.py`.
 6. Při buildu z nich Astro (`astro:assets`) vyrobí WebP v několika šířkách. Stránka pak přes `srcset`/`sizes` načte jen velikost, kterou zařízení potřebuje, a fotky mimo obrazovku načítá líně.
+7. **Hodnocení fotek:** `python scripts/hodnoceni-fotek.py <složka> --arch render/archy --detaily render/detaily` změří technickou kvalitu (přepálení, tma, ostrost, kontrast, rozlišení, skoro stejné záběry), dá skóre 0–10 a vyrobí kontaktní archy a výřezy nejostřejšího místa. Krásu nezměří – tu posoudí agent Balrog (viz níž).
+
+Od 25. 11. 2026 jsou na webu jen fotky z let 2025 a 2026 (Majáles 2025 a Color Run 2026). Originály nových fotek jsou zatím jen v ZIPech „Majales 2025“ a „MAJALES - COLOR RUN“, do `media/` v pracovním repu je potřeba je teprve nahrát; do té doby `scripts/fotky.py` nové fotky znovu nevyexportuje. `fotky-balik/` je ještě ze starého výběru.
+
+## Agenti (Claude Code)
+
+V `.claude/agents/` jsou dva pomocníci, Claude Code je načte sám, když se pracuje v tomhle repu:
+
+- **Morgoth** (`morgoth.md`) – kontrolor před nasazením: build, barvy, nadpisy, texty a pravidla z O-MAJALESU.md, fotky na webu (alkohol, děti, jmenovky, reklamy), snímky na PC i mobilu a po nasazení živý web. Jen hlásí, nic neopravuje. Stačí napsat „zkontroluj to Morgothem“.
+- **Balrog** (`balrog.md`) – fotoeditor: změří fotky skriptem `scripts/hodnoceni-fotek.py`, prohlédne si je a ke každé řekne 🟢 hezká / 🟡 ujde / 🔴 na hovno s konkrétním důvodem a doporučí výběr na web. Taky jen radí. Stačí napsat „ať Balrog projde fotky ve složce …“.
 
 ## Vizuál
 
