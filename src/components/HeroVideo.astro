@@ -53,25 +53,27 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
   <div class="hero3d-clona absolute inset-0 -z-10 pointer-events-none" aria-hidden="true"></div>
 
   <div class="obal hero3d-obsah relative flex flex-col justify-end lg:justify-center @container">
-    <div class="lg:max-w-[36rem]">
+    <div class="hero3d-text lg:max-w-[36rem]">
+      <div>
       <h1 id="hero-nadpis" class="display select-none">
         <span class="sr-only">Majáles {AKCE.rok}</span>
-        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(5.5rem,26.5cqi,13rem)] lg:text-[clamp(8rem,11.5vw,12rem)] leading-[0.84]">Majáles</span>
+        <span aria-hidden="true" class="block whitespace-nowrap -ml-[0.02em] text-[clamp(5.5rem,26.5cqi,13rem)] lg:text-[clamp(7rem,min(11.5vw,21svh),15rem)] leading-[0.84]">Majáles</span>
       </h1>
 
-      <div class="mt-3 lg:mt-6 flex flex-wrap items-end gap-x-6 gap-y-2">
+      <div class="hero3d-datum mt-3 flex flex-wrap items-end gap-x-6 gap-y-2">
         <p class="display text-[clamp(2.9rem,12cqi,5rem)] leading-none">{AKCE.datum}</p>
         <p class="text-base sm:text-lg font-medium leading-snug pb-1">
           {AKCE.misto}<br />{AKCE.mesto}
         </p>
       </div>
+      </div>
 
-      <div class="mt-6 lg:mt-8 flex flex-wrap gap-3">
+      <div class="hero3d-tlacitka mt-6 flex flex-wrap gap-3">
         <a href="#program" class="tlacitko tlacitko-plne">Co tě čeká</a>
         <a href="/partneri/" class="tlacitko">Staň se partnerem</a>
       </div>
 
-      <div class="mt-5 lg:mt-8">
+      <div class="hero3d-odpocet mt-5">
         <p class="kicker mb-3">Do Majálesu zbývá</p>
         <Odpocet />
       </div>
@@ -154,6 +156,23 @@ const zakladSrc = (await getImage({ src: zaklad.img, width: 1080, format: 'webp'
       min-height: calc(100svh - 4.5rem);
       padding-top: 6.5rem;
       padding-bottom: 2.5rem;
+    }
+    /* obsah roztažený po výšce: nadpis s datem nahoře, odpočet dole, tlačítka mezi nimi.
+       Na nízkých obrazovkách se mezery smrsknou na minimum, na vysokých je výška omezená (58rem), ať se to nerozsype. */
+    .hero3d-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1 1 auto;
+      max-height: 58rem;
+      padding-block: clamp(0rem, 5svh - 1.5rem, 3rem);
+    }
+    .hero3d-datum {
+      margin-top: clamp(0.75rem, 2.5svh, 1.75rem);
+    }
+    .hero3d-tlacitka,
+    .hero3d-odpocet {
+      margin-top: 1.25rem;
     }
     /* video je ≈ 2 : 1; na širokých monitorech se ořezává shora a zdola, proto výš než střed scény (0,6) – ať zůstane věž */
     .hero3d-plakat,
