@@ -12,8 +12,15 @@ ZDROJ = KOREN / 'src' / 'assets' / 'ikona' / 'ikona-zdroj.png'
 VEN = KOREN / 'public'
 MODRA = (0, 74, 253)  # #004AFD, pozadí loga
 
-logo = Image.open(ZDROJ).convert('RGB')
+puvodni = Image.open(ZDROJ)
+logo = puvodni.convert('RGB')
 assert logo.width == logo.height, 'logo musí být čtverec'
+# Canva a jiné editory zapisují do PNG metadata (celé jméno autora, ID účtu) – zdroj v repu je jen s pixely
+if puvodni.info.keys() - {'dpi'}:
+    cisty = Image.new('RGB', logo.size)
+    cisty.paste(logo)
+    cisty.save(ZDROJ, optimize=True)
+    print('zdroj uložený znovu bez metadat:', ', '.join(sorted(puvodni.info.keys())))
 
 
 def zmensit(velikost: int, obsah: float = 1.0) -> Image.Image:

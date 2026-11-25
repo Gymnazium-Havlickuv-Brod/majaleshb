@@ -44,7 +44,7 @@ U každého potvrzeného nálezu:
 
 - **co a kde** (soubor a řádek, nebo které nastavení v které službě),
 - **jak** – konkrétní kód nebo nastavení (třeba celý obsah `public/_headers` pro Cloudflare a `vercel.json` pro Vercel),
-- **kdo to udělá:** stačí změna v repu (udělá ji hlavní agent), nebo je potřeba přístup do Cloudflaru a DNS (Jonáš), GitHubu (Adam, správci repa), Vercelu nebo Webglobe,
+- **kdo to udělá:** stačí změna v repu (udělá ji hlavní agent), nebo je potřeba přístup do Cloudflaru a DNS (správce domény), GitHubu (správci repa), Vercelu nebo Webglobe (správce pošty) – v repu i ve zprávě jen role, žádná jména,
 - **odhad práce** (minuty, hodina, víc).
 
 Pozor na opravy, které by rozbily web. Content-Security-Policy musí povolit všechno, co web používá: inline skripty a styly z Astra, obrázky z `/_astro/`, video z `/hero/`, `mailto:`, odkazy na Gmail a Outlook, případné fonty. Navrhni takovou, která projde, a doporuč ji nejdřív jako `Content-Security-Policy-Report-Only`. U tajností, které unikly do historie gitu, nestačí přepsat historii: tajnost je potřeba hlavně **zneplatnit** a vygenerovat novou.
