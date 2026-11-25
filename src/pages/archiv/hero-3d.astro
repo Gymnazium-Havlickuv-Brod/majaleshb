@@ -101,20 +101,20 @@ const schema = {
         }
       </ul>
 
-      <!-- průběh dne -->
-      <div class="mt-20 rounded-[2rem] karta p-6 sm:p-10">
+      <!-- průběh dne: modrý panel bez čar, části dne odděluje jen mezera -->
+      <div class="mt-20 rounded-[2rem] na-modre p-6 sm:p-10">
         <h3 class="kicker">Jak bude vypadat den</h3>
-        <ol class="mt-6 grid gap-6 md:grid-cols-3">
+        <ol class="mt-6 grid gap-8 md:grid-cols-3">
           {
             DEN.map((d) => (
-              <li class="border-l-4 border-hot pl-5">
-                <p class="display text-3xl">{d.kdy}</p>
+              <li>
+                <p class="display text-4xl">{d.kdy}</p>
                 <p class="mt-2">{d.co}</p>
               </li>
             ))
           }
         </ol>
-        <p class="mt-8 pt-6 border-t-2 border-hot">
+        <p class="mt-10">
           <strong>Den předem, v pátek 21. 5.,</strong> chystáme hru pro osmáky ze základních škol.
         </p>
       </div>
