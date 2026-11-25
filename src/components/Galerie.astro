@@ -43,9 +43,10 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
     }
   </ul>
 
-  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full na-modre p-0 backdrop:bg-modra" aria-label="Fotka">
+  <!-- touch-pan-y: vodorovný tah prstem si nebere prohlížeč, takže přepíná fotky -->
+  <dialog class="lightbox m-auto max-w-none max-h-none w-full h-full na-modre p-0 backdrop:bg-modra touch-pan-y touch-pinch-zoom" aria-label="Fotka">
     <div class="relative grid h-full w-full place-items-center p-4 sm:p-10">
-      <img class="max-h-[82vh] max-w-full rounded-xl object-contain" alt="" />
+      <img class="max-h-[min(82vh,calc(100dvh-7rem))] max-w-full rounded-xl object-contain" alt="" />
       <p class="popis absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] text-center text-sm text-ruzova"></p>
       <button type="button" class="zavrit absolute right-3 top-3 sm:right-6 sm:top-6 lb-tl" aria-label="Zavřít">✕</button>
       <button type="button" class="pred absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 lb-tl" aria-label="Předchozí">←</button>
@@ -183,7 +184,8 @@ const velke = await Promise.all(fotky.map((f) => getImage({ src: f.img, width: 1
       const b = v[aktualni];
       img.src = b.dataset.velka!;
       img.alt = b.dataset.alt!;
-      popis.textContent = `${b.dataset.alt} · ${b.dataset.rok}`;
+      // rok jen tehdy, když už není v popisu fotky
+      popis.textContent = b.dataset.alt!.includes(b.dataset.rok!) ? b.dataset.alt! : `${b.dataset.alt} · ${b.dataset.rok}`;
     };
     polozky.forEach((li) =>
       li.querySelector('button')!.addEventListener('click', (e) => {

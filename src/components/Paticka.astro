@@ -28,10 +28,11 @@ const site = [
     </div>
     <div>
       <p class="kicker">Kontakt</p>
-      <ul class="mt-3 space-y-2">
-        <li><a class="odkaz" href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a></li>
-        {site.map((s) => <li><a class="odkaz" href={s.href} rel="noopener">{s.text}</a></li>)}
-        <li><a class="odkaz" href="/partneri/">Pro partnery</a></li>
+      <!-- odkazy s větší plochou pro prst (py-1), rozestupy zůstávají stejné jako dřív -->
+      <ul class="mt-2">
+        <li><a class="odkaz inline-block py-1"href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a></li>
+        {site.map((s) => <li><a class="odkaz inline-block py-1"href={s.href} rel="noopener">{s.text}</a></li>)}
+        <li><a class="odkaz inline-block py-1"href="/partneri/">Pro partnery</a></li>
       </ul>
     </div>
   </div>

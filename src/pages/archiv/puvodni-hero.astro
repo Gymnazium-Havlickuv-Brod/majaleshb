@@ -70,7 +70,7 @@ const schema = {
           alt={namesti.alt}
           widths={[300, 500]}
           sizes="(min-width: 1024px) 18vw, 40vw"
-          class="absolute -top-12 -right-3 sm:-right-8 w-[36%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-bila rotate-3"
+          class="absolute -top-6 right-0 lg:-top-12 lg:-right-4 w-[36%] aspect-square object-cover rounded-[1.5rem] ring-8 ring-bila rotate-3"
         />
       </div>
     </div>
@@ -107,7 +107,7 @@ const schema = {
   </section>
 
   <!-- Line-up -->
-  <section id="line-up" class="sekce na-modre" aria-labelledby="lineup-nadpis">
+  <section id="line-up" class="sekce na-modre -scroll-mt-2" aria-labelledby="lineup-nadpis">
     <div class="obal">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -121,7 +121,7 @@ const schema = {
             <li class="flex flex-col gap-1.5 aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-hot px-4 py-3">
               <span class="text-sm font-bold tabular-nums">{k.cislo}</span>
               <span class="flex-1 grid place-items-center display text-[clamp(3.5rem,13vw,8rem)] leading-none">{k.jmeno}</span>
-              <span class="kicker !text-[0.65rem] leading-snug">Jméno odhalíme brzy</span>
+              <span class="kicker !text-[0.65rem] leading-snug text-balance">Jméno odhalíme brzy</span>
             </li>
           ))
         }

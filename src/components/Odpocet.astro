@@ -8,14 +8,15 @@ const jednotky = [
 ];
 ---
 
-<div class="odpocet flex gap-2 sm:gap-3" data-cil={AKCE.zacatek} aria-label={`Odpočet do ${AKCE.datum}`} role="timer">
+<!-- čtyři stejně široké boxy; na úzkém telefonu se vejdou i s popiskem SEKUND -->
+<div class="odpocet grid grid-cols-4 gap-2 sm:gap-3 max-w-[22rem] sm:max-w-[24rem]" data-cil={AKCE.zacatek} aria-label={`Odpočet do ${AKCE.datum}`} role="timer">
   {
     jednotky.map(([k, n]) => (
-      <div class="min-w-[4.2rem] sm:min-w-[5rem] rounded-2xl bg-modra karta px-3 py-2 text-center">
+      <div class="rounded-2xl bg-modra karta px-1.5 sm:px-3 py-2 text-center">
         <span class="display block text-[clamp(1.8rem,6vw,2.6rem)] leading-none tabular-nums" data-k={k}>
           –
         </span>
-        <span class="mt-1 block text-[0.7rem] uppercase tracking-[0.14em]">{n}</span>
+        <span class="mt-1 block text-[0.65rem] tracking-[0.1em] sm:text-[0.7rem] sm:tracking-[0.14em] uppercase">{n}</span>
       </div>
     ))
   }
