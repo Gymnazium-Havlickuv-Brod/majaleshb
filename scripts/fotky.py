@@ -34,6 +34,12 @@ def export(f):
     if cil.exists() and cil.stat().st_mtime > (MEDIA / f["zdroj"]).stat().st_mtime:
         return cil
     im = ImageOps.exif_transpose(Image.open(MEDIA / f["zdroj"])).convert("RGB")
+    if "orez" in f:
+        # volitelný výřez [x1, y1, x2, y2] v podílech šířky a výšky originálu, např. ať hlavní motiv
+        # neschová malá fotka přes roh (web ořezává od středu)
+        w, h = im.size
+        x1, y1, x2, y2 = f["orez"]
+        im = im.crop((round(x1 * w), round(y1 * h), round(x2 * w), round(y2 * h)))
     im.thumbnail((MAX, MAX), Image.LANCZOS)
     # bez exif= → žádná metadata (GPS, fotoaparát) se neuloží
     im.save(cil, "JPEG", quality=84, optimize=True, progressive=True)

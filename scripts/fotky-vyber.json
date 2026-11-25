@@ -257,9 +257,7 @@
   "zdroj": "2025/foto/Majales 2025/51-DSC_5313.jpg",
   "rok": 2025,
   "typ": "crowd",
-  "role": [
-   "o-majalesu"
-  ],
+  "role": [],
   "skore": 8,
   "alt": "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem"
  },
@@ -374,5 +372,22 @@
   ],
   "skore": 8,
   "alt": "Saxofonista hraje na pódiu ve fialovém světle"
+ },
+ {
+  "klic": "2025-dsc-5833",
+  "zdroj": "2025/foto/Majales 2025/94-DSC_5833.jpg",
+  "rok": 2025,
+  "typ": "crowd",
+  "role": [
+   "o-majalesu"
+  ],
+  "skore": 9,
+  "alt": "Studenti tančí v řadě na Havlíčkově náměstí",
+  "orez": [
+   0.1114,
+   0,
+   1,
+   1
+  ]
  }
 ]

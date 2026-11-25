@@ -39,6 +39,7 @@ import f35 from '../assets/foto/2025-kral-a-kralovna-dsc-0298.jpg';
 import f36 from '../assets/foto/2026-kral-a-kralovna-img-0040.jpg';
 import f37 from '../assets/foto/2026-moderatori-img-0233.jpg';
 import f38 from '../assets/foto/2026-kapely-img-0515.jpg';
+import f39 from '../assets/foto/2025-dsc-5833.jpg';
 
 export type Foto = { klic: string; img: ImageMetadata; rok: number; typ: string; role: string[]; alt: string };
 
@@ -70,7 +71,7 @@ export const FOTKY: Foto[] = [
   { klic: "2025-dsc-5431", img: f24, rok: 2025, typ: "square", role: [], alt: "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem" },
   { klic: "2025-dsc-5469", img: f25, rok: 2025, typ: "band", role: ["hero"], alt: "Studentská kapela hraje na pódiu na náměstí" },
   { klic: "2025-dsc-5474", img: f26, rok: 2025, typ: "band", role: [], alt: "Trombonista v pruhované košili hraje na pódiu" },
-  { klic: "2025-dsc-5313", img: f27, rok: 2025, typ: "crowd", role: ["o-majalesu"], alt: "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem" },
+  { klic: "2025-dsc-5313", img: f27, rok: 2025, typ: "crowd", role: [], alt: "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem" },
   { klic: "2025-dsc-5591", img: f28, rok: 2025, typ: "square", role: ["og", "o-majalesu-2"], alt: "Havlíčkovo náměstí v den Majálesu, lavice a stany pod věží kostela" },
   { klic: "2025-dsc-5604", img: f29, rok: 2025, typ: "food", role: [], alt: "Příprava palačinek u studentského stánku" },
   { klic: "2025-dsc-5622", img: f30, rok: 2025, typ: "portrait", role: ["program:stanky"], alt: "Dvě rozesmáté kamarádky s talířem bramboráků ze stánku" },
@@ -82,6 +83,7 @@ export const FOTKY: Foto[] = [
   { klic: "2026-kral-a-kralovna-img-0040", img: f36, rok: 2026, typ: "king_queen", role: ["program:kral"], alt: "Král a královna Majálesu 2026 s korunami, diplomem a kyticí na pódiu" },
   { klic: "2026-moderatori-img-0233", img: f37, rok: 2026, typ: "portrait", role: ["partneri"], alt: "Moderátoři Majálesu s mikrofony na Havlíčkově náměstí" },
   { klic: "2026-kapely-img-0515", img: f38, rok: 2026, typ: "band", role: ["program:stage"], alt: "Saxofonista hraje na pódiu ve fialovém světle" },
+  { klic: "2025-dsc-5833", img: f39, rok: 2025, typ: "crowd", role: ["o-majalesu"], alt: "Studenti tančí v řadě na Havlíčkově náměstí" },
 ];
 
 export const podleRole = (role: string) => FOTKY.find((f) => f.role.includes(role))!;

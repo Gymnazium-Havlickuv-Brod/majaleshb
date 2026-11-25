@@ -40,13 +40,13 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 
 1. Originály leží v `c:\dev\ghb\majales\media` (mimo git, soupis v `media/INDEX.md`).
 2. `c:\dev\ghb\majales\media\HODNOCENI-FOTEK.json` (privátní, mimo tohle repo) obsahuje hodnocení všech 334 fotek: skóre 1–10, typ, příznaky (dítě zblízka, alkohol, duplicita) a český alt text.
-3. `scripts/fotky-vyber.json` je výběr na web: klíč, zdroj, rok, role (`hero`, `og`, `program:*`, `o-majalesu`) a alt text. Fotku přidáš nebo vyměníš tady.
+3. `scripts/fotky-vyber.json` je výběr na web: klíč, zdroj, rok, role (`hero`, `og`, `partneri`, `program:*`, `o-majalesu`, `o-majalesu-2`), alt text a volitelně `orez` (výřez `[x1, y1, x2, y2]` v podílech originálu, když web ořezáním od středu schová hlavní motiv). Fotku přidáš nebo vyměníš tady.
 4. `python scripts/fotky.py` vyexportuje výběr do `src/assets/foto/`: max 2000 px, bez EXIF/GPS. Zároveň vygeneruje `src/data/fotky.ts` (ten se needituje ručně).
 5. **`fotky-balik/`** obsahuje 78 zajímavých fotek (skóre 7+), i ty, které na webu zatím nejsou, pro toho, kdo bude web upravovat. Náhledy jsou v `fotky-balik/index.html` (dvojklik), tabulka v `fotky-balik/README.md`. Přegeneruje se příkazem `python scripts/fotky-balik.py`.
 6. Při buildu z nich Astro (`astro:assets`) vyrobí WebP v několika šířkách. Stránka pak přes `srcset`/`sizes` načte jen velikost, kterou zařízení potřebuje, a fotky mimo obrazovku načítá líně.
 7. **Hodnocení fotek:** `python scripts/hodnoceni-fotek.py <složka> --arch render/archy --detaily render/detaily` změří technickou kvalitu (přepálení, tma, ostrost, kontrast, rozlišení, skoro stejné záběry), dá skóre 0–10 a vyrobí kontaktní archy a výřezy nejostřejšího místa. Krásu nezměří – tu posoudí agent Balrog (viz níž).
 
-Od 25. 11. 2026 jsou na webu jen fotky z let 2025 a 2026 (Majáles 2025 a Color Run 2026). Originály nových fotek jsou zatím jen v ZIPech „Majales 2025“ a „MAJALES - COLOR RUN“, do `media/` v pracovním repu je potřeba je teprve nahrát; do té doby `scripts/fotky.py` nové fotky znovu nevyexportuje. `fotky-balik/` je ještě ze starého výběru.
+Od 25. 11. 2026 jsou na webu jen fotky z let 2025 a 2026 (Majáles 2025, Color Run 2026 a Majáles 2026). Originály nových fotek jsou zatím jen ve složkách „Majales 2025“, „MAJALES - COLOR RUN“ a „05 majales/edit“ (ve `zdroj` jako `2026/foto/05 majales/…`), do `media/` v pracovním repu je potřeba je teprve nahrát; do té doby `scripts/fotky.py` nové fotky znovu nevyexportuje. `fotky-balik/` je ještě ze starého výběru.
 
 ## Agenti (Claude Code)
 
