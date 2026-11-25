@@ -37,6 +37,18 @@ import f33 from '../assets/foto/2026-color-run-dsc-5182.jpg';
 import f34 from '../assets/foto/2026-color-run-dsc-5213.jpg';
 import f35 from '../assets/foto/2026-color-run-img-9737.jpg';
 import f36 from '../assets/foto/2026-color-run-img-9644.jpg';
+import f37 from '../assets/foto/2022-vpp07910.jpg';
+import f38 from '../assets/foto/2022-vpp07906.jpg';
+import f39 from '../assets/foto/2022-vpp07917.jpg';
+import f40 from '../assets/foto/2022-vpp07932.jpg';
+import f41 from '../assets/foto/2022-vpp07940.jpg';
+import f42 from '../assets/foto/2022-vpp07897.jpg';
+import f43 from '../assets/foto/2017-sobota-img-0087.jpg';
+import f44 from '../assets/foto/2017-sobota-img-6491.jpg';
+import f45 from '../assets/foto/2017-sobota-img-0216.jpg';
+import f46 from '../assets/foto/2017-sobota-img-0309.jpg';
+import f47 from '../assets/foto/2017-sobota-img-0476.jpg';
+import f48 from '../assets/foto/2017-sobota-img-0052.jpg';
 
 export type Foto = { klic: string; img: ImageMetadata; rok: number; typ: string; role: string[]; alt: string };
 
@@ -78,6 +90,18 @@ export const FOTKY: Foto[] = [
   { klic: "2026-color-run-dsc-5213", img: f34, rok: 2026, typ: "crowd", role: [], alt: "Parta studentů celá od barevného prášku po Color Run" },
   { klic: "2026-color-run-img-9737", img: f35, rok: 2026, typ: "run", role: [], alt: "Dvě běžkyně radostně mávají cestou do cíle" },
   { klic: "2026-color-run-img-9644", img: f36, rok: 2026, typ: "portrait", role: ["program:zony"], alt: "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026" },
+  { klic: "2022-vpp07910", img: f37, rok: 2022, typ: "crowd", role: [], alt: "Dav zvedá ruce před pódiem s nápisem GHB Majáles a paprsky reflektorů" },
+  { klic: "2022-vpp07906", img: f38, rok: 2022, typ: "square", role: [], alt: "Fialově zářící pódium pod věží s hodinami na náměstí za modré hodiny" },
+  { klic: "2022-vpp07917", img: f39, rok: 2022, typ: "band", role: [], alt: "Raper a spoluhráč zvedají ruce pod zelenými reflektory, před nimi dav" },
+  { klic: "2022-vpp07932", img: f40, rok: 2022, typ: "crowd", role: [], alt: "Siluety fanoušků se zvednutýma rukama proti růžovým a modrým světlům" },
+  { klic: "2022-vpp07940", img: f41, rok: 2022, typ: "detail", role: [], alt: "Mobil natáčí koncert, v pozadí rozostřená barevná světla" },
+  { klic: "2022-vpp07897", img: f42, rok: 2022, typ: "crowd", role: [], alt: "Dav na náměstí za soumraku, mladík natáčí mobilem, v pozadí historické domy" },
+  { klic: "2017-sobota-img-0087", img: f43, rok: 2017, typ: "square", role: [], alt: "Pohled z věže na náměstí v Havlíčkově Brodě s pódiem Majálesu" },
+  { klic: "2017-sobota-img-6491", img: f44, rok: 2017, typ: "crowd", role: [], alt: "Studentský tým Majálesu s rukama nahoře na schodech sloupu na náměstí" },
+  { klic: "2017-sobota-img-0216", img: f45, rok: 2017, typ: "king_queen", role: [], alt: "Král Majálesu zvedá meč, královna mává před pódiem" },
+  { klic: "2017-sobota-img-0309", img: f46, rok: 2017, typ: "band", role: [], alt: "Kytarista z pódia hraje davu na náměstí s kostelní věží" },
+  { klic: "2017-sobota-img-0476", img: f47, rok: 2017, typ: "band", role: [], alt: "Kapela naplno hraje na pódiu na náměstí" },
+  { klic: "2017-sobota-img-0052", img: f48, rok: 2017, typ: "crowd", role: [], alt: "Soutěž v házení míčkem na náměstí před davem diváků" },
 ];
 
 export const podleRole = (role: string) => FOTKY.find((f) => f.role.includes(role))!;

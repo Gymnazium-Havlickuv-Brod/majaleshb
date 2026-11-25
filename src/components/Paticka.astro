@@ -1,5 +1,9 @@
 ---
 import { AKCE, KONTAKT } from '../data/akce';
+import { FOTKY } from '../data/fotky';
+// roky fotek v galerii, od nejstaršího ročníku po nejnovější
+const roky = FOTKY.map((f) => f.rok);
+const rokyFotek = `${Math.min(...roky)}–${Math.max(...roky)}`;
 const site = [
   KONTAKT.instagram && { href: KONTAKT.instagram, text: 'Instagram' },
   KONTAKT.facebook && { href: KONTAKT.facebook, text: 'Facebook' },
@@ -33,6 +37,6 @@ const site = [
   </div>
   <div class="obal pb-8 text-sm flex flex-wrap justify-between gap-2">
     <span>© {AKCE.rok} Majáles HB</span>
-    <span>Fotky: archiv Majálesu 2025–2026</span>
+    <span>Fotky: archiv Majálesu {rokyFotek}</span>
   </div>
 </footer>
