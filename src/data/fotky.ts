@@ -40,6 +40,7 @@ import f36 from '../assets/foto/2026-kral-a-kralovna-img-0040.jpg';
 import f37 from '../assets/foto/2026-moderatori-img-0233.jpg';
 import f38 from '../assets/foto/2026-kapely-img-0515.jpg';
 import f39 from '../assets/foto/2025-dsc-5833.jpg';
+import f40 from '../assets/foto/2026-dav-img-0622.jpg';
 
 export type Foto = { klic: string; img: ImageMetadata; rok: number; typ: string; role: string[]; alt: string };
 
@@ -83,7 +84,8 @@ export const FOTKY: Foto[] = [
   { klic: "2026-kral-a-kralovna-img-0040", img: f36, rok: 2026, typ: "king_queen", role: ["program:kral"], alt: "Král a královna Majálesu 2026 s korunami, diplomem a kyticí na pódiu" },
   { klic: "2026-moderatori-img-0233", img: f37, rok: 2026, typ: "portrait", role: ["partneri"], alt: "Moderátoři Majálesu s mikrofony na Havlíčkově náměstí" },
   { klic: "2026-kapely-img-0515", img: f38, rok: 2026, typ: "band", role: ["program:stage"], alt: "Saxofonista hraje na pódiu ve fialovém světle" },
-  { klic: "2025-dsc-5833", img: f39, rok: 2025, typ: "crowd", role: ["o-majalesu"], alt: "Studenti tančí v řadě na Havlíčkově náměstí" },
+  { klic: "2025-dsc-5833", img: f39, rok: 2025, typ: "crowd", role: [], alt: "Studenti tančí v řadě na Havlíčkově náměstí" },
+  { klic: "2026-dav-img-0622", img: f40, rok: 2026, typ: "crowd", role: ["o-majalesu"], alt: "Plné náměstí před pódiem při koncertu na Majálesu 2026" },
 ];
 
 export const podleRole = (role: string) => FOTKY.find((f) => f.role.includes(role))!;

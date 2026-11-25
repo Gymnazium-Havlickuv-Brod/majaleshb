@@ -378,16 +378,19 @@
   "zdroj": "2025/foto/Majales 2025/94-DSC_5833.jpg",
   "rok": 2025,
   "typ": "crowd",
+  "role": [],
+  "skore": 9,
+  "alt": "Studenti tančí v řadě na Havlíčkově náměstí"
+ },
+ {
+  "klic": "2026-dav-img-0622",
+  "zdroj": "2026/foto/05 majales/IMG_0622.jpg",
+  "rok": 2026,
+  "typ": "crowd",
   "role": [
    "o-majalesu"
   ],
   "skore": 9,
-  "alt": "Studenti tančí v řadě na Havlíčkově náměstí",
-  "orez": [
-   0.1114,
-   0,
-   1,
-   1
-  ]
+  "alt": "Plné náměstí před pódiem při koncertu na Majálesu 2026"
  }
 ]
