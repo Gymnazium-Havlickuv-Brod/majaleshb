@@ -119,10 +119,10 @@ const schema = {
       <ul class="mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
         {
           LINEUP.map((k) => (
-            <li class="relative aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-hot grid place-items-center">
-              <span class="absolute left-4 top-3 text-sm font-bold tabular-nums">{k.cislo}</span>
-              <span class="display text-[clamp(4.5rem,14vw,8rem)] leading-none">{k.jmeno}</span>
-              <span class="absolute bottom-3 left-4 right-4 kicker !text-[0.65rem]">Jméno odhalíme brzy</span>
+            <li class="flex flex-col gap-1.5 aspect-[4/3] lg:aspect-[16/9] rounded-[1.5rem] border-2 border-dashed border-hot px-4 py-3">
+              <span class="text-sm font-bold tabular-nums">{k.cislo}</span>
+              <span class="flex-1 grid place-items-center display text-[clamp(3.5rem,13vw,8rem)] leading-none">{k.jmeno}</span>
+              <span class="kicker !text-[0.65rem] leading-snug">Jméno odhalíme brzy</span>
             </li>
           ))
         }

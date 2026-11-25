@@ -13,7 +13,8 @@ import { DEN } from '../data/akce';
         <li>
           <span class="osa-ikona" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              {d.ikona === 'rano' && <path d="M3 18h18M7 18a5 5 0 0 1 10 0M12 6.5v3M5.5 11.5l2 2M18.5 11.5l-2 2M9 21.5h6" />}
+              {/* východ slunce: všechny tři paprsky stejně daleko od slunce (střed 12 / 15,5) */}
+              {d.ikona === 'rano' && <path d="M3 15.5h18M7 15.5a5 5 0 0 1 10 0M12 7V4.7M6 9.5L4.4 7.9M18 9.5L19.6 7.9M9 19.5h6" />}
               {d.ikona === 'slunce' && (
                 <Fragment>
                   <circle cx="12" cy="12" r="4" />
