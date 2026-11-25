@@ -131,7 +131,7 @@ Celá nabídka je na webu `/partneri/` (data v `src/data/partneri.ts`).
 
 - ✅ Úrovně (sjednocené s tabulkou partnerů):
   - **5 000 Kč – Podporovatel:** logo na webu, poděkování na sociálních sítích, poděkování na pódiu.
-  - **10 000 Kč – Partner:** to samé + logo na plakátu, banner na pódiu (ze strany).
+  - **10 000 Kč – Partner:** to samé + logo na plakátu, banner na pódiu.
   - **25 000 Kč – Hlavní partner:** to samé + hlavní banner na pódiu, příspěvek věnovaný partnerovi, program na pódiu.
   - **Dar:** jídlo (zmínění na pódiu a u stánku) nebo ceny do hry o ceny.
   - **Na míru:** individuální nabídka.

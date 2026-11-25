@@ -29,7 +29,7 @@ export const UROVNE: Uroven[] = [
       'poděkování na sociálních sítích',
       'poděkování na pódiu',
       'logo na plakátu',
-      'banner na pódiu (ze strany)',
+      'banner na pódiu',
     ],
   },
   {
