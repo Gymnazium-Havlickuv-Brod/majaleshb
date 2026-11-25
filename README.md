@@ -51,10 +51,14 @@ Od 25. 11. 2026 jsou na webu hlavně fotky z let 2025 a 2026 (Majáles 2025, Col
 
 ## Agenti (Claude Code)
 
-V `.claude/agents/` jsou dva pomocníci, Claude Code je načte sám, když se pracuje v tomhle repu:
+V `.claude/agents/` jsou čtyři pomocníci, Claude Code je načte sám, když se pracuje v tomhle repu:
 
 - **Morgoth** (`morgoth.md`) – kontrolor před nasazením: build, barvy, nadpisy, texty a pravidla z O-MAJALESU.md, fotky na webu (alkohol, děti, jmenovky, reklamy), snímky na PC i mobilu a po nasazení živý web. Jen hlásí, nic neopravuje. Stačí napsat „zkontroluj to Morgothem“.
 - **Balrog** (`balrog.md`) – fotoeditor: změří fotky skriptem `scripts/hodnoceni-fotek.py`, prohlédne si je a ke každé řekne 🟢 hezká / 🟡 ujde / 🔴 na hovno s konkrétním důvodem a doporučí výběr na web. Taky jen radí. Stačí napsat „ať Balrog projde fotky ve složce …“.
+- **Gandalf Šedý** (`gandalf-sedy.md`) – bezpečnost, první průchod: projde repo i celou historii gitu (hesla, klíče, osobní údaje, GPS ve fotkách), živý web (hlavičky, soubory, které venku být nemají, XSS), závislosti, doménu a poštu (SPF, DMARC) a nastavení GitHubu a všechno podezřelé sepíše s důkazy. Stačí napsat „ať se na security podívá Gandalf Šedý“.
+- **Gandalf Bílý** (`gandalf-bily.md`) – bezpečnost, druhý průchod po Gandalfu Šedém: každý jeho nález sám ověří, vyřadí plané poplachy, dohledá, co chybělo, určí skutečnou závažnost a napíše přesné opravy (kdo je udělá) a shrnutí pro netechnické lidi.
+
+O bezpečnostních agentech se píše vždy celým jménem, Gandalf Šedý a Gandalf Bílý, nikdy jen „Gandalf“. Pořadí je pevné: nejdřív Gandalf Šedý, jeho zprávu dostane Gandalf Bílý. Ani jeden nic neopravuje, opravy dělá hlavní agent nebo lidi s přístupem do služeb.
 
 ## Vizuál
 
