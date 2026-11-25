@@ -34,6 +34,7 @@ import f30 from '../assets/foto/2025-dsc-5622.jpg';
 import f31 from '../assets/foto/2025-dsc-5819.jpg';
 import f32 from '../assets/foto/2025-dsc-5850.jpg';
 import f33 from '../assets/foto/2025-dsc-5559.jpg';
+import f34 from '../assets/foto/2026-color-run-img-9644.jpg';
 
 export type Foto = { klic: string; img: ImageMetadata; rok: number; typ: string; role: string[]; alt: string };
 
@@ -62,7 +63,7 @@ export const FOTKY: Foto[] = [
   { klic: "2026-color-run-dsc-5213", img: f21, rok: 2026, typ: "crowd", role: [], alt: "Parta studentů celá od barevného prášku po Color Run" },
   { klic: "2026-color-run-img-9721", img: f22, rok: 2026, typ: "run", role: [], alt: "Dvě běžkyně celé od barevného prášku na trati podél zeleně" },
   { klic: "2026-color-run-img-9737", img: f23, rok: 2026, typ: "run", role: [], alt: "Dvě běžkyně radostně mávají cestou do cíle" },
-  { klic: "2025-dsc-5431", img: f24, rok: 2025, typ: "square", role: ["program:zony"], alt: "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem" },
+  { klic: "2025-dsc-5431", img: f24, rok: 2025, typ: "square", role: [], alt: "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem" },
   { klic: "2025-dsc-5469", img: f25, rok: 2025, typ: "band", role: ["hero"], alt: "Studentská kapela hraje na pódiu na náměstí" },
   { klic: "2025-dsc-5474", img: f26, rok: 2025, typ: "band", role: [], alt: "Trombonista v pruhované košili hraje na pódiu" },
   { klic: "2025-dsc-5313", img: f27, rok: 2025, typ: "crowd", role: ["o-majalesu"], alt: "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem" },
@@ -72,6 +73,7 @@ export const FOTKY: Foto[] = [
   { klic: "2025-dsc-5819", img: f31, rok: 2025, typ: "portrait", role: [], alt: "Tři kamarádky na náměstí ukazují palec nahoru" },
   { klic: "2025-dsc-5850", img: f32, rok: 2025, typ: "band", role: [], alt: "Kapela se loučí s publikem na pódiu pod světly" },
   { klic: "2025-dsc-5559", img: f33, rok: 2025, typ: "band", role: ["program:stage"], alt: "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí" },
+  { klic: "2026-color-run-img-9644", img: f34, rok: 2026, typ: "portrait", role: ["program:zony"], alt: "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026" },
 ];
 
 export const podleRole = (role: string) => FOTKY.find((f) => f.role.includes(role))!;

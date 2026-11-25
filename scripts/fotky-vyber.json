@@ -231,9 +231,7 @@
   "zdroj": "2025/foto/Majales 2025/17-DSC_5431.jpg",
   "rok": 2025,
   "typ": "square",
-  "role": [
-   "program:zony"
-  ],
+  "role": [],
   "skore": 8,
   "alt": "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem"
  },
@@ -328,5 +326,16 @@
   ],
   "skore": 8,
   "alt": "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí"
+ },
+ {
+  "klic": "2026-color-run-img-9644",
+  "zdroj": "2026/foto/Color run/IMG_9644.jpg",
+  "rok": 2026,
+  "typ": "portrait",
+  "role": [
+   "program:zony"
+  ],
+  "skore": 8,
+  "alt": "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026"
  }
 ]
