@@ -11,24 +11,6 @@
   "alt": "Zpěvák s kytarou naplno zpívá ve fialových světlech"
  },
  {
-  "klic": "2025-beh-dsc-0566",
-  "zdroj": "2025/foto/Běh/DSC_0566.jpg",
-  "rok": 2025,
-  "typ": "run",
-  "role": [],
-  "skore": 8,
-  "alt": "Veselí studenti běží a mávají do objektivu"
- },
- {
-  "klic": "2025-kral-a-kralovna-dsc-0182",
-  "zdroj": "2025/foto/Král a královna/DSC_0182.jpg",
-  "rok": 2025,
-  "typ": "king_queen",
-  "role": [],
-  "skore": 7,
-  "alt": "Soutěž o krále a královnu: jízda se zavázanýma očima v kolečku"
- },
- {
   "klic": "2025-detsky-den-dsc-0122",
   "zdroj": "2025/foto/Dětský den/DSC_0122.jpg",
   "rok": 2025,
@@ -40,15 +22,6 @@
   "alt": "Studenti v kostýmu Scoobyho připravují dětem úkol"
  },
  {
-  "klic": "2025-kapely-dsc-0580",
-  "zdroj": "2025/foto/Kapely/DSC_0580.jpg",
-  "rok": 2025,
-  "typ": "band",
-  "role": [],
-  "skore": 8,
-  "alt": "Dva zpěváci zpívají do jednoho mikrofonu"
- },
- {
   "klic": "2025-kapely-dsc-0491",
   "zdroj": "2025/foto/Kapely/DSC_0491.jpg",
   "rok": 2025,
@@ -56,15 +29,6 @@
   "role": [],
   "skore": 7,
   "alt": "Zpěvák v pruhované košili zpívá na pódiu na náměstí"
- },
- {
-  "klic": "2025-kapely-dsc-0444",
-  "zdroj": "2025/foto/Kapely/DSC_0444.jpg",
-  "rok": 2025,
-  "typ": "band",
-  "role": [],
-  "skore": 7,
-  "alt": "Zpěvačka v džínovém oblečení zpívá na pódiu"
  },
  {
   "klic": "2025-kapely-dsc-0548",
@@ -112,15 +76,6 @@
   "alt": "Dvě usměvavé dívky běží se štafetovými kolíky"
  },
  {
-  "klic": "2025-detsky-den-dsc-0182",
-  "zdroj": "2025/foto/Dětský den/DSC_0182.jpg",
-  "rok": 2025,
-  "typ": "other",
-  "role": [],
-  "skore": 7,
-  "alt": "Shrek s cedulí Pozor Šrek na dětském dni"
- },
- {
   "klic": "2025-detsky-den-dsc-0250",
   "zdroj": "2025/foto/Dětský den/DSC_0250.jpg",
   "rok": 2025,
@@ -128,15 +83,6 @@
   "role": [],
   "skore": 7,
   "alt": "Studenti sjíždějí nafukovací skluzavku"
- },
- {
-  "klic": "2025-detsky-den-dsc-0310",
-  "zdroj": "2025/foto/Dětský den/DSC_0310.jpg",
-  "rok": 2025,
-  "typ": "other",
-  "role": [],
-  "skore": 7,
-  "alt": "Akrobatka na šálách předvádí figuru"
  },
  {
   "klic": "2025-kral-a-kralovna-dsc-0240",
@@ -148,100 +94,62 @@
   "alt": "Porota hodnotí soutěžící, na stole čekají korunky"
  },
  {
-  "klic": "2026-wyrval-img-1020",
-  "zdroj": "2026/foto/Wyrvál/IMG_1020.HEIC",
+  "klic": "2026-dav-img-0622",
+  "zdroj": "2026/foto/05 majales/IMG_0622.jpg",
   "rok": 2026,
-  "typ": "band",
-  "role": [],
-  "skore": 7,
-  "alt": "Studentská kapela mává z pódia na náměstí"
+  "typ": "crowd",
+  "role": [
+   "o-majalesu"
+  ],
+  "skore": 9,
+  "alt": "Plné náměstí před pódiem při koncertu na Majálesu 2026"
  },
  {
-  "klic": "2026-color-run-dsc-5152",
-  "zdroj": "2026/foto/Color run/_DSC5152.jpg",
+  "klic": "2026-kapely-img-9900",
+  "zdroj": "2026/foto/05 majales/IMG_9900.jpg",
   "rok": 2026,
-  "typ": "run",
+  "typ": "band",
   "role": [
    "hero"
   ],
-  "skore": 8,
-  "alt": "Běžci Color Run probíhají oblakem modrého a růžového prášku"
+  "skore": 9,
+  "alt": "Studentská kapela se fotí s fanoušky na pódiu na náměstí"
  },
  {
-  "klic": "2026-color-run-dsc-5157",
-  "zdroj": "2026/foto/Color run/_DSC5157.jpg",
-  "rok": 2026,
-  "typ": "run",
-  "role": [
-   "program:run"
-  ],
-  "skore": 8,
-  "alt": "Běžci v oblaku žlutého prášku na barevném běhu Majálesu 2026"
- },
- {
-  "klic": "2026-color-run-dsc-5182",
-  "zdroj": "2026/foto/Color run/_DSC5182.jpg",
-  "rok": 2026,
-  "typ": "run",
-  "role": [],
-  "skore": 8,
-  "alt": "Skupina běžců v bílých tričkách na trati Color Run"
- },
- {
-  "klic": "2026-color-run-dsc-5194",
-  "zdroj": "2026/foto/Color run/_DSC5194-2.jpg",
-  "rok": 2026,
-  "typ": "portrait",
-  "role": [],
-  "skore": 8,
-  "alt": "Tři usměvaví účastníci Color Run v tričkách od barevného prášku"
- },
- {
-  "klic": "2026-color-run-dsc-5213",
-  "zdroj": "2026/foto/Color run/_DSC5213-2.jpg",
+  "klic": "2026-tanec-img-9860",
+  "zdroj": "2026/foto/05 majales/IMG_9860.jpg",
   "rok": 2026,
   "typ": "crowd",
   "role": [],
-  "skore": 8,
-  "alt": "Parta studentů celá od barevného prášku po Color Run"
+  "skore": 9,
+  "alt": "Kamarádky spolu tančí na Havlíčkově náměstí"
  },
  {
-  "klic": "2026-color-run-img-9721",
-  "zdroj": "2026/foto/Color run/IMG_9721.jpg",
+  "klic": "2026-kamaradky-img-0468",
+  "zdroj": "2026/foto/05 majales/IMG_0468.jpg",
   "rok": 2026,
-  "typ": "run",
+  "typ": "portrait",
   "role": [],
-  "skore": 8,
-  "alt": "Dvě běžkyně celé od barevného prášku na trati podél zeleně"
+  "skore": 9,
+  "alt": "Tři kamarádky se usmívají u stánku na náměstí"
  },
  {
-  "klic": "2026-color-run-img-9737",
-  "zdroj": "2026/foto/Color run/IMG_9737.jpg",
+  "klic": "2026-kamaradky-img-9916",
+  "zdroj": "2026/foto/05 majales/IMG_9916.jpg",
   "rok": 2026,
-  "typ": "run",
+  "typ": "portrait",
   "role": [],
-  "skore": 8,
-  "alt": "Dvě běžkyně radostně mávají cestou do cíle"
+  "skore": 9,
+  "alt": "Dvě rozesmáté kamarádky u pódia"
  },
  {
-  "klic": "2025-dsc-5431",
-  "zdroj": "2025/foto/Majales 2025/17-DSC_5431.jpg",
-  "rok": 2025,
-  "typ": "square",
+  "klic": "2026-stanek-img-0118",
+  "zdroj": "2026/foto/05 majales/IMG_0118.jpg",
+  "rok": 2026,
+  "typ": "portrait",
   "role": [],
-  "skore": 8,
-  "alt": "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem"
- },
- {
-  "klic": "2025-dsc-5469",
-  "zdroj": "2025/foto/Majales 2025/25-DSC_5469.jpg",
-  "rok": 2025,
-  "typ": "band",
-  "role": [
-   "hero"
-  ],
-  "skore": 8,
-  "alt": "Studentská kapela hraje na pódiu na náměstí"
+  "skore": 9,
+  "alt": "Studenti gymnázia u svého stánku s mikinami GHB"
  },
  {
   "klic": "2025-dsc-5474",
@@ -303,44 +211,6 @@
   "alt": "Tři kamarádky na náměstí ukazují palec nahoru"
  },
  {
-  "klic": "2025-dsc-5850",
-  "zdroj": "2025/foto/Majales 2025/96-DSC_5850.jpg",
-  "rok": 2025,
-  "typ": "band",
-  "role": [],
-  "skore": 8,
-  "alt": "Kapela se loučí s publikem na pódiu pod světly"
- },
- {
-  "klic": "2025-dsc-5559",
-  "zdroj": "2025/foto/Majales 2025/46-DSC_5559.jpg",
-  "rok": 2025,
-  "typ": "band",
-  "role": [],
-  "skore": 8,
-  "alt": "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí"
- },
- {
-  "klic": "2026-color-run-img-9644",
-  "zdroj": "2026/foto/Color run/IMG_9644.jpg",
-  "rok": 2026,
-  "typ": "portrait",
-  "role": [
-   "program:zony"
-  ],
-  "skore": 8,
-  "alt": "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026"
- },
- {
-  "klic": "2025-kral-a-kralovna-dsc-0298",
-  "zdroj": "2025/foto/Král a královna/DSC_0298.jpg",
-  "rok": 2025,
-  "typ": "king_queen",
-  "role": [],
-  "skore": 8,
-  "alt": "Korunovace krále Majálesu na pódiu"
- },
- {
   "klic": "2026-kral-a-kralovna-img-0040",
   "zdroj": "2026/foto/05 majales/IMG_0040.jpg",
   "rok": 2026,
@@ -363,15 +233,22 @@
   "alt": "Moderátoři Majálesu s mikrofony na Havlíčkově náměstí"
  },
  {
-  "klic": "2026-kapely-img-0515",
-  "zdroj": "2026/foto/05 majales/IMG_0515.jpg",
+  "klic": "2026-kapely-img-0746",
+  "zdroj": "2026/foto/05 majales/IMG_0746.jpg",
   "rok": 2026,
   "typ": "band",
-  "role": [
-   "program:stage"
-  ],
-  "skore": 8,
-  "alt": "Saxofonista hraje na pódiu ve fialovém světle"
+  "role": [],
+  "skore": 9,
+  "alt": "Zpěvák s mikrofonem salutuje do objektivu"
+ },
+ {
+  "klic": "2026-kapely-img-0600",
+  "zdroj": "2026/foto/05 majales/IMG_0600.jpg",
+  "rok": 2026,
+  "typ": "band",
+  "role": [],
+  "skore": 9,
+  "alt": "Zpěvák a kytarista zdvihají ruce na pódiu"
  },
  {
   "klic": "2025-dsc-5833",
@@ -383,14 +260,101 @@
   "alt": "Studenti tančí v řadě na Havlíčkově náměstí"
  },
  {
-  "klic": "2026-dav-img-0622",
-  "zdroj": "2026/foto/05 majales/IMG_0622.jpg",
+  "klic": "2026-kapely-img-0280",
+  "zdroj": "2026/foto/05 majales/IMG_0280.jpg",
+  "rok": 2026,
+  "typ": "band",
+  "role": [],
+  "skore": 9,
+  "alt": "Kytarista s tyrkysovou kytarou ve fialovém světle"
+ },
+ {
+  "klic": "2026-kapely-img-0515",
+  "zdroj": "2026/foto/05 majales/IMG_0515.jpg",
+  "rok": 2026,
+  "typ": "band",
+  "role": [
+   "program:stage"
+  ],
+  "skore": 8,
+  "alt": "Saxofonista hraje na pódiu ve fialovém světle"
+ },
+ {
+  "klic": "2026-moderatorka-img-9957",
+  "zdroj": "2026/foto/05 majales/IMG_9957.jpg",
+  "rok": 2026,
+  "typ": "portrait",
+  "role": [],
+  "skore": 9,
+  "alt": "Moderátorka s mikrofonem na Havlíčkově náměstí"
+ },
+ {
+  "klic": "2026-wyrval-img-1020",
+  "zdroj": "2026/foto/Wyrvál/IMG_1020.HEIC",
+  "rok": 2026,
+  "typ": "band",
+  "role": [],
+  "skore": 7,
+  "alt": "Studentská kapela mává z pódia na náměstí"
+ },
+ {
+  "klic": "2026-color-run-dsc-5152",
+  "zdroj": "2026/foto/Color run/_DSC5152.jpg",
+  "rok": 2026,
+  "typ": "run",
+  "role": [
+   "hero"
+  ],
+  "skore": 8,
+  "alt": "Běžci Color Run probíhají oblakem modrého a růžového prášku"
+ },
+ {
+  "klic": "2026-color-run-dsc-5157",
+  "zdroj": "2026/foto/Color run/_DSC5157.jpg",
+  "rok": 2026,
+  "typ": "run",
+  "role": [
+   "program:run"
+  ],
+  "skore": 8,
+  "alt": "Běžci v oblaku žlutého prášku na barevném běhu Majálesu 2026"
+ },
+ {
+  "klic": "2026-color-run-dsc-5182",
+  "zdroj": "2026/foto/Color run/_DSC5182.jpg",
+  "rok": 2026,
+  "typ": "run",
+  "role": [],
+  "skore": 8,
+  "alt": "Skupina běžců v bílých tričkách na trati Color Run"
+ },
+ {
+  "klic": "2026-color-run-dsc-5213",
+  "zdroj": "2026/foto/Color run/_DSC5213-2.jpg",
   "rok": 2026,
   "typ": "crowd",
+  "role": [],
+  "skore": 8,
+  "alt": "Parta studentů celá od barevného prášku po Color Run"
+ },
+ {
+  "klic": "2026-color-run-img-9737",
+  "zdroj": "2026/foto/Color run/IMG_9737.jpg",
+  "rok": 2026,
+  "typ": "run",
+  "role": [],
+  "skore": 8,
+  "alt": "Dvě běžkyně radostně mávají cestou do cíle"
+ },
+ {
+  "klic": "2026-color-run-img-9644",
+  "zdroj": "2026/foto/Color run/IMG_9644.jpg",
+  "rok": 2026,
+  "typ": "portrait",
   "role": [
-   "o-majalesu"
+   "program:zony"
   ],
-  "skore": 9,
-  "alt": "Plné náměstí před pódiem při koncertu na Majálesu 2026"
+  "skore": 8,
+  "alt": "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026"
  }
 ]
