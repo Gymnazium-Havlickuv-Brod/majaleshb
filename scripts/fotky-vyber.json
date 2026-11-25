@@ -5,8 +5,7 @@
   "rok": 2025,
   "typ": "band",
   "role": [
-   "hero",
-   "partneri"
+   "hero"
   ],
   "skore": 8,
   "alt": "Zpěvák s kytarou naplno zpívá ve fialových světlech"
@@ -319,9 +318,7 @@
   "zdroj": "2025/foto/Majales 2025/46-DSC_5559.jpg",
   "rok": 2025,
   "typ": "band",
-  "role": [
-   "program:stage"
-  ],
+  "role": [],
   "skore": 8,
   "alt": "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí"
  },
@@ -341,10 +338,41 @@
   "zdroj": "2025/foto/Král a královna/DSC_0298.jpg",
   "rok": 2025,
   "typ": "king_queen",
+  "role": [],
+  "skore": 8,
+  "alt": "Korunovace krále Majálesu na pódiu"
+ },
+ {
+  "klic": "2026-kral-a-kralovna-img-0040",
+  "zdroj": "2026/foto/05 majales/IMG_0040.jpg",
+  "rok": 2026,
+  "typ": "king_queen",
   "role": [
    "program:kral"
   ],
   "skore": 8,
-  "alt": "Korunovace krále Majálesu na pódiu"
+  "alt": "Král a královna Majálesu 2026 s korunami, diplomem a kyticí na pódiu"
+ },
+ {
+  "klic": "2026-moderatori-img-0233",
+  "zdroj": "2026/foto/05 majales/IMG_0233.jpg",
+  "rok": 2026,
+  "typ": "portrait",
+  "role": [
+   "partneri"
+  ],
+  "skore": 8,
+  "alt": "Moderátoři Majálesu s mikrofony na Havlíčkově náměstí"
+ },
+ {
+  "klic": "2026-kapely-img-0515",
+  "zdroj": "2026/foto/05 majales/IMG_0515.jpg",
+  "rok": 2026,
+  "typ": "band",
+  "role": [
+   "program:stage"
+  ],
+  "skore": 8,
+  "alt": "Saxofonista hraje na pódiu ve fialovém světle"
  }
 ]
