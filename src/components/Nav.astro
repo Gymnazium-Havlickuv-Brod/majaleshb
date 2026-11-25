@@ -58,9 +58,13 @@ const { pruhledna = false } = Astro.props;
   header[data-pruhledna] {
     transition: background-color 0.3s ease;
   }
-  /* nahoře nad videem průhledné, navazuje na modrý přechod v hero */
-  header[data-pruhledna]:not(.je-plna) {
-    background-color: transparent;
+  /* nahoře nad videem průhledné, navazuje na modrý přechod v hero – jen na počítači.
+     Na mobilu a tabletu je lišta plná: ve videu je kousek pod horním okrajem hrana,
+     která na širších mobilech průhlednou lištu přetínala napůl. */
+  @media (min-width: 1024px) {
+    header[data-pruhledna]:not(.je-plna) {
+      background-color: transparent;
+    }
   }
 </style>
 
