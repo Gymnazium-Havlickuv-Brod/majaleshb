@@ -99,7 +99,8 @@
   "rok": 2026,
   "typ": "crowd",
   "role": [
-   "o-majalesu"
+   "o-majalesu",
+   "og"
   ],
   "skore": 9,
   "alt": "Plné náměstí před pódiem při koncertu na Majálesu 2026"
@@ -175,7 +176,6 @@
   "rok": 2025,
   "typ": "square",
   "role": [
-   "og",
    "o-majalesu-2"
   ],
   "skore": 8,

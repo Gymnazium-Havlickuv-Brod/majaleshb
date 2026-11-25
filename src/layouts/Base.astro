@@ -34,7 +34,10 @@ const ogUrl = new URL(og.src, Astro.site);
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#004afd" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- ikony z loga (scripts/ikony.py): záložka prohlížeče, plocha iPhonu, plocha Androidu -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="cs_CZ" />

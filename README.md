@@ -49,6 +49,8 @@ Loga se ukazují na hlavní stránce (sekce Partneři, `/#partneri`) i na `/part
 
 Od 25. 11. 2026 jsou na webu hlavně fotky z let 2025 a 2026 (Majáles 2025, Color Run 2026 a Majáles 2026). Ze starších ročníků je v galerii jen pár fotek, ať je vidět, že Majáles byl i dřív: 5–7 z každého roku (teď 6 z roku 2017 a 6 z roku 2022, bez rolí). Originály nových fotek jsou zatím jen ve složkách „Majales 2025“, „MAJALES - COLOR RUN“ a „05 majales/edit“ (ve `zdroj` jako `2026/foto/05 majales/…`), do `media/` v pracovním repu je potřeba je teprve nahrát; do té doby `scripts/fotky.py` nové fotky znovu nevyexportuje. `fotky-balik/` je ještě ze starého výběru.
 
+**Ikony a náhled odkazu:** logo je `src/assets/ikona/ikona-zdroj.png` (čtverec 2000 px na modrém pozadí). `python scripts/ikony.py` z něj vyrobí `public/favicon.ico` (záložka prohlížeče), `apple-touch-icon.png` (plocha iPhonu) a `ikona-192.png`, `ikona-512.png` a `ikona-maskable-512.png` pro plochu Androidu (`public/site.webmanifest`). Náhled při sdílení odkazu (og:image) je fotka s rolí `og` ve `scripts/fotky-vyber.json`, teď dav před pódiem z roku 2026. Web ji ořízne od středu na 1200 × 630.
+
 ## Agenti (Claude Code)
 
 V `.claude/agents/` jsou čtyři pomocníci, Claude Code je načte sám, když se pracuje v tomhle repu:
