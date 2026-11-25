@@ -25,9 +25,7 @@
   "zdroj": "2025/foto/Král a královna/DSC_0182.jpg",
   "rok": 2025,
   "typ": "king_queen",
-  "role": [
-   "program:kral"
-  ],
+  "role": [],
   "skore": 7,
   "alt": "Soutěž o krále a královnu: jízda se zavázanýma očima v kolečku"
  },
@@ -337,5 +335,16 @@
   ],
   "skore": 8,
   "alt": "Moderátor dělá rozhovor se zlatým retrívrem na barevném běhu Majálesu 2026"
+ },
+ {
+  "klic": "2025-kral-a-kralovna-dsc-0298",
+  "zdroj": "2025/foto/Král a královna/DSC_0298.jpg",
+  "rok": 2025,
+  "typ": "king_queen",
+  "role": [
+   "program:kral"
+  ],
+  "skore": 8,
+  "alt": "Korunovace krále Majálesu na pódiu"
  }
 ]
