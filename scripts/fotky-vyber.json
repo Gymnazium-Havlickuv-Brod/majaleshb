@@ -6,7 +6,7 @@
   "typ": "band",
   "role": [
    "hero",
-   "program:stage"
+   "partneri"
   ],
   "skore": 8,
   "alt": "Zpěvák s kytarou naplno zpívá ve fialových světlech"
@@ -26,10 +26,10 @@
   "rok": 2025,
   "typ": "king_queen",
   "role": [
-   "program:zony"
+   "program:kral"
   ],
   "skore": 7,
-  "alt": "Soutěžní úkol: jízda se zavázanýma očima v kolečku"
+  "alt": "Soutěž o krále a královnu: jízda se zavázanýma očima v kolečku"
  },
  {
   "klic": "2025-detsky-den-dsc-0122",
@@ -146,9 +146,7 @@
   "zdroj": "2025/foto/Král a královna/DSC_0240.jpg",
   "rok": 2025,
   "typ": "king_queen",
-  "role": [
-   "program:kral"
-  ],
+  "role": [],
   "skore": 7,
   "alt": "Porota hodnotí soutěžící, na stole čekají korunky"
  },
@@ -233,7 +231,9 @@
   "zdroj": "2025/foto/Majales 2025/17-DSC_5431.jpg",
   "rok": 2025,
   "typ": "square",
-  "role": [],
+  "role": [
+   "program:zony"
+  ],
   "skore": 8,
   "alt": "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem"
  },
@@ -263,7 +263,7 @@
   "rok": 2025,
   "typ": "crowd",
   "role": [
-   "o-majalesu-2"
+   "o-majalesu"
   ],
   "skore": 8,
   "alt": "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem"
@@ -275,7 +275,7 @@
   "typ": "square",
   "role": [
    "og",
-   "o-majalesu"
+   "o-majalesu-2"
   ],
   "skore": 8,
   "alt": "Havlíčkovo náměstí v den Majálesu, lavice a stany pod věží kostela"
@@ -317,5 +317,16 @@
   "role": [],
   "skore": 8,
   "alt": "Kapela se loučí s publikem na pódiu pod světly"
+ },
+ {
+  "klic": "2025-dsc-5559",
+  "zdroj": "2025/foto/Majales 2025/46-DSC_5559.jpg",
+  "rok": 2025,
+  "typ": "band",
+  "role": [
+   "program:stage"
+  ],
+  "skore": 8,
+  "alt": "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí"
  }
 ]

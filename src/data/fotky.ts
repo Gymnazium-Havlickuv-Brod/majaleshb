@@ -33,13 +33,14 @@ import f29 from '../assets/foto/2025-dsc-5604.jpg';
 import f30 from '../assets/foto/2025-dsc-5622.jpg';
 import f31 from '../assets/foto/2025-dsc-5819.jpg';
 import f32 from '../assets/foto/2025-dsc-5850.jpg';
+import f33 from '../assets/foto/2025-dsc-5559.jpg';
 
 export type Foto = { klic: string; img: ImageMetadata; rok: number; typ: string; role: string[]; alt: string };
 
 export const FOTKY: Foto[] = [
-  { klic: "2025-kapely-dsc-0657", img: f0, rok: 2025, typ: "band", role: ["hero", "program:stage"], alt: "Zpěvák s kytarou naplno zpívá ve fialových světlech" },
+  { klic: "2025-kapely-dsc-0657", img: f0, rok: 2025, typ: "band", role: ["hero", "partneri"], alt: "Zpěvák s kytarou naplno zpívá ve fialových světlech" },
   { klic: "2025-beh-dsc-0566", img: f1, rok: 2025, typ: "run", role: [], alt: "Veselí studenti běží a mávají do objektivu" },
-  { klic: "2025-kral-a-kralovna-dsc-0182", img: f2, rok: 2025, typ: "king_queen", role: ["program:zony"], alt: "Soutěžní úkol: jízda se zavázanýma očima v kolečku" },
+  { klic: "2025-kral-a-kralovna-dsc-0182", img: f2, rok: 2025, typ: "king_queen", role: ["program:kral"], alt: "Soutěž o krále a královnu: jízda se zavázanýma očima v kolečku" },
   { klic: "2025-detsky-den-dsc-0122", img: f3, rok: 2025, typ: "kids", role: ["program:deti"], alt: "Studenti v kostýmu Scoobyho připravují dětem úkol" },
   { klic: "2025-kapely-dsc-0580", img: f4, rok: 2025, typ: "band", role: [], alt: "Dva zpěváci zpívají do jednoho mikrofonu" },
   { klic: "2025-kapely-dsc-0491", img: f5, rok: 2025, typ: "band", role: [], alt: "Zpěvák v pruhované košili zpívá na pódiu na náměstí" },
@@ -52,7 +53,7 @@ export const FOTKY: Foto[] = [
   { klic: "2025-detsky-den-dsc-0182", img: f12, rok: 2025, typ: "other", role: [], alt: "Shrek s cedulí Pozor Šrek na dětském dni" },
   { klic: "2025-detsky-den-dsc-0250", img: f13, rok: 2025, typ: "kids", role: [], alt: "Studenti sjíždějí nafukovací skluzavku" },
   { klic: "2025-detsky-den-dsc-0310", img: f14, rok: 2025, typ: "other", role: [], alt: "Akrobatka na šálách předvádí figuru" },
-  { klic: "2025-kral-a-kralovna-dsc-0240", img: f15, rok: 2025, typ: "king_queen", role: ["program:kral"], alt: "Porota hodnotí soutěžící, na stole čekají korunky" },
+  { klic: "2025-kral-a-kralovna-dsc-0240", img: f15, rok: 2025, typ: "king_queen", role: [], alt: "Porota hodnotí soutěžící, na stole čekají korunky" },
   { klic: "2026-wyrval-img-1020", img: f16, rok: 2026, typ: "band", role: [], alt: "Studentská kapela mává z pódia na náměstí" },
   { klic: "2026-color-run-dsc-5152", img: f17, rok: 2026, typ: "run", role: ["hero"], alt: "Běžci Color Run probíhají oblakem modrého a růžového prášku" },
   { klic: "2026-color-run-dsc-5157", img: f18, rok: 2026, typ: "run", role: ["program:run"], alt: "Běžci v oblaku žlutého prášku na barevném běhu Majálesu 2026" },
@@ -61,15 +62,16 @@ export const FOTKY: Foto[] = [
   { klic: "2026-color-run-dsc-5213", img: f21, rok: 2026, typ: "crowd", role: [], alt: "Parta studentů celá od barevného prášku po Color Run" },
   { klic: "2026-color-run-img-9721", img: f22, rok: 2026, typ: "run", role: [], alt: "Dvě běžkyně celé od barevného prášku na trati podél zeleně" },
   { klic: "2026-color-run-img-9737", img: f23, rok: 2026, typ: "run", role: [], alt: "Dvě běžkyně radostně mávají cestou do cíle" },
-  { klic: "2025-dsc-5431", img: f24, rok: 2025, typ: "square", role: [], alt: "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem" },
+  { klic: "2025-dsc-5431", img: f24, rok: 2025, typ: "square", role: ["program:zony"], alt: "Obří šachy na Havlíčkově náměstí, hráči přemýšlejí nad tahem" },
   { klic: "2025-dsc-5469", img: f25, rok: 2025, typ: "band", role: ["hero"], alt: "Studentská kapela hraje na pódiu na náměstí" },
   { klic: "2025-dsc-5474", img: f26, rok: 2025, typ: "band", role: [], alt: "Trombonista v pruhované košili hraje na pódiu" },
-  { klic: "2025-dsc-5313", img: f27, rok: 2025, typ: "crowd", role: ["o-majalesu-2"], alt: "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem" },
-  { klic: "2025-dsc-5591", img: f28, rok: 2025, typ: "square", role: ["og", "o-majalesu"], alt: "Havlíčkovo náměstí v den Majálesu, lavice a stany pod věží kostela" },
+  { klic: "2025-dsc-5313", img: f27, rok: 2025, typ: "crowd", role: ["o-majalesu"], alt: "Studenti v kostýmech s nápisem HOLLYWOOD před gymnáziem" },
+  { klic: "2025-dsc-5591", img: f28, rok: 2025, typ: "square", role: ["og", "o-majalesu-2"], alt: "Havlíčkovo náměstí v den Majálesu, lavice a stany pod věží kostela" },
   { klic: "2025-dsc-5604", img: f29, rok: 2025, typ: "food", role: ["program:stanky"], alt: "Příprava palačinek u studentského stánku" },
   { klic: "2025-dsc-5622", img: f30, rok: 2025, typ: "portrait", role: [], alt: "Dvě rozesmáté kamarádky s jídlem ze stánku" },
   { klic: "2025-dsc-5819", img: f31, rok: 2025, typ: "portrait", role: [], alt: "Tři kamarádky na náměstí ukazují palec nahoru" },
   { klic: "2025-dsc-5850", img: f32, rok: 2025, typ: "band", role: [], alt: "Kapela se loučí s publikem na pódiu pod světly" },
+  { klic: "2025-dsc-5559", img: f33, rok: 2025, typ: "band", role: ["program:stage"], alt: "Kapela se zpěvačkou hraje na pódiu na Havlíčkově náměstí" },
 ];
 
 export const podleRole = (role: string) => FOTKY.find((f) => f.role.includes(role))!;

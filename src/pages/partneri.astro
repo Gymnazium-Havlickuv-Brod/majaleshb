@@ -6,7 +6,7 @@ import { UROVNE, DALSI, PROC, POSTUP } from '../data/partneri';
 import { podleRole } from '../data/fotky';
 import PartneriLoga from '../components/PartneriLoga.astro';
 
-const foto = podleRole('program:stage');
+const foto = podleRole('partneri'); // úvod pro partnery: fotka bez reklam minulých partnerů
 const mail = (predmet: string) => `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}`;
 ---
 
