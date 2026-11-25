@@ -10,3 +10,6 @@ render/
 # tajnosti a lokální nastavení nikdy do veřejného repa
 .env*
 .claude/settings.local.json
+
+# balík fotek patří do soukromého pracovního repa (fotky bez ověřeného souhlasu), ne sem
+fotky-balik/

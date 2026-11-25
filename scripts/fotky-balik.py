@@ -1,9 +1,12 @@
-"""Balíček fotek pro další práci na webu (fotky-balik/).
+"""Balíček fotek pro další práci na webu (fotky-balik/ v soukromém pracovním repu vedle media/).
 
 Vezme z hodnocení všech fotek (privátní soubor v pracovním repu) to zajímavé: skóre 7+,
 bez duplicit a bez fotek s příznakem (dítě zblízka, alkohol, trapná chvíle, otočené).
 Exportuje je zmenšené (max 2000 px, bez EXIF/GPS) do fotky-balik/<rok>/ a napíše
 fotky-balik/README.md (tabulka) a fotky-balik/index.html (náhledová galerie, otevřít dvojklikem).
+
+Balík NESMÍ do veřejného repu webu: jsou v něm i fotky, u kterých není ověřený souhlas lidí
+(afterparty, portréty) a fotky stažené z webu. Ve veřejném repu byl do 25. 11. 2026.
 
 Spuštění:  python scripts/fotky-balik.py
 """
@@ -24,7 +27,7 @@ KOREN = Path(__file__).resolve().parent.parent
 MEDIA = Path(r"c:\dev\ghb\majales\media")
 HODNOCENI = MEDIA / "HODNOCENI-FOTEK.json"
 VYBER = KOREN / "scripts" / "fotky-vyber.json"
-BALIK = KOREN / "fotky-balik"
+BALIK = MEDIA.parent / "fotky-balik"  # soukromé pracovní repo, ne veřejné repo webu
 MAX = 2000
 MIN_SKORE = 7
 VYRADIT_PRIZNAKY = {"minor_closeup", "alcohol", "awkward", "rotated"}
@@ -36,6 +39,11 @@ VYRADIT_RUCNE = {
     "2025/2025__Král-a-královna__DSC_0170.jpg",
     "2025/2025__Král-a-královna__DSC_0298.jpg",
     "2026/2026__Wyrvál__IMG_1022.jpg",
+    # vyřazené po bezpečnostní kontrole 25. 11. 2026: školka zblízka, selfie a afterparty stažené z webu, jmenovka
+    "2025/2025__Dětský-den__DSC_0163.jpg",
+    "2025/2025__Kapely__KIF_3521.jpg",
+    "2025/2025__Afterparty__KIF_3790.jpg",
+    "2025/2025__Král-a-královna__DSC_0182.jpg",
 }
 # portréty z afterparty – před zveřejněním ověřit souhlas
 SCHVALIT = {"afterparty", "portrait"}

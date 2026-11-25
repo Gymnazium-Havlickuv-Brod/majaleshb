@@ -45,7 +45,7 @@ Zdroj: zápisy a data v pracovním repu `c:\dev\ghb\majales` (stav k 15. 11. 202
 - ✅ **Od roku 2026** ho gympl připravuje společně se **stavební průmyslovkou**. Do budoucna se můžou přidat další školy.
 - ✅ Z archivu fotek: Majáles **2017** byl dvoudenní (pátek + sobota) s králem a královnou s mečem a korunou, rockovými kapelami a soutěžemi na náměstí. **2022** měl večerní koncert pod věží radnice a afterparty. **2025** měl kapely, běh, dětský den, volbu krále a královny, přednášky a afterparty.
 - ❓ Loni (2026) hráli mj. **UDG a Slavíček**. Ověřit, než to napíšeš.
-- 💡 Fotky archivu: `fotky-balik/` v tomhle repu (78 vybraných fotek z let 2017–2026).
+- 💡 Fotky archivu: `fotky-balik/` v soukromém pracovním repu vedle `media/` (vybrané fotky z let 2017–2026). Do veřejného repu webu nepatří: jsou v něm i fotky bez ověřeného souhlasu.
 
 ## Pro koho to je
 
