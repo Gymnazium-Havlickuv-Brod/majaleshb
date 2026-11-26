@@ -45,7 +45,7 @@ export const UROVNE: Uroven[] = [
       'poděkování na pódiu',
       'logo na plakátu',
       'hlavní banner na pódiu',
-      'studenti se u vás zastaví ve firmě a představí vás na Instagramu Majálesu, v kolaboraci s Instagramy obou škol a MDKO',
+      'studenti se u vás zastaví ve firmě a představí vás na Instagramu Majálesu, v kolaboraci s Instagramy obou škol',
       'program na pódiu',
       'možnost ovlivnit promo na míru a vymyslet s námi další kreativní nápad',
     ],
