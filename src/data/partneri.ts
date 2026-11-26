@@ -15,14 +15,14 @@ export const UROVNE: Uroven[] = [
   {
     id: 'podporovatel',
     nazev: 'Podporovatel',
-    castka: '5 000 Kč',
+    castka: 'do 5 000 Kč',
     podtitul: 'Pro menší firmy a živnostníky z Brodu.',
     vyhody: ['logo na webu', 'poděkování na sociálních sítích', 'poděkování na pódiu'],
   },
   {
     id: 'partner',
     nazev: 'Partner',
-    castka: '10 000 Kč',
+    castka: 'do 10 000 Kč',
     podtitul: 'Nejčastější forma podpory.',
     vyhody: [
       'logo na webu',
@@ -30,12 +30,13 @@ export const UROVNE: Uroven[] = [
       'poděkování na pódiu',
       'logo na plakátu',
       'banner na pódiu',
+      'možnost ovlivnit promo na míru a vymyslet s námi další kreativní nápad',
     ],
   },
   {
     id: 'hlavni',
     nazev: 'Hlavní partner',
-    castka: '25 000 Kč',
+    castka: 'do 25 000 Kč',
     podtitul: 'Největší viditelnost na náměstí i na pódiu.',
     zvyraznit: true,
     vyhody: [
