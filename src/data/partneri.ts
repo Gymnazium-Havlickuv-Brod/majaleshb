@@ -47,6 +47,7 @@ export const UROVNE: Uroven[] = [
       'hlavní banner na pódiu',
       'příspěvek věnovaný partnerovi',
       'program na pódiu',
+      'možnost ovlivnit promo na míru a vymyslet s námi další kreativní nápad',
     ],
   },
   {
