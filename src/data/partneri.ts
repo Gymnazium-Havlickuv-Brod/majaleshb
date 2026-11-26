@@ -54,7 +54,7 @@ export const UROVNE: Uroven[] = [
     id: 'dar',
     nazev: 'Dar',
     castka: 'Věcný dar',
-    podtitul: 'Podpora jídlem nebo cenami do hry o ceny.',
+    podtitul: 'Podpořte nás jídlem nebo věcmi, které se stanou výhrami v doprovodném programu.',
     vyhody: ['jídlo: zmíníme vás na pódiu', 'jídlo: zmíníme vás u stánku', 'barter: využijeme jako výhru v doprovodném programu'],
   },
 ];
