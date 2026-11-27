@@ -20,6 +20,7 @@ export const AKCE = {
 // TODO: doplnit skutečný kontakt a sociální sítě (zatím placeholder – na webu se nezobrazí prázdné).
 export const KONTAKT = {
   email: 'info@majaleshb.cz',
+  kopie: 'majales.ghb.spss@gmail.com', // partnerské e-maily jdou i sem do kopie
   instagram: '', // např. 'https://www.instagram.com/majaleshb/'
   facebook: '',
 };

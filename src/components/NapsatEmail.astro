@@ -53,8 +53,9 @@
       const enc = encodeURIComponent;
       const predmet = enc(p.get('subject') ?? '');
       const text = enc(p.get('body') ?? '');
-      gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(komu)}&su=${predmet}&body=${text}`;
-      outlook.href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(komu)}&subject=${predmet}&body=${text}`;
+      const kopie = enc(p.get('cc') ?? '');
+      gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(komu)}&cc=${kopie}&su=${predmet}&body=${text}`;
+      outlook.href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(komu)}&cc=${kopie}&subject=${predmet}&body=${text}`;
       aplikace.href = href;
       adresa.textContent = komu;
       kopirovat.textContent = 'Zkopírovat adresu';
