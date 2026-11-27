@@ -153,7 +153,7 @@ Celá nabídka je na webu `/partneri/` (data v `src/data/partneri.ts`).
 
 - ❓ Je vstup zdarma? Od kolika hodin program začíná?
 - ❓ Jména kapel (až po podpisu).
-- ❓ Odkaz na Instagram a kontaktní e-mail (na webu je zatím placeholder `info@majaleshb.cz`).
+- ❓ Odkaz na Instagram a kontaktní e-mail (na webu je zatím `majales.ghb.spss@gmail.com`).
 - ❓ Celý název MDKO a jejich manuál k logu.
 - ❓ Přesný počet let tradice (20+?).
 - ❓ Bude Color Run, nebo jiný formát běhu?

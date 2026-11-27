@@ -1,7 +1,7 @@
 ---
 // Okno „Napište nám“: všechny odkazy mailto: na webu místo přímého otevření poštovní aplikace
-// (na počítači často žádná není nastavená a klik pak nic neudělá) nabídnou, kde e-mail napsat.
-// Gmail a Outlook se otevřou v prohlížeči s předvyplněnou adresou, předmětem i textem z odkazu.
+// (na počítači často žádná není nastavená a klik pak nic neudělá) ukážou adresu ke zkopírování
+// a tlačítko, které otevře e-mail s předvyplněným předmětem i textem.
 // Bez JavaScriptu zůstanou obyčejné odkazy mailto:.
 ---
 
@@ -13,12 +13,10 @@
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
       </button>
     </div>
-    <p class="mt-3">Vyberte, kde chcete e-mail napsat. Adresa, předmět i text už budou předvyplněné.</p>
+    <p class="mt-3">Napište nám na tuto adresu. Tlačítkem otevřete e-mail s předvyplněným předmětem i textem.</p>
     <p class="napsat-adresa mt-4 text-lg font-bold break-all select-all"></p>
     <div class="napsat-volby mt-6 grid gap-3">
-      <a class="tlacitko justify-center" data-sluzba="gmail" target="_blank" rel="noopener">Napsat v Gmailu</a>
-      <a class="tlacitko justify-center" data-sluzba="outlook" target="_blank" rel="noopener">Napsat v Outlooku</a>
-      <a class="tlacitko justify-center" data-sluzba="aplikace">Poštovní aplikace</a>
+      <a class="tlacitko tlacitko-plne justify-center" data-sluzba="aplikace">Otevřít e-mail</a>
       <button type="button" class="tlacitko justify-center" data-sluzba="kopirovat">Zkopírovat adresu</button>
     </div>
   </div>
@@ -28,18 +26,10 @@
   const dlg = document.querySelector<HTMLDialogElement>('dialog.napsat-email');
   if (dlg) {
     const volba = (s: string) => dlg.querySelector<HTMLElement>(`[data-sluzba="${s}"]`)!;
-    const gmail = volba('gmail') as HTMLAnchorElement;
-    const outlook = volba('outlook') as HTMLAnchorElement;
     const aplikace = volba('aplikace') as HTMLAnchorElement;
     const kopirovat = volba('kopirovat') as HTMLButtonElement;
     const adresa = dlg.querySelector<HTMLElement>('.napsat-adresa')!;
     const zavrit = () => dlg.close();
-
-    // na telefonu je poštovní aplikace vždycky po ruce, na počítači spíš Gmail v prohlížeči
-    const dotyk = matchMedia('(pointer: coarse)').matches;
-    const hlavni = dotyk ? aplikace : gmail;
-    hlavni.classList.add('tlacitko-plne');
-    hlavni.parentElement!.prepend(hlavni);
 
     document.addEventListener('click', (e) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -47,23 +37,14 @@
       if (!odkaz || dlg.contains(odkaz)) return;
       e.preventDefault();
       const href = odkaz.getAttribute('href')!;
-      const [cil, dotaz = ''] = href.slice('mailto:'.length).split('?');
-      const komu = decodeURIComponent(cil);
-      const p = new URLSearchParams(dotaz);
-      const enc = encodeURIComponent;
-      const predmet = enc(p.get('subject') ?? '');
-      const text = enc(p.get('body') ?? '');
-      const kopie = enc(p.get('cc') ?? '');
-      gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(komu)}&cc=${kopie}&su=${predmet}&body=${text}`;
-      outlook.href = `https://outlook.office.com/mail/deeplink/compose?to=${enc(komu)}&cc=${kopie}&subject=${predmet}&body=${text}`;
       aplikace.href = href;
-      adresa.textContent = komu;
+      adresa.textContent = decodeURIComponent(href.slice('mailto:'.length).split('?')[0]);
       kopirovat.textContent = 'Zkopírovat adresu';
       dlg.showModal();
     });
 
-    // po výběru služby okno zavřít (odkaz se mezitím otevře)
-    for (const a of [gmail, outlook, aplikace]) a.addEventListener('click', () => setTimeout(zavrit));
+    // po kliknutí okno zavřít (e-mail se mezitím otevře)
+    aplikace.addEventListener('click', () => setTimeout(zavrit));
     dlg.querySelector('.napsat-zavrit')!.addEventListener('click', zavrit);
     // klik mimo okno ho zavře (Esc zavírá <dialog> sám)
     dlg.addEventListener('click', (e) => e.target === dlg && zavrit());

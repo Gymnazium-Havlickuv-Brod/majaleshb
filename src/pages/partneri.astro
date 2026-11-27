@@ -11,7 +11,7 @@ const foto = podleRole('partneri'); // úvod pro partnery: fotka bez reklam minu
 const NL = String.fromCharCode(13, 10); // konec řádku v těle e-mailu (CRLF)
 const PODPIS = ['', '', 'Firma:', 'Kontaktní osoba:', 'Telefon:', '', 'S pozdravem'].join(NL);
 const mail = (predmet: string, uvod = `rádi bychom se domluvili na partnerství Majálesu ${AKCE.rok}.`) =>
-  `mailto:${KONTAKT.email}?cc=${encodeURIComponent(KONTAKT.kopie)}&subject=${encodeURIComponent(predmet)}&body=${encodeURIComponent(['Dobrý den,', '', uvod].join(NL) + PODPIS)}`;
+  `mailto:${KONTAKT.email}?subject=${encodeURIComponent(predmet)}&body=${encodeURIComponent(['Dobrý den,', '', uvod].join(NL) + PODPIS)}`;
 const zajem = (u: (typeof UROVNE)[number]) =>
   u.id === 'dar'
     ? `rádi bychom Majáles ${AKCE.rok} podpořili věcným darem (jídlo nebo ceny do hry o ceny).`

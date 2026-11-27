@@ -93,7 +93,7 @@ Hero video zůstává vyrenderované ze 3D scény v původních barvách. Clona 
 
 ## Otevřené (TODO)
 
-- Kontaktní e-mail `info@majaleshb.cz` je zatím placeholder. Instagram a Facebook doplnit do `KONTAKT` v `akce.ts`.
+- Kontaktní e-mail je zatím `majales.ghb.spss@gmail.com` (schránka na majaleshb.cz zatím není). Instagram a Facebook doplnit do `KONTAKT` v `akce.ts`.
 - Hosting a doména (Cloudflare Pages jako learningtriangle?) zatím nejsou nastavené.
 
 ## Hero video (3D scéna)
