@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import HeroVideo from '../components/HeroVideo.astro';
 import Galerie from '../components/Galerie.astro';
@@ -7,16 +7,24 @@ import PartneriLoga from '../components/PartneriLoga.astro';
 import Kvet from '../components/Kvet.astro';
 import PrubehDne from '../components/PrubehDne.astro';
 import { AKCE, PAS, PROGRAM, LINEUP } from '../data/akce';
-import { podleRole } from '../data/fotky';
+import { podleRole, OG_FOTO } from '../data/fotky';
 
 const oMajalesu = podleRole('o-majalesu');
 const namesti = podleRole('o-majalesu-2');
 const program = PROGRAM.map((p) => ({ ...p, f: podleRole(`program:${p.foto}`) }));
 
+const popis = `Studentský Majáles ${AKCE.mesto}: ${AKCE.den} ${AKCE.datum} na Havlíčkově náměstí. Kapely, sport, král a královna, zóny gymplu a stavebky.`;
+// stejný obrázek jako og:image v Base.astro (stejné parametry = stejný soubor, nevznikne nový)
+const og = await getImage({ src: OG_FOTO, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 75 });
+
+// Event schema pro Google – jen potvrzené údaje z data/akce.ts. Časy začátku a konce, vstupné (offers)
+// a kapely (performer) sem přijdou, až budou potvrzené; do té doby startDate/endDate jen jako datum.
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Festival',
   name: AKCE.nazev,
+  description: popis,
+  image: [new URL(og.src, Astro.site).href],
   startDate: AKCE.datumIso,
   endDate: AKCE.datumIso,
   eventStatus: 'https://schema.org/EventScheduled',
@@ -24,7 +32,12 @@ const schema = {
   location: {
     '@type': 'Place',
     name: AKCE.misto,
-    address: { '@type': 'PostalAddress', addressLocality: AKCE.mesto, addressCountry: 'CZ' },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: AKCE.misto,
+      addressLocality: AKCE.mesto,
+      addressCountry: 'CZ',
+    },
   },
   organizer: AKCE.skoly.map((name) => ({ '@type': 'EducationalOrganization', name })),
   url: 'https://majaleshb.cz/',
@@ -34,7 +47,7 @@ const schema = {
 <Base
   pruhlednaHlavicka
   title={`Majáles ${AKCE.rok} · ${AKCE.datum} · ${AKCE.mesto}`}
-  description={`Studentský Majáles ${AKCE.mesto}: ${AKCE.den} ${AKCE.datum} na Havlíčkově náměstí. Kapely, sport, král a královna, zóny gymplu a stavebky.`}
+  description={popis}
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
